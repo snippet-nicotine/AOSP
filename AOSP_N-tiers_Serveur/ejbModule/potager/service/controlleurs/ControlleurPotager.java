@@ -34,13 +34,10 @@ public class ControlleurPotager {
 	Historique historique;
 	
 	// TODO: Refactorer dans PotagerManager
-	public Potager creerPotager(String nom, int longueur, int largeur, String codePostal, Jardinier proprietaire) 
+	public Potager ajouterPotager(Potager potager) 
 			throws NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException, DaoPotagerAjoutException{
-		
-		Potager potager = null;
-		potager = new Potager(nom, longueur, largeur, codePostal, proprietaire);
-		checkPotager(potager);
-		
+				
+		checkPotager(potager);		
 		return daoGestionPotager.ajouterPotager(potager);
 				
 	}
@@ -104,6 +101,10 @@ public class ControlleurPotager {
 
 	public int getNombreAnnulations() {
 		return historique.getNbAnnulations();
+	}
+
+	public Potager getPotager() {
+		return new Potager();
 	}
 	
 }

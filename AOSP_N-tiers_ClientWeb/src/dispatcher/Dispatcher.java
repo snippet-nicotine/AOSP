@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controlleur.ControlleurConnexion;
-import commun.config.Url;
+import commun.config.Parametres;
 
 /**
  * Servlet implementation class DispatcherGestionDocument
@@ -40,11 +40,11 @@ public class Dispatcher extends HttpServlet {
 			
 		switch(nomControlleur){		
 		
-			case Url.CONTROLLEUR_GESTION_POTAGER:			
+			case Parametres.CONTROLLEUR_GESTION_POTAGER:			
 				request.getRequestDispatcher("/ControlleurPotagers").forward(request, response);
 				break;
 			
-			case Url.CONTROLLEUR_GESTION_CARRE:
+			case Parametres.CONTROLLEUR_GESTION_CARRE:
 				request.getRequestDispatcher("/ControlleurCarres").forward(request, response);
 				break;
 				
@@ -65,7 +65,7 @@ public class Dispatcher extends HttpServlet {
 				
 				boolean isLogged = ControlleurConnexion.isLogged(request);		
 
-				if( isLogged )  response.sendRedirect(request.getContextPath() + "/aosp/documents");
+				if( isLogged )  response.sendRedirect(request.getContextPath() + "/aosp/" + Parametres.CONTROLLEUR_GESTION_POTAGER);
 				else      		response.sendRedirect(request.getContextPath() + "/commun/html/connexion.jsp");					
 				
 		}
@@ -77,7 +77,6 @@ public class Dispatcher extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession(true);
 		doGet(request, response);
 	}
 	

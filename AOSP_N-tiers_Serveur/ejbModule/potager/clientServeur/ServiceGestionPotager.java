@@ -19,8 +19,7 @@ public interface ServiceGestionPotager {
 	public Potager ajouterPotager(Potager potager)
 			throws NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException, DaoPotagerAjoutException;;
 	
-	public Potager creerPotager(String nom, int longueur, int largeur, String codePostal, Jardinier proprietaire) 
-			throws NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException, DaoPotagerAjoutException;
+	public Potager getPotager();
 	
 	public Potager getPotager(int idPotager) throws DaoPotagerGetException;
 	

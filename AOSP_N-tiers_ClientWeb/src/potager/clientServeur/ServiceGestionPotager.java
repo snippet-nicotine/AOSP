@@ -19,8 +19,7 @@ public interface ServiceGestionPotager {
 	public Potager ajouterPotager(Potager potager)
 			throws NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException, DaoPotagerAjoutException;;
 	
-	public Potager creerPotager(String nom, int longueur, int largeur, String codePostal, Jardinier proprietaire) 
-			throws NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException, DaoPotagerAjoutException;
+	public Potager getPotager();
 	
 	public Potager getPotager(int idPotager) throws DaoPotagerGetException;
 	
@@ -50,8 +49,8 @@ public interface ServiceGestionPotager {
 	 * Renvoie une liste de potager, en recherchant par une propriï¿½tï¿½ du potager
 	 * Ex: listerPotager("nom", "mon Potager", false)
 	 * 
-	 * @param nomPropriete     Nom de la propriï¿½tï¿½ recherchï¿½e ex: "nom"
-	 * @param valeurPropriete  Valeur recherchï¿½e ex: "mon potager"
+	 * @param nomPropriete     Nom de la propriété recherchï¿½e ex: "nom"
+	 * @param valeurPropriete  Valeur recherchée ex: "mon potager"
 	 * @param isExact          Si true, la valeur recherchï¿½e doit correspondre exactement
 	 * @return
 	 */

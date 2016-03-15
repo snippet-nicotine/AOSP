@@ -34,16 +34,6 @@ public class FacadeServiceGestionPotager implements ServiceGestionPotager{
 	Historique historique;
 
 	@Override
-	public Potager creerPotager(String nom, int longueur, int largeur, String codePostal, Jardinier proprietaire) 
-			throws NomPotagerException, CPPotagerException, ProprietairePotagerException, 
-				   DimensionPotagerException, DaoPotagerAjoutException 
-	{
-		
-		return controlleurPotager.creerPotager(nom, longueur, largeur, codePostal, proprietaire);
-		
-	}
-
-	@Override
 	public Potager getPotager(int idPotager) throws DaoPotagerGetException {	
 		
 		return controlleurPotager.getPotager(idPotager);
@@ -89,7 +79,7 @@ public class FacadeServiceGestionPotager implements ServiceGestionPotager{
 			       DimensionPotagerException, DaoPotagerAjoutException 
 	{
 		
-		return controlleurPotager.creerPotager(potager.getNom(), potager.getLongueur(), potager.getLargeur(), potager.getCodePostal(), potager.getProprietaire() );
+		return controlleurPotager.ajouterPotager(potager);
 	
 	}
 
@@ -101,6 +91,11 @@ public class FacadeServiceGestionPotager implements ServiceGestionPotager{
 	@Override
 	public int getNombreAnnulations() {
 		return controlleurPotager.getNombreAnnulations();
+	}
+
+	@Override
+	public Potager getPotager() {
+		return controlleurPotager.getPotager();
 	}
 
 	

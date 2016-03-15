@@ -15,9 +15,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import commun.config.Parametres;
 import controlleur.ControlleurConnexion;
 import potager.clientServeur.ServiceGestionPotager;
-import potager.config.Url;
 import potager.entity.Potager;
 import potager.service.exception.CPPotagerException;
 import potager.service.exception.DaoPotagerAjoutException;
@@ -63,7 +63,7 @@ public class ControlleurPotagers extends HttpServlet {
 
 		try {
 			initialContext = new InitialContext();
-			serviceGestionPotager = (ServiceGestionPotager) initialContext.lookup( Url.EJB_SERVICE_GESTION_POTAGER );
+			serviceGestionPotager = (ServiceGestionPotager) initialContext.lookup( Parametres.EJB_SERVICE_GESTION_POTAGER );
 			
 		} catch (NamingException e) {
 			e.printStackTrace();
@@ -342,7 +342,7 @@ public class ControlleurPotagers extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		request.getRequestDispatcher(Url.IHM_GESTION_POTAGER ).forward(request,response);
+		request.getRequestDispatcher(Parametres.IHM_GESTION_POTAGER ).forward(request,response);
 		
 	}
 
@@ -352,7 +352,7 @@ public class ControlleurPotagers extends HttpServlet {
 		try {
 			
 			LOG.debug( "request param: " + request.getParameter("nom") );
-			Potager potager = potagerFromRequest(request, "");			
+			Potager potager = potagerFromRequest(request, "");		
 			serviceGestionPotager.ajouterPotager(potager);
 			
 		} catch (NomPotagerException e) {
@@ -414,7 +414,7 @@ public class ControlleurPotagers extends HttpServlet {
 
 	private void refreshPage(HttpServletRequest request, HttpServletResponse response) throws IOException{
 				
-		response.sendRedirect(request.getContextPath() + "/aosp/potagers");
+		response.sendRedirect(request.getContextPath() + "/aosp/" + Parametres.CONTROLLEUR_GESTION_POTAGER);
 
 	}
 	

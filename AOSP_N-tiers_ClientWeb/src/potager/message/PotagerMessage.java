@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import commun.config.Parametres;
 import potager.clientServeur.ServiceGestionPotager;
-import potager.config.Url;
 import potager.entity.Potager;
 import potager.service.exception.DaoPotagerQueryException;
 
@@ -46,7 +46,7 @@ public class PotagerMessage extends HttpServlet {
 		
 		try {
 			initialContext = new InitialContext();
-			serviceGestionPotager = (ServiceGestionPotager) initialContext.lookup( Url.EJB_SERVICE_GESTION_POTAGER );
+			serviceGestionPotager = (ServiceGestionPotager) initialContext.lookup( Parametres.EJB_SERVICE_GESTION_POTAGER );
 			
 		} catch (NamingException e) {
 			e.printStackTrace();

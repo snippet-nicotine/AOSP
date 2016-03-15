@@ -1,3 +1,4 @@
+<%@page import="commun.config.Parametres"%>
 <%@page import="potager.entity.Potager"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -36,7 +37,7 @@
 		
 			<!-- Ajouter un potager -->
 			<section id="ajouter">
-				<form class="form-inline well" id="formulaire-ajouter" method="POST" action="<%= request.getContextPath() %>/aosp/potagers">
+				<form class="form-inline well" id="formulaire-ajouter" method="POST" action="<%= request.getContextPath() %>/aosp/<%=Parametres.CONTROLLEUR_GESTION_POTAGER%>">
 				  
 				  <div class="form-group ${ erreurNom != null ? 'has-error' : '' }">
 				    <label for="nom">Nom</label>
@@ -151,7 +152,7 @@
 				</div>
 				<div class="modal-body">
 				
-				<form class="form well" id="formulaire-modifier" method="POST" action="<%= request.getContextPath() %>/aosp/potagers">
+				<form class="form well" id="formulaire-modifier" method="POST" action="<%= request.getContextPath() %>/aosp/<%=Parametres.CONTROLLEUR_GESTION_POTAGER%>">
 		  
 				  <div class="form-group ${ erreurNom != null ? 'has-error' : '' }">
 				    <label for="nom">Nom</label>
