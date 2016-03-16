@@ -56,6 +56,7 @@ public class ControlleurPotager {
 	public Potager modifierPotager(Potager potager) throws DaoPotagerModificationException, NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException{
 		
 		checkPotager(potager);
+		potagerManager.buildPotager(potager);
 		return daoGestionPotager.modifierPotager(potager);
 		
 	}

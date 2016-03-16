@@ -51,6 +51,14 @@ public class Carre implements Serializable{
 	public void setY(int y) {
 		this.y = y;
 	}
+
+	public Potager getPotager() {
+		return potager;
+	}
+
+	public void setPotager(Potager potager) {
+		this.potager = potager;
+	}
 	
 	
 

@@ -44,7 +44,7 @@ public class Potager implements Serializable{
 	
 	protected LocalDate  dateCreation;	
 	
-	@OneToMany(mappedBy="potager", cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	protected List<Carre> carres;
 	
 	@Column(length=20, nullable=false)

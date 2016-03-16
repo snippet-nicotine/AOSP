@@ -258,7 +258,7 @@ public class ControlleurPotagers extends HttpServlet {
 			potager.setLargeur( potagerRequested.getLargeur() );
 			potager.setCodePostal( potagerRequested.getCodePostal() );
 			
-			serviceGestionPotager.modifierPotager(potager);
+						serviceGestionPotager.modifierPotager(potager);
 			
 		} catch (NomPotagerException e) {
 			request.setAttribute("erreurNom", e.getMessage() );
@@ -300,10 +300,9 @@ public class ControlleurPotagers extends HttpServlet {
 		try {
 			potager = serviceGestionPotager.getPotager(idPotager);
 			request.setAttribute("potager", potager);
-			request.getRequestDispatcher("/potager/voirPotager.jsp").forward(request,response);
+			request.getRequestDispatcher("/" + Parametres.CONTROLLEUR_GESTION_POTAGER + "/visualiser.jsp").forward(request,response);
 			
 		} catch (DaoPotagerGetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

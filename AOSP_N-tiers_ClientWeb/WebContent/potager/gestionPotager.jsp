@@ -26,7 +26,7 @@
 		
 			<section id="titre" class="page-header">
 			  <h1>Administration des potagers</h1>
-			</header>		
+			</section>		
 		
 			<div class="row">
 				<a href="<%= request.getContextPath() %>/aosp/potagers/annuler" class="btn btn-danger">
@@ -91,12 +91,14 @@
 				<table class="table table-hover table-striped table-bordered">
 				
 					<thead>
-						<th>Nom</th>
-						<th>Dimension</th>
-						<th>Nombre de carrés</th>
-						<th>Code Postal</th>
-						<th>Propriétaire</th>
-						<th>Actions</th>
+						<tr>
+							<th>Nom</th>
+							<th>Dimension</th>
+							<th>Nombre de carrés</th>
+							<th>Code Postal</th>
+							<th>Propriétaire</th>
+							<th>Actions</th>
+						</tr>
 						
 					</thead>
 						
@@ -110,7 +112,7 @@
 								data-potager-codePostal="${potager.codePostal}"
 							>				
 								
-								<td><a href="<c:url value="/aosp/potagers/${potager.idPotager}"/>"> 
+								<td><a href="<c:url value="/aosp/potager/${potager.idPotager}"/>"> 
 									${potager.nom} </a>
 								</td>
 								
