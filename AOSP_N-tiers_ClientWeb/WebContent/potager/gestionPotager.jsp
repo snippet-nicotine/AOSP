@@ -2,6 +2,7 @@
 <%@page import="potager.entity.Potager"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html">
@@ -52,19 +53,20 @@
 				  <div class="form-group ${ erreurDimension != null ? 'has-error' : '' }">
 				  
 				    <label for="longueur">Dimension</label>
-				    <input type="number" class="form-control" id="longueur"
-				    		value="${param.longueur}"
-				    		name="longueur" 
-				    		placeholder="Longueur" 
-				    		data-toggle="tooltip" 
-				    		title="${ erreurDimension != null ? erreurDimension : 'Entrez la longueur en cm' }">
-				    X
+
 				    <input type="number" class="form-control" id="largeur" 
 				    		value="${param.largeur}"
 				    		name="largeur" 
 				    		placeholder="Largeur" 
 				    		data-toggle="tooltip" 
 				    		title="${ erreurDimension != null ? erreurDimension : 'Entrez la largeur en cm' }">
+				    X
+				    <input type="number" class="form-control" id="longueur"
+				    		value="${param.longueur}"
+				    		name="longueur" 
+				    		placeholder="Longueur" 
+				    		data-toggle="tooltip" 
+				    		title="${ erreurDimension != null ? erreurDimension : 'Entrez la longueur en cm' }">
 				    
 				    
 				  </div>
@@ -91,6 +93,7 @@
 					<thead>
 						<th>Nom</th>
 						<th>Dimension</th>
+						<th>Nombre de carrés</th>
 						<th>Code Postal</th>
 						<th>Propriétaire</th>
 						<th>Actions</th>
@@ -112,6 +115,8 @@
 								</td>
 								
 								<td>${potager.largeur} x ${potager.longueur}</td>
+								
+								<td>${fn:length(potager.carres)}</td>
 								
 								<td>${potager.codePostal}</td>
 								

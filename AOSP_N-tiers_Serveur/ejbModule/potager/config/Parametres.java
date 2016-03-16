@@ -1,6 +1,6 @@
 package potager.config;
 
-public class Configuration {
+public class Parametres {
 	
 	public static final int TAILLE_CARRE = 50;
 

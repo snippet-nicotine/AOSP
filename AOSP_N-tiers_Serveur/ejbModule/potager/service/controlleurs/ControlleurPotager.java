@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 
-import potager.config.Configuration;
+import potager.config.Parametres;
 import potager.dao.DaoGestionPotager;
 import potager.dao.exception.DaoPotagerAjoutException;
 import potager.dao.exception.DaoPotagerGetException;
@@ -22,7 +22,7 @@ import potager.service.exception.CPPotagerException;
 import potager.service.exception.DimensionPotagerException;
 import potager.service.exception.NomPotagerException;
 import potager.service.exception.ProprietairePotagerException;
-import utilisateur.entity.Jardinier;
+import potager.service.logic.PotagerManager;
 
 @Stateful
 @LocalBean
@@ -32,12 +32,15 @@ public class ControlleurPotager {
 	DaoGestionPotager daoGestionPotager;
 	@EJB
 	Historique historique;
+	@EJB
+	PotagerManager potagerManager;
 	
 	// TODO: Refactorer dans PotagerManager
 	public Potager ajouterPotager(Potager potager) 
 			throws NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException, DaoPotagerAjoutException{
 				
-		checkPotager(potager);		
+		checkPotager(potager);
+		potagerManager.buildPotager(potager);
 		return daoGestionPotager.ajouterPotager(potager);
 				
 	}
@@ -90,8 +93,8 @@ public class ControlleurPotager {
 		if( potager.getProprietaire() == null )                  throw new ProprietairePotagerException("Le potager a obligatoirement un propriétaire.");
 		
 		// RG 19.3 La largeur et la longueur du potager >= 50cm
-		if( potager.getLongueur() < Configuration.TAILLE_CARRE ) throw new DimensionPotagerException("La longueur doit être supérieur à " + Configuration.TAILLE_CARRE + "cm");
-		if( potager.getLargeur()  < Configuration.TAILLE_CARRE ) throw new DimensionPotagerException("La largeur doit être supérieur à " + Configuration.TAILLE_CARRE + "cm");
+		if( potager.getLongueur() < Parametres.TAILLE_CARRE ) throw new DimensionPotagerException("La longueur doit être supérieur à " + Parametres.TAILLE_CARRE + "cm");
+		if( potager.getLargeur()  < Parametres.TAILLE_CARRE ) throw new DimensionPotagerException("La largeur doit être supérieur à " + Parametres.TAILLE_CARRE + "cm");
 				
 	}
 	

@@ -2,18 +2,20 @@ package potager.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import utilisateur.entity.Jardinier;
 
@@ -26,34 +28,18 @@ import utilisateur.entity.Jardinier;
  * Il a une dimension <i>(longueur x largeur)</i> et peut être géré par un jardinier.
  * Il est décomposé en plusieurs {@link potager.entity.Carre Carres} de potager. </p>
  */
-@Entity
-@Table(name="aosp2_potager")
+
 public class Potager implements Serializable{
 
 	private static final long serialVersionUID = -8065181790953611569L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	protected int         idPotager;
-	
-	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="idProprietaire", unique=true)
-	protected Jardinier   proprietaire;	
-	
-	protected LocalDate   dateCreation;	
-	@Transient
+	protected int idPotager;
+	protected Jardinier  proprietaire;	
+	protected LocalDate  dateCreation;
 	protected List<Carre> carres;
-	
-	@Column(length=20, nullable=false)
 	private String nom;
-	
-	@Column(nullable=false)
 	private int longueur;
-	
-	@Column(nullable=false)
 	private int largeur;
-	
-	@Column(length=5, nullable=false)
 	private String codePostal;
 	
 	public Potager(){
@@ -67,6 +53,8 @@ public class Potager implements Serializable{
 		this.codePostal   = codePostal;
 		this.proprietaire = proprietaire;
 		this.dateCreation = LocalDate.now();
+		this.carres       = new ArrayList<Carre>();
+
 	}
 	
 	public int getIdPotager() {
