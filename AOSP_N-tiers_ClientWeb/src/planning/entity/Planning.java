@@ -8,15 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
-/**
- * EJB Entity, classe Entity Serialisable. Actuellement et
- * pour des raisons pratiques, la propriété evenements de type
- * ArrayList<Evenement> reste en Transient. Aucune méthode 
- * codée dans cette classe.
- * @author Didier
- *
- */
-@Entity
 public class Planning implements Serializable {
 
 
@@ -25,11 +16,10 @@ public class Planning implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id
 	private int idPlanning;
 	private int idCarre;
 	private LocalDate dateCréation;
-	@Transient
+
 	private ArrayList<Evenement> evenements;
 
 	public Planning() {

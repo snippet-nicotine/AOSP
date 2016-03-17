@@ -1,0 +1,52 @@
+@CHARSET "ISO-8859-1";
+
+div#divMenu {
+	margin: 0 auto;
+	width : 900px;
+	height: 100%;
+	background-color: #c9c7af;
+}
+
+nav ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+	background-color: #008000;
+	text-align: center;
+	display: inline-block;
+}
+
+nav li {
+	float: left;
+	margin: auto;
+	padding: 0;
+	background-color: #008000;
+}
+
+nav li :hover {
+	background-color: #804000
+}
+
+nav li a {
+	display: block;
+	width: 215px;
+	color: white;
+	text-decoration: none;
+	padding: 5px;
+}
+
+#menu ul li ul {
+	display: none;
+}
+
+#menu ul li:hover ul {
+	display: block;
+}
+
+#menu li:hover ul li {
+	float: none;
+}
+
+#menu li ul {
+	position: absolute;
+}
