@@ -37,6 +37,7 @@ public class DaoPotager{
 			em.flush();
 		}
 		catch(EntityExistsException e){
+			e.printStackTrace();
 			throw new DaoPotagerAjoutException( "Le potager à ajouter existe dejà." );
 		}
 		catch(IllegalArgumentException e){

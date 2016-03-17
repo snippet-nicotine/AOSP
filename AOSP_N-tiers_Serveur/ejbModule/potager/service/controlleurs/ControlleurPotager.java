@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 
-import potager.config.Configuration;
+import potager.config.Parametres;
 import potager.dao.DaoGestionPotager;
 import potager.dao.exception.DaoPotagerAjoutException;
 import potager.dao.exception.DaoPotagerGetException;
@@ -22,7 +22,7 @@ import potager.service.exception.CPPotagerException;
 import potager.service.exception.DimensionPotagerException;
 import potager.service.exception.NomPotagerException;
 import potager.service.exception.ProprietairePotagerException;
-import utilisateur.entity.Jardinier;
+import potager.service.logic.PotagerManager;
 
 @Stateful
 @LocalBean
@@ -32,27 +32,21 @@ public class ControlleurPotager {
 	DaoGestionPotager daoGestionPotager;
 	@EJB
 	Historique historique;
+	@EJB
+	PotagerManager potagerManager;
 	
 	// TODO: Refactorer dans PotagerManager
 	public Potager ajouterPotager(Potager potager) 
 			throws NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException, DaoPotagerAjoutException{
 				
-		checkPotager(potager);		
+		potagerManager.buildPotager(potager);
 		return daoGestionPotager.ajouterPotager(potager);
 				
-	}
-
-	// TODO: regexp de check du codepostal
-	private boolean checkCodePostal(String codePostal) {
-		
-		String  regex = "^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$";		 
-		Pattern pattern = Pattern.compile(regex);
-		return pattern.matcher(codePostal).matches();
 	}
 	
 	public Potager modifierPotager(Potager potager) throws DaoPotagerModificationException, NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException{
 		
-		checkPotager(potager);
+		potagerManager.buildPotager(potager);
 		return daoGestionPotager.modifierPotager(potager);
 		
 	}
@@ -79,20 +73,6 @@ public class ControlleurPotager {
 
 	public Potager getPotager(int idPotager) throws DaoPotagerGetException {
 		return daoGestionPotager.getPotager(idPotager);
-	}
-	
-	private void checkPotager(Potager potager) throws NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException{
-		
-		// Control de la validité de données
-		// RG 19.1 Nom, codePostal et le jardinier sont obligatoire
-		if( potager.getNom().isEmpty() )                         throw new NomPotagerException("Le nom du potager doit être renseigné.");
-		if( !checkCodePostal(potager.getCodePostal() ) )         throw new CPPotagerException("Le code postal n'est pas valide. (ex: 13100, 65200, 13000, ...)");
-		if( potager.getProprietaire() == null )                  throw new ProprietairePotagerException("Le potager a obligatoirement un propriétaire.");
-		
-		// RG 19.3 La largeur et la longueur du potager >= 50cm
-		if( potager.getLongueur() < Configuration.TAILLE_CARRE ) throw new DimensionPotagerException("La longueur doit être supérieur à " + Configuration.TAILLE_CARRE + "cm");
-		if( potager.getLargeur()  < Configuration.TAILLE_CARRE ) throw new DimensionPotagerException("La largeur doit être supérieur à " + Configuration.TAILLE_CARRE + "cm");
-				
 	}
 	
 	public void annuler() throws DaoPotagerAjoutException, DaoPotagerModificationException{

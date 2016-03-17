@@ -2,18 +2,20 @@ package potager.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import utilisateur.entity.Jardinier;
 
@@ -34,14 +36,15 @@ public class Potager implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	protected int         idPotager;
+	protected int idPotager;
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="idProprietaire", unique=true)
-	protected Jardinier   proprietaire;	
+	protected Jardinier  proprietaire;	
 	
-	protected LocalDate   dateCreation;	
-	@Transient
+	protected LocalDate  dateCreation;	
+	
+	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER)
 	protected List<Carre> carres;
 	
 	@Column(length=20, nullable=false)
@@ -56,6 +59,9 @@ public class Potager implements Serializable{
 	@Column(length=5, nullable=false)
 	private String codePostal;
 	
+	private int nbCarresX;
+	private int nbCarresY;	
+	
 	public Potager(){
 		
 	}
@@ -67,6 +73,7 @@ public class Potager implements Serializable{
 		this.codePostal   = codePostal;
 		this.proprietaire = proprietaire;
 		this.dateCreation = LocalDate.now();
+		this.carres       = new ArrayList<Carre>();
 	}
 	
 	public int getIdPotager() {
@@ -131,6 +138,22 @@ public class Potager implements Serializable{
 
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
+	}
+
+	public int getNbCarresX() {
+		return nbCarresX;
+	}
+
+	public void setNbCarresX(int nbCarresX) {
+		this.nbCarresX = nbCarresX;
+	}
+
+	public int getNbCarresY() {
+		return nbCarresY;
+	}
+
+	public void setNbCarresY(int nbCarresY) {
+		this.nbCarresY = nbCarresY;
 	}
 
 }
