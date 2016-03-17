@@ -4,12 +4,12 @@ import java.util.LinkedList;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
-import javax.ejb.Singleton;
+import javax.ejb.Stateful;
 
 import potager.dao.exception.DaoPotagerAjoutException;
 import potager.dao.exception.DaoPotagerModificationException;
 
-@Singleton
+@Stateful
 @LocalBean
 public class Historique {
 

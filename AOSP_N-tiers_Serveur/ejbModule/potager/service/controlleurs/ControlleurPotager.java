@@ -1,13 +1,11 @@
 package potager.service.controlleurs;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 
-import potager.config.Parametres;
 import potager.dao.DaoGestionPotager;
 import potager.dao.exception.DaoPotagerAjoutException;
 import potager.dao.exception.DaoPotagerGetException;

@@ -8,8 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import commun.config.Parametres;
+
 @Entity
-@Table(name="aosp2_jardinier")
+@Table(name=Parametres.bddPrefix + "jardinier" + Parametres.bddSuffix)
 public class Jardinier implements Serializable{
 
 	private static final long serialVersionUID = 8754664668653019633L;
