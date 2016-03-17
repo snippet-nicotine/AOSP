@@ -1,11 +1,15 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="commun.config.Parametres"%>
 <%@page import="potager.entity.Potager"%>
+<%@page import="potager.entity.Carre"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html">
+
+<% Potager potager = (Potager) request.getAttribute("potager"); %>
 
 <html>
 <head>
@@ -29,14 +33,24 @@
 			</section>					
 					
 			<section id="lister">
-			
-				<c:forEach items="${potager.carres}" var="carre">
-				
-					<c:set var="carre" value="${carre}" scope="request" />
-					<jsp:include page="carre.jsp"></jsp:include>
+							
+				<% for(int y=0; y < potager.getNbCarresY(); y++) { %>
 					
-				</c:forEach>
-						
+					<div clas="row">				
+									
+						<%	for(int x=0; x < potager.getNbCarresX(); x++){ 
+								
+								int index = ( y*potager.getNbCarresX() ) + x ;
+								Carre carre = potager.getCarres().get(index);
+								request.setAttribute("carre", carre);
+						%>								
+								<jsp:include page="carre.jsp"></jsp:include>
+						<% } %>
+					
+					</div>
+									
+				<% } %>		
+
 			</section>
 			
 			

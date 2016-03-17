@@ -44,7 +44,7 @@ public class Potager implements Serializable{
 	
 	protected LocalDate  dateCreation;	
 	
-	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER)
 	protected List<Carre> carres;
 	
 	@Column(length=20, nullable=false)
@@ -58,6 +58,9 @@ public class Potager implements Serializable{
 	
 	@Column(length=5, nullable=false)
 	private String codePostal;
+	
+	private int nbCarresX;
+	private int nbCarresY;	
 	
 	public Potager(){
 		
@@ -135,6 +138,22 @@ public class Potager implements Serializable{
 
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
+	}
+
+	public int getNbCarresX() {
+		return nbCarresX;
+	}
+
+	public void setNbCarresX(int nbCarresX) {
+		this.nbCarresX = nbCarresX;
+	}
+
+	public int getNbCarresY() {
+		return nbCarresY;
+	}
+
+	public void setNbCarresY(int nbCarresY) {
+		this.nbCarresY = nbCarresY;
 	}
 
 }
