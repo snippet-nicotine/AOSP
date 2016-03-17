@@ -28,7 +28,7 @@ public class Planning implements Serializable {
 	@Id
 	private int idPlanning;
 	private int idCarre;
-	private LocalDate dateCréation;
+	private LocalDate dateCreation;
 	@Transient
 	private ArrayList<Evenement> evenements;
 
@@ -36,11 +36,11 @@ public class Planning implements Serializable {
 		super();
 	}
 
-	public Planning(int idPlanning, int idCarre, LocalDate dateCréation, ArrayList<Evenement> evenements) {
+	public Planning(int idPlanning, int idCarre, LocalDate dateCreation, ArrayList<Evenement> evenements) {
 		super();
 		this.idPlanning   = idPlanning;
 		this.idCarre      = idCarre;
-		this.dateCréation = dateCréation;
+		this.dateCreation = dateCreation;
 		this.evenements   = evenements;
 	}
 
@@ -60,12 +60,12 @@ public class Planning implements Serializable {
 		this.idCarre = idCarre;
 	}
 
-	public LocalDate getDateCréation() {
-		return dateCréation;
+	public LocalDate getDateCreation() {
+		return dateCreation;
 	}
 
-	public void setDateCréation(LocalDate dateCréation) {
-		this.dateCréation = dateCréation;
+	public void setDateCreation(LocalDate dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 
 	public ArrayList<Evenement> getEvenements() {
@@ -78,7 +78,7 @@ public class Planning implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Planning [idPlanning=" + idPlanning + ", idCarre=" + idCarre + ", dateCréation=" + dateCréation
+		return "Planning [idPlanning=" + idPlanning + ", idCarre=" + idCarre + ", dateCréation=" + dateCreation
 				+ ", evenements=" + evenements + "]";
 	}
 
