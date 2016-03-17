@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import utilisateur.entity.Jardinier;
+
 /**
  * Servlet implementation class ServletConnexion
  */
@@ -20,10 +22,8 @@ public class ControlleurConnexion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session = request.getSession(true);
-		
-		boolean isLogged = (boolean) session.getAttribute("isLogged");
+				
+		boolean isLogged = ControlleurConnexion.isLogged(request);
 		
 		if( isLogged ){
 			response.sendRedirect(request.getContextPath()+"/aosp/potagers");
@@ -40,31 +40,29 @@ public class ControlleurConnexion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String login    = request.getParameter("login");
+		
+		//Todo: Gérer le user en base avec un check password
 		String password = request.getParameter("password");
 		
 		HttpSession session = request.getSession(true);
-		session.setAttribute("isLogged", false);
+		Jardinier jardinier = null;
 		
 		if( !login.isEmpty() ){
-			session.setAttribute("login", login);
-			session.setAttribute("username", login);
-			session.setAttribute("isLogged", true);			
-		}
+			jardinier = new Jardinier();
+			jardinier.setNom(login);
+		}		
 		
-		System.out.println("session logged: " + session.getAttribute("isLogged"));
-		
+		session.setAttribute("user", jardinier);		
 		doGet(request, response);
 	}
 	
 	public static boolean isLogged(HttpServletRequest request){
 		
 		boolean isLogged = false;		
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession(true);		
+		Object user = (Object) session.getAttribute("user");
 		
-		Object isLoggedObj = (Object) session.getAttribute("isLogged");
-		
-		if(isLoggedObj == null)	isLogged = false;
-		else                    isLogged = (boolean) session.getAttribute("isLogged");		
+		if(user != null) isLogged = true;
 		
 		return isLogged;
 		

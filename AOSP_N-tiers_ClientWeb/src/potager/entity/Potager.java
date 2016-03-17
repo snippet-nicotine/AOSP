@@ -28,19 +28,39 @@ import utilisateur.entity.Jardinier;
  * Il a une dimension <i>(longueur x largeur)</i> et peut être géré par un jardinier.
  * Il est décomposé en plusieurs {@link potager.entity.Carre Carres} de potager. </p>
  */
-
+@Entity
+@Table(name="aosp_potager")
 public class Potager implements Serializable{
 
 	private static final long serialVersionUID = -8065181790953611569L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	protected int idPotager;
+	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="idProprietaire", unique=true)
 	protected Jardinier  proprietaire;	
-	protected LocalDate  dateCreation;
+	
+	protected LocalDate  dateCreation;	
+	
+	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	protected List<Carre> carres;
+	
+	@Column(length=20, nullable=false)
 	private String nom;
+	
+	@Column(nullable=false)
 	private int longueur;
+	
+	@Column(nullable=false)
 	private int largeur;
+	
+	@Column(length=5, nullable=false)
 	private String codePostal;
+	
+	private int nbCarresX;
+	private int nbCarresY;	
 	
 	public Potager(){
 		
@@ -54,7 +74,6 @@ public class Potager implements Serializable{
 		this.proprietaire = proprietaire;
 		this.dateCreation = LocalDate.now();
 		this.carres       = new ArrayList<Carre>();
-
 	}
 	
 	public int getIdPotager() {
@@ -119,6 +138,22 @@ public class Potager implements Serializable{
 
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
+	}
+
+	public int getNbCarresX() {
+		return nbCarresX;
+	}
+
+	public void setNbCarresX(int nbCarresX) {
+		this.nbCarresX = nbCarresX;
+	}
+
+	public int getNbCarresY() {
+		return nbCarresY;
+	}
+
+	public void setNbCarresY(int nbCarresY) {
+		this.nbCarresY = nbCarresY;
 	}
 
 }

@@ -6,9 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import commun.config.Parametres;
+
 //TODO: Faire la javadoc
 @Entity
-@Table(name="aosp_terrain")
+@Table(name=Parametres.bddPrefix + "terrain" + Parametres.bddSuffix)
 public abstract class Terrain implements Serializable{
 
 	private static final long serialVersionUID = -4558213931653633895L;

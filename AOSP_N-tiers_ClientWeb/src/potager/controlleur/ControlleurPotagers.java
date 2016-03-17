@@ -49,7 +49,7 @@ public class ControlleurPotagers extends HttpServlet {
 	private static final Logger LOG = LogManager.getLogger();
 	
 	private ServiceGestionPotager serviceGestionPotager;
-	private Jardinier jardinier;
+
 	
 	@Override
 	public void init() throws ServletException {
@@ -58,8 +58,6 @@ public class ControlleurPotagers extends HttpServlet {
 		
 		InitialContext initialContext;
 
-		//TODO: Gérer le jardinier via une httpSession
-		jardinier = new Jardinier();
 
 		try {
 			initialContext = new InitialContext();
@@ -258,7 +256,7 @@ public class ControlleurPotagers extends HttpServlet {
 			potager.setLargeur( potagerRequested.getLargeur() );
 			potager.setCodePostal( potagerRequested.getCodePostal() );
 			
-			serviceGestionPotager.modifierPotager(potager);
+						serviceGestionPotager.modifierPotager(potager);
 			
 		} catch (NomPotagerException e) {
 			request.setAttribute("erreurNom", e.getMessage() );
@@ -300,10 +298,9 @@ public class ControlleurPotagers extends HttpServlet {
 		try {
 			potager = serviceGestionPotager.getPotager(idPotager);
 			request.setAttribute("potager", potager);
-			request.getRequestDispatcher("/potager/voirPotager.jsp").forward(request,response);
+			request.getRequestDispatcher("/" + Parametres.CONTROLLEUR_GESTION_POTAGER + "/visualiser.jsp").forward(request,response);
 			
 		} catch (DaoPotagerGetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -383,7 +380,10 @@ public class ControlleurPotagers extends HttpServlet {
 	}
 	
 	private Potager potagerFromRequest(HttpServletRequest request, String prefix) throws DimensionPotagerException, NomPotagerException, CPPotagerException{
-				
+		
+		HttpSession session = request.getSession(true);
+		Jardinier jardinier = (Jardinier) session.getAttribute("user");
+		
 		String nom        = request.getParameter(prefix + "nom");
 		String codePostal = request.getParameter(prefix + "codePostal");
 		Potager potager   = null;

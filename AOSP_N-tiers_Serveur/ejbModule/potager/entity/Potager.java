@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import commun.config.Parametres;
 import utilisateur.entity.Jardinier;
 
 
@@ -29,7 +30,7 @@ import utilisateur.entity.Jardinier;
  * Il est décomposé en plusieurs {@link potager.entity.Carre Carres} de potager. </p>
  */
 @Entity
-@Table(name="aosp_potager")
+@Table(name = Parametres.bddPrefix + "potager" + Parametres.bddSuffix)
 public class Potager implements Serializable{
 
 	private static final long serialVersionUID = -8065181790953611569L;
@@ -44,7 +45,7 @@ public class Potager implements Serializable{
 	
 	protected LocalDate  dateCreation;	
 	
-	@OneToMany(mappedBy="potager", cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER)
 	protected List<Carre> carres;
 	
 	@Column(length=20, nullable=false)
@@ -58,6 +59,9 @@ public class Potager implements Serializable{
 	
 	@Column(length=5, nullable=false)
 	private String codePostal;
+	
+	private int nbCarresX;
+	private int nbCarresY;	
 	
 	public Potager(){
 		
@@ -135,6 +139,22 @@ public class Potager implements Serializable{
 
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
+	}
+
+	public int getNbCarresX() {
+		return nbCarresX;
+	}
+
+	public void setNbCarresX(int nbCarresX) {
+		this.nbCarresX = nbCarresX;
+	}
+
+	public int getNbCarresY() {
+		return nbCarresY;
+	}
+
+	public void setNbCarresY(int nbCarresY) {
+		this.nbCarresY = nbCarresY;
 	}
 
 }

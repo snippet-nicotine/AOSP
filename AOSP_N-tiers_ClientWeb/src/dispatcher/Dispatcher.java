@@ -58,7 +58,7 @@ public class Dispatcher extends HttpServlet {
 				break;
 			
 			case "message":
-				request.getRequestDispatcher("/DocumentEnvoiMessage").forward(request, response);	
+				request.getRequestDispatcher("/PotagerEnvoiMessage").forward(request, response);	
 				break;
 
 			default:

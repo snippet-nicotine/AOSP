@@ -9,8 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import commun.config.Parametres;
+
 @Entity
-@Table(name="aosp_carre")
+@Table(name=Parametres.bddPrefix + "carre" + Parametres.bddSuffix)
 public class Carre implements Serializable{
 
 	private static final long serialVersionUID = 8695011214229733217L;

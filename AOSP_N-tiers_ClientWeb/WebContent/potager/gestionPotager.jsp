@@ -21,20 +21,18 @@
 	<%@ include file="/WEB-INF/vuesPartielles/header.jsp"%>
 	
 	<div id="contenu" class="container-fluid">	
-	
-		<div class="row">
-		
+			
 			<section id="titre" class="page-header">
 			  <h1>Administration des potagers</h1>
-			</header>		
+			</section>		
 		
-			<div class="row">
-				<a href="<%= request.getContextPath() %>/aosp/potagers/annuler" class="btn btn-danger">
+			<section class="well">
+				<a href="<%= request.getContextPath() %>/aosp/potager/annuler" class="btn btn-danger">
 					<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
 					Annuler (${nbAnnulations})
 			 	</a>
 			 	<a href="<%= request.getContextPath() %>/aosp/message" class="btn btn-default">Demande d'arrosage</a> ( sur tout les potagers listés (Message) )		
-			</div>
+			</section>
 		
 			<!-- Ajouter un potager -->
 			<section id="ajouter">
@@ -91,12 +89,14 @@
 				<table class="table table-hover table-striped table-bordered">
 				
 					<thead>
-						<th>Nom</th>
-						<th>Dimension</th>
-						<th>Nombre de carrés</th>
-						<th>Code Postal</th>
-						<th>Propriétaire</th>
-						<th>Actions</th>
+						<tr>
+							<th>Nom</th>
+							<th>Dimension</th>
+							<th>Nombre de carrés</th>
+							<th>Code Postal</th>
+							<th>Propriétaire</th>
+							<th>Actions</th>
+						</tr>
 						
 					</thead>
 						
@@ -110,7 +110,7 @@
 								data-potager-codePostal="${potager.codePostal}"
 							>				
 								
-								<td><a href="<c:url value="/aosp/potagers/${potager.idPotager}"/>"> 
+								<td><a href="<c:url value="/aosp/potager/${potager.idPotager}"/>"> 
 									${potager.nom} </a>
 								</td>
 								
@@ -141,7 +141,6 @@
 			
 			</section>
 		</div>
-	</div>
 
 	<!-- Modifier le potager -->
 	<div class="modal fade ${ isModifier ? 'visible' : '' }" id="modal-modifier" tabindex="-1" role="dialog"
