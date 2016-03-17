@@ -32,11 +32,11 @@
 			  <h1>${potager.nom}</h1>
 			</section>					
 					
-			<section id="lister">
+			<section id="carres">
 							
 				<% for(int y=0; y < potager.getNbCarresY(); y++) { %>
 					
-					<div clas="row">				
+					<div class="ligne">				
 									
 						<%	for(int x=0; x < potager.getNbCarresX(); x++){ 
 								

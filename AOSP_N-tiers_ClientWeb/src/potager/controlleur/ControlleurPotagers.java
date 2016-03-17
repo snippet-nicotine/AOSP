@@ -49,7 +49,7 @@ public class ControlleurPotagers extends HttpServlet {
 	private static final Logger LOG = LogManager.getLogger();
 	
 	private ServiceGestionPotager serviceGestionPotager;
-	private Jardinier jardinier;
+
 	
 	@Override
 	public void init() throws ServletException {
@@ -58,8 +58,6 @@ public class ControlleurPotagers extends HttpServlet {
 		
 		InitialContext initialContext;
 
-		//TODO: Gérer le jardinier via une httpSession
-		jardinier = new Jardinier();
 
 		try {
 			initialContext = new InitialContext();
@@ -382,7 +380,10 @@ public class ControlleurPotagers extends HttpServlet {
 	}
 	
 	private Potager potagerFromRequest(HttpServletRequest request, String prefix) throws DimensionPotagerException, NomPotagerException, CPPotagerException{
-				
+		
+		HttpSession session = request.getSession(true);
+		Jardinier jardinier = (Jardinier) session.getAttribute("user");
+		
 		String nom        = request.getParameter(prefix + "nom");
 		String codePostal = request.getParameter(prefix + "codePostal");
 		Potager potager   = null;
