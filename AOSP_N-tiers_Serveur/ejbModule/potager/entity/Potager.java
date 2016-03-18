@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import commun.config.Parametres;
 import utilisateur.entity.Jardinier;
 
 
@@ -30,7 +29,7 @@ import utilisateur.entity.Jardinier;
  * Il est décomposé en plusieurs {@link potager.entity.Carre Carres} de potager. </p>
  */
 @Entity
-@Table(name = Parametres.bddPrefix + "potager" + Parametres.bddSuffix)
+@Table(name="aosp_potager")
 public class Potager implements Serializable{
 
 	private static final long serialVersionUID = -8065181790953611569L;
@@ -43,9 +42,13 @@ public class Potager implements Serializable{
 	@JoinColumn(name="idProprietaire", unique=true)
 	protected Jardinier  proprietaire;	
 	
+	@OneToMany(mappedBy="potager", cascade={CascadeType.REMOVE},
+			fetch=FetchType.LAZY)
+	protected List<PotagerJardinier> visiteurs;	
+	
 	protected LocalDate  dateCreation;	
 	
-	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	protected List<Carre> carres;
 	
 	@Column(length=20, nullable=false)
@@ -75,6 +78,7 @@ public class Potager implements Serializable{
 		this.proprietaire = proprietaire;
 		this.dateCreation = LocalDate.now();
 		this.carres       = new ArrayList<Carre>();
+		this.visiteurs    = new ArrayList<PotagerJardinier>();
 	}
 	
 	public int getIdPotager() {
@@ -156,5 +160,14 @@ public class Potager implements Serializable{
 	public void setNbCarresY(int nbCarresY) {
 		this.nbCarresY = nbCarresY;
 	}
+
+	public List<PotagerJardinier> getVisiteurs() {
+		return visiteurs;
+	}
+
+	public void setVisiteurs(List<PotagerJardinier> visiteurs) {
+		this.visiteurs = visiteurs;
+	}
+
 
 }

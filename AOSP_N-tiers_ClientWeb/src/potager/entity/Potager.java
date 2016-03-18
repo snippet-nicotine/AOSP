@@ -42,6 +42,10 @@ public class Potager implements Serializable{
 	@JoinColumn(name="idProprietaire", unique=true)
 	protected Jardinier  proprietaire;	
 	
+	@OneToMany(mappedBy="potager", cascade={CascadeType.REMOVE},
+			fetch=FetchType.LAZY)
+	protected List<PotagerJardinier> visiteurs;	
+	
 	protected LocalDate  dateCreation;	
 	
 	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
@@ -74,6 +78,7 @@ public class Potager implements Serializable{
 		this.proprietaire = proprietaire;
 		this.dateCreation = LocalDate.now();
 		this.carres       = new ArrayList<Carre>();
+		this.visiteurs    = new ArrayList<PotagerJardinier>();
 	}
 	
 	public int getIdPotager() {
@@ -155,5 +160,14 @@ public class Potager implements Serializable{
 	public void setNbCarresY(int nbCarresY) {
 		this.nbCarresY = nbCarresY;
 	}
+
+	public List<PotagerJardinier> getVisiteurs() {
+		return visiteurs;
+	}
+
+	public void setVisiteurs(List<PotagerJardinier> visiteurs) {
+		this.visiteurs = visiteurs;
+	}
+
 
 }

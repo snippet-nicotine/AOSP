@@ -1,24 +1,33 @@
 package utilisateur.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import commun.config.Parametres;
+import potager.entity.PotagerJardinier;
 
 @Entity
-@Table(name=Parametres.bddPrefix + "jardinier" + Parametres.bddSuffix)
+@Table(name="aosp_jardinier")
 public class Jardinier implements Serializable{
 
 	private static final long serialVersionUID = 8754664668653019633L;
 	
-	@Id
+	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int idJardinier;
+	
+	@OneToMany(mappedBy="jardinier", cascade={CascadeType.REMOVE},
+			fetch=FetchType.LAZY)
+	private List<PotagerJardinier> potagerPartages;
+	
 	private String nom;
 	private String prenom;
 	private String mail;
@@ -81,6 +90,15 @@ public class Jardinier implements Serializable{
 
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
+	}
+
+
+	public void setPotagerPartages(List<PotagerJardinier> potagerPartages) {
+		this.potagerPartages = potagerPartages;
+	}
+
+	public List<PotagerJardinier> getPotagerPartages() {
+		return potagerPartages;
 	}
 
 }
