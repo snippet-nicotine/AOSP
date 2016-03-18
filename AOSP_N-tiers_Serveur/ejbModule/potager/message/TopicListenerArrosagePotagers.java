@@ -1,4 +1,4 @@
-package message;
+package potager.message;
 
 // test
 import java.time.LocalDate;

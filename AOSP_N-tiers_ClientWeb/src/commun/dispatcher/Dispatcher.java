@@ -1,4 +1,4 @@
-package dispatcher;
+package commun.dispatcher;
 
 
 import java.io.IOException;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controlleur.ControlleurConnexion;
 import commun.config.Parametres;
+import commun.controleur.ControleurConnexion;
 
 /**
  * Servlet implementation class DispatcherGestionDocument
@@ -63,7 +63,7 @@ public class Dispatcher extends HttpServlet {
 
 			default:
 				
-				boolean isLogged = ControlleurConnexion.isLogged(request);		
+				boolean isLogged = ControleurConnexion.isLogged(request);		
 
 				if( isLogged )  response.sendRedirect(request.getContextPath() + "/aosp/" + Parametres.CONTROLLEUR_GESTION_POTAGER);
 				else      		response.sendRedirect(request.getContextPath() + "/commun/html/connexion.jsp");					

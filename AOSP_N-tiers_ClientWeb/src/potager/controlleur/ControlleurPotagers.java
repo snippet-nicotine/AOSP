@@ -16,7 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import commun.config.Parametres;
-import controlleur.ControlleurConnexion;
+import commun.controleur.ControleurConnexion;
 import potager.clientServeur.ServiceGestionPotager;
 import potager.entity.Potager;
 import potager.service.exception.CPPotagerException;
@@ -76,7 +76,7 @@ public class ControlleurPotagers extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession(true);
-		boolean isLogged = ControlleurConnexion.isLogged(request);		
+		boolean isLogged = ControleurConnexion.isLogged(request);		
 		if(!isLogged) response.sendRedirect(request.getContextPath() + "/commun/html/connexion.jsp");
 		
 		String id     = (String) request.getAttribute("id");
@@ -168,7 +168,7 @@ public class ControlleurPotagers extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(true);
-		boolean isLogged = ControlleurConnexion.isLogged(request);		
+		boolean isLogged = ControleurConnexion.isLogged(request);		
 		if(!isLogged) response.sendRedirect(request.getContextPath() + "/commun/html/connexion.jsp");
 		
 		String id     = (String) request.getAttribute("id");

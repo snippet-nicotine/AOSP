@@ -1,4 +1,4 @@
-package controlleur;
+package commun.controleur;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import utilisateur.entity.Jardinier;
  * Servlet implementation class ServletConnexion
  */
 @WebServlet("/ControlleurConnexion")
-public class ControlleurConnexion extends HttpServlet {
+public class ControleurConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	/**
@@ -23,7 +23,7 @@ public class ControlleurConnexion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
-		boolean isLogged = ControlleurConnexion.isLogged(request);
+		boolean isLogged = ControleurConnexion.isLogged(request);
 		
 		if( isLogged ){
 			response.sendRedirect(request.getContextPath()+"/aosp/potagers");
