@@ -25,7 +25,7 @@ import utilisateur.entity.Jardinier;
  * 
  * @author Nicolas LAMBERT
  * 
- * <p> Le potager est un terrain cultivable d’un jardinier. 
+ * <p> Le potager est un terrain cultivable d’'un jardinier. 
  * Il a une dimension <i>(longueur x largeur)</i> et peut être géré par un jardinier.
  * Il est décomposé en plusieurs {@link potager.entity.Carre Carres} de potager. </p>
  */
