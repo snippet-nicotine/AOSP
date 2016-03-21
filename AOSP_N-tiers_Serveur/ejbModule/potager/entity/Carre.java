@@ -8,11 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import commun.config.Parametres;
 
 @Entity
-@Table(name=Parametres.bddPrefix + "carre" + Parametres.bddSuffix)
+@Table(name=Parametres.bddPrefix + "_carre" + Parametres.bddSuffix)
 public class Carre implements Serializable{
 
 	private static final long serialVersionUID = 8695011214229733217L;

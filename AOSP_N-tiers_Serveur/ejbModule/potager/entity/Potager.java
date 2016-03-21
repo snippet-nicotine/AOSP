@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -42,9 +44,11 @@ public class Potager implements Serializable{
 	@JoinColumn(name="idProprietaire", unique=true)
 	protected Jardinier  proprietaire;	
 	
-	@OneToMany(mappedBy="potager", cascade={CascadeType.REMOVE},
-			fetch=FetchType.LAZY)
-	protected List<PotagerJardinier> visiteurs;	
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinTable(name="aosp_potager_visiteur",
+		joinColumns        = @JoinColumn(name="id_potager"),
+		inverseJoinColumns = @JoinColumn(name="id_visiteur")	)
+	protected List<Jardinier> visiteurs;
 	
 	protected LocalDate  dateCreation;	
 	
@@ -67,18 +71,19 @@ public class Potager implements Serializable{
 	private int nbCarresY;	
 	
 	public Potager(){
-		
+		this.carres       = new ArrayList<Carre>();
+		this.visiteurs    = new ArrayList<Jardinier>();
 	}
 	
 	public Potager(String nom, int longueur, int largeur, String codePostal, Jardinier proprietaire){
+		this();
 		this.nom          = nom;
 		this.longueur     = longueur;
 		this.largeur      = largeur;
 		this.codePostal   = codePostal;
 		this.proprietaire = proprietaire;
 		this.dateCreation = LocalDate.now();
-		this.carres       = new ArrayList<Carre>();
-		this.visiteurs    = new ArrayList<PotagerJardinier>();
+
 	}
 	
 	public int getIdPotager() {
@@ -161,12 +166,50 @@ public class Potager implements Serializable{
 		this.nbCarresY = nbCarresY;
 	}
 
-	public List<PotagerJardinier> getVisiteurs() {
-		return visiteurs;
+	public List<Jardinier> getVisiteurs() {
+		return this.visiteurs;
 	}
 
-	public void setVisiteurs(List<PotagerJardinier> visiteurs) {
+	public void setVisiteurs(List<Jardinier> visiteurs) {
 		this.visiteurs = visiteurs;
+	}
+	
+	public void addVisiteur(Jardinier visiteur){
+		if(!visiteurs.contains(visiteur) ){
+			visiteurs.add(visiteur);
+			//visiteur.addPotagerPartage(this);
+		}
+	}
+	
+	public void serialize(){
+				
+		if(carres != null){	
+			ArrayList<Carre> serializedCarres = new ArrayList<Carre>();
+			for(Carre carre: carres){
+				System.out.println("serialize carre : " + carre);
+				serializedCarres.add(carre);			
+			}
+			carres = serializedCarres;
+		}
+		
+		if(visiteurs != null){
+			ArrayList<Jardinier> serializedVisiteurs = new ArrayList<Jardinier>();
+			for(Jardinier visiteur: visiteurs){
+				System.out.println("serialize visiteur : " + visiteur);
+				visiteur.serialize();
+				serializedVisiteurs.add(visiteur);
+			}
+			visiteurs = serializedVisiteurs;			
+		}
+		
+	}
+
+	@Override
+	public String toString() {
+		return "Potager [idPotager=" + idPotager + ", proprietaire=" + proprietaire + ", visiteurs=" + visiteurs
+				+ ", dateCreation=" + dateCreation + ", carres=" + carres + ", nom=" + nom + ", longueur=" + longueur
+				+ ", largeur=" + largeur + ", codePostal=" + codePostal + ", nbCarresX=" + nbCarresX + ", nbCarresY="
+				+ nbCarresY + "]";
 	}
 
 

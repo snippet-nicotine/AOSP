@@ -53,7 +53,15 @@ public class PotagerManager {
 	
 	public void buildPotager(Potager potager) throws NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException{	
 		
+		Jardinier visiteur1 = new Jardinier();
+		visiteur1.setNom("visiteur 1");
+		Jardinier visiteur2 = new Jardinier();
+		visiteur1.setNom("visiteur 2");
+		
 		setDimension(potager);
+		
+		//potager.getVisiteurs().add(visiteur1);
+		//potager.getVisiteurs().add(visiteur2);
 		validerPotager(potager);
 
 	}

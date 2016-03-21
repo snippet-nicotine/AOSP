@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import utilisateur.entity.Jardinier;
 
 
@@ -21,6 +22,7 @@ public class Potager implements Serializable{
 	private static final long serialVersionUID = -8065181790953611569L;
 
 	protected int idPotager;
+
 	protected Jardinier  proprietaire;	
 	protected List<Jardinier> visiteurs;
 	
@@ -35,18 +37,19 @@ public class Potager implements Serializable{
 	private int nbCarresY;	
 	
 	public Potager(){
-		
+		this.carres       = new ArrayList<Carre>();
+		this.visiteurs    = new ArrayList<Jardinier>();
 	}
 	
 	public Potager(String nom, int longueur, int largeur, String codePostal, Jardinier proprietaire){
+		this();
 		this.nom          = nom;
 		this.longueur     = longueur;
 		this.largeur      = largeur;
 		this.codePostal   = codePostal;
 		this.proprietaire = proprietaire;
 		this.dateCreation = LocalDate.now();
-		this.carres       = new ArrayList<Carre>();
-		this.visiteurs    = new ArrayList<Jardinier>();
+
 	}
 	
 	public int getIdPotager() {
@@ -130,11 +133,48 @@ public class Potager implements Serializable{
 	}
 
 	public List<Jardinier> getVisiteurs() {
-		return visiteurs;
+		return this.visiteurs;
 	}
 
 	public void setVisiteurs(List<Jardinier> visiteurs) {
 		this.visiteurs = visiteurs;
+	}
+	
+	public void addVisiteur(Jardinier visiteur){
+		if(!visiteurs.contains(visiteur) ){
+			visiteurs.add(visiteur);
+			visiteur.addPotagerPartage(this);
+		}
+	}
+	
+	public void serialize(){
+				
+		if(carres != null){	
+			ArrayList<Carre> serializedCarres = new ArrayList<Carre>();
+			for(Carre carre: carres){
+				System.out.println("serialize carre : " + carre);
+				serializedCarres.add(carre);			
+			}
+			carres = serializedCarres;
+		}
+		
+		if(visiteurs != null){
+			ArrayList<Jardinier> serializedVisiteurs = new ArrayList<Jardinier>();
+			for(Jardinier visiteur: visiteurs){
+				System.out.println("serialize visiteur : " + visiteur);
+				serializedVisiteurs.add(visiteur);
+			}
+			visiteurs = serializedVisiteurs;			
+		}
+		
+	}
+
+	@Override
+	public String toString() {
+		return "Potager [idPotager=" + idPotager + ", proprietaire=" + proprietaire + ", visiteurs=" + visiteurs
+				+ ", dateCreation=" + dateCreation + ", carres=" + carres + ", nom=" + nom + ", longueur=" + longueur
+				+ ", largeur=" + largeur + ", codePostal=" + codePostal + ", nbCarresX=" + nbCarresX + ", nbCarresY="
+				+ nbCarresY + "]";
 	}
 
 

@@ -1,18 +1,18 @@
 package utilisateur.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import potager.entity.PotagerJardinier;
+import potager.entity.Potager;
 
 @Entity
 @Table(name="aosp_jardinier")
@@ -20,13 +20,12 @@ public class Jardinier implements Serializable{
 
 	private static final long serialVersionUID = 8754664668653019633L;
 	
-	@Id 
+	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int idJardinier;
 	
-	@OneToMany(mappedBy="jardinier", cascade={CascadeType.REMOVE},
-			fetch=FetchType.LAZY)
-	private List<PotagerJardinier> potagerPartages;
+	@ManyToMany(mappedBy="visiteurs", 	fetch=FetchType.EAGER)
+	private List<Potager> potagerPartages;
 	
 	private String nom;
 	private String prenom;
@@ -36,6 +35,7 @@ public class Jardinier implements Serializable{
 	
 	public Jardinier(){
 		this.nom = "Jardinier temp";
+		this.potagerPartages = new ArrayList<Potager>();
 	}
 
 	public String getNom() {
@@ -46,11 +46,6 @@ public class Jardinier implements Serializable{
 		this.nom = nom;
 	}
 
-	@Override
-	public String toString() {
-		return "Jardinier [idJardinier=" + idJardinier + ", nom=" + nom + ", prenom=" + prenom + ", mail=" + mail
-				+ ", motPasse=" + motPasse + ", codePostal=" + codePostal + "]";
-	}
 
 	public int getIdJardinier() {
 		return idJardinier;
@@ -93,12 +88,41 @@ public class Jardinier implements Serializable{
 	}
 
 
-	public void setPotagerPartages(List<PotagerJardinier> potagerPartages) {
+	public void setPotagerPartages(List<Potager> potagerPartages) {
 		this.potagerPartages = potagerPartages;
 	}
 
-	public List<PotagerJardinier> getPotagerPartages() {
+	public List<Potager> getPotagerPartages() {
 		return potagerPartages;
+	}
+
+	public void addPotagerPartage(Potager potager) {
+		
+		if(!potagerPartages.contains(potager)){
+			potagerPartages.add(potager);
+		}
+		
+	}
+	
+	public void serialize(){
+		
+		if(potagerPartages != null ){
+			ArrayList<Potager> dtoPotagers = new ArrayList<Potager>();
+			for(Potager potager : potagerPartages){
+				System.out.println("serialize visiteur : ");
+				potager.setVisiteurs( new ArrayList<Jardinier>() );
+				dtoPotagers.add( potager );
+			}
+			potagerPartages = dtoPotagers;
+		}
+		
+	}
+
+	@Override
+	public String toString() {
+		return "Jardinier [idJardinier=" + idJardinier + ", potagerPartages="  + ", nom=" + nom
+				+ ", prenom=" + prenom + ", mail=" + mail + ", motPasse=" + motPasse + ", codePostal=" + codePostal
+				+ "]";
 	}
 
 }

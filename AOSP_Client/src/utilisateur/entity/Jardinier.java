@@ -1,22 +1,14 @@
 package utilisateur.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 import potager.entity.Potager;
 
 public class Jardinier implements Serializable{
 
 	private static final long serialVersionUID = 8754664668653019633L;
-
 	private int idJardinier;
 	private List<Potager> potagerPartages;
 	
@@ -27,7 +19,9 @@ public class Jardinier implements Serializable{
 	private String codePostal;
 	
 	public Jardinier(){
+		
 		this.nom = "Jardinier temp";
+		this.potagerPartages = new ArrayList<Potager>();
 	}
 
 	public String getNom() {
@@ -36,12 +30,6 @@ public class Jardinier implements Serializable{
 
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-
-	@Override
-	public String toString() {
-		return "Jardinier [idJardinier=" + idJardinier + ", nom=" + nom + ", prenom=" + prenom + ", mail=" + mail
-				+ ", motPasse=" + motPasse + ", codePostal=" + codePostal + "]";
 	}
 
 	public int getIdJardinier() {
@@ -91,6 +79,21 @@ public class Jardinier implements Serializable{
 
 	public List<Potager> getPotagerPartages() {
 		return potagerPartages;
+	}
+
+	public void addPotagerPartage(Potager potager) {
+		
+		if(!potagerPartages.contains(potager)){
+			potagerPartages.add(potager);
+		}
+		
+	}
+
+	@Override
+	public String toString() {
+		return "Jardinier [idJardinier=" + idJardinier + ", potagerPartages=" + ", nom=" + nom
+				+ ", prenom=" + prenom + ", mail=" + mail + ", motPasse=" + motPasse + ", codePostal=" + codePostal
+				+ "]";
 	}
 
 }

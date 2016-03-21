@@ -1,5 +1,6 @@
 package potager.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -34,7 +35,7 @@ public class DaoPotager{
 		
 		try{
 			em.persist(potager);
-			em.flush();
+			em.flush();			
 		}
 		catch(EntityExistsException e){
 			e.printStackTrace();
@@ -45,8 +46,7 @@ public class DaoPotager{
 		}
 		catch(TransactionRequiredException e){
 			throw new DaoPotagerAjoutException( "Un problème de transction est survenue.Veuillez reesayer dans quellques minutes." );
-		}
-		
+		}		
 		return potager;
 	}
 
@@ -68,7 +68,6 @@ public class DaoPotager{
 		catch(TransactionRequiredException e){
 			throw new DaoPotagerModificationException( "Un problème de transction est survenue.Veuillez reesayer dans quellques minutes." );
 		}
-		
 		
 		return potager;
 		
@@ -101,9 +100,11 @@ public class DaoPotager{
 	 * @throws DaoPotagerQueryException si la requête n'est pas valide
 	 */
 	public List<Potager> listerPotager() throws DaoPotagerQueryException {
-		
+
 		try{
-			return em.createQuery("SELECT p FROM Potager p ORDER BY p.nom").getResultList();			
+			ArrayList<Potager> potagers = (ArrayList<Potager>) em.createQuery("SELECT p FROM Potager p ORDER BY p.nom").getResultList();
+			return potagers;			
+
 		}
 		catch(IllegalArgumentException e){
 			throw new DaoPotagerQueryException("La requête: " + "SELECT p FROM Potager p ORDER BY p.idPotager" + " n'est pas valide");
@@ -123,7 +124,8 @@ public class DaoPotager{
 	public Potager getPotager(int idPotager) throws DaoPotagerGetException {
 		
 		try{
-			return em.find(Potager.class, idPotager);			
+			Potager potager = em.find(Potager.class, idPotager);	
+			return potager;
 		}
 		catch(IllegalArgumentException  e){
 			throw new DaoPotagerGetException("Impossible de trouver le potager demandé.");

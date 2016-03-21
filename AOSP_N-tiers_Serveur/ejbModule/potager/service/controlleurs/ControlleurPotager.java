@@ -38,7 +38,18 @@ public class ControlleurPotager {
 			throws NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException, DaoPotagerAjoutException{
 				
 		potagerManager.buildPotager(potager);
-		return daoGestionPotager.ajouterPotager(potager);
+		Potager daoPotager = daoGestionPotager.ajouterPotager(potager);
+		daoPotager.serialize();
+		
+		Potager testPotager = new Potager();
+		testPotager.setNom( daoPotager.getNom() );
+		testPotager.setCodePostal( daoPotager.getNom() );
+		testPotager.setNom( daoPotager.getNom() );
+		
+		
+		System.out.println(daoPotager);
+		
+		return daoPotager;
 				
 	}
 	
