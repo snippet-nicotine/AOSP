@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import planning.entity.Evenement;
+import planning.entity.Follower;
 import planning.entity.Nutrition;
 import planning.entity.Planning;
 import planning.entity.Plante;
@@ -32,5 +33,12 @@ public interface IService {
 	public Evenement getEvenement(int idEvenement) throws ServiceException;
 	public Evenement creationEvenement() throws ServiceException;
 	public Evenement creationEvenement(int idEvenement, Planning planning, Action action,
-			Plante plante, Nutrition nutrition, LocalDate localDate, String comAuto, String com);
+			Plante plante, Nutrition nutrition, LocalDate localDate, String comAuto, String com) throws ServiceException;
+	
+	public void creerFollower(Follower follower) throws ServiceException;
+	public void supprimerFollower(int idFollower) throws ServiceException;
+	public Follower getFollower(int idFollower) throws ServiceException;
+	public void modifierFollower(Follower follower) throws ServiceException;
+	public List<Follower> rechercherAllFollower(int idPlanning) throws ServiceException;
+	public Follower creationFollower() throws ServiceException;
 }

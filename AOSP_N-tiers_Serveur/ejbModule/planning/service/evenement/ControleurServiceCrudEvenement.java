@@ -1,13 +1,19 @@
 package planning.service.evenement;
 
+import java.time.LocalDate;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import planning.dao.IDao;
 import planning.entity.Evenement;
+import planning.entity.Nutrition;
+import planning.entity.Planning;
+import planning.entity.Plante;
 import planning.exception.DaoException;
 import planning.exception.ServiceException;
+import planning.util.Action;
 import planning.util.Utilitaire;
 
 /**
@@ -85,6 +91,19 @@ public class ControleurServiceCrudEvenement {
 		} catch (DaoException e) {
 			throw new ServiceException("ControleurServiceCrudEvenement modifierEvenement : Erreur de modification d'evenement");
 		}
+	}
+	
+	public Evenement creationEvenement() throws ServiceException {
+		// TODO
+		return null;
+		
+	}
+	
+	public Evenement creationEvenement(Planning planning, Action action,
+			Plante plante, Nutrition nutrition,
+			LocalDate localDate, String comAuto, String com) {
+		// TODO
+		return null;
 	}
 
 }

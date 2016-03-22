@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 
 import planning.clientServeur.IService;
 import planning.entity.Evenement;
+import planning.entity.Follower;
 import planning.entity.Nutrition;
 import planning.entity.Planning;
 import planning.entity.Plante;
@@ -16,6 +17,8 @@ import planning.exception.ServiceException;
 import planning.fabrique.FactoryPlanifier;
 import planning.service.evenement.ControleurServiceCrudEvenement;
 import planning.service.evenement.ControleurServiceListerEvenement;
+import planning.service.follower.ControleurServiceCrudFollower;
+import planning.service.follower.ControleurServiceListerFollower;
 import planning.service.planning.ControleurServiceCrudPlanning;
 import planning.service.planning.ControleurServiceListerPlanning;
 import planning.util.Action;
@@ -46,8 +49,17 @@ public class FacadeService implements IService {
 	private ControleurServiceListerEvenement controleurServiceListerEvenement;
 	
 	@EJB
+	private ControleurServiceCrudFollower controleurServiceCrudFollower;
+	@EJB
+	private ControleurServiceListerFollower controleurServiceListerFollower;
+	
+	@EJB
 	private FactoryPlanifier factoryPlanifier;
 	
+	
+	//***********************//
+	//      Planning         //
+	//***********************//
 	
 	@Override
 	public void creerPlanning(Planning planning) throws ServiceException {
@@ -76,6 +88,18 @@ public class FacadeService implements IService {
 		return controleurServiceListerPlanning.rechercherAllPlanning(idCarre);
 	}
 
+	@Override
+	public Planning creationPlanning() throws ServiceException {
+		return factoryPlanifier.creationPlanning();
+	}
+
+	
+	
+	//***********************//
+	//      Evenement        //
+	//***********************//
+	
+	
 	@Override
 	public void creerEvenement(Evenement evenement) throws ServiceException {
 		controleurServiceCrudEvenement.creerEvenement(evenement);
@@ -107,11 +131,6 @@ public class FacadeService implements IService {
 	}
 
 	@Override
-	public Planning creationPlanning() throws ServiceException {
-		return factoryPlanifier.creationPlanning();
-	}
-
-	@Override
 	public Evenement creationEvenement() throws ServiceException {
 		return factoryPlanifier.creationEvenement();
 	}
@@ -123,9 +142,44 @@ public class FacadeService implements IService {
 		return factoryPlanifier.creationEvenement(idEvenement, planning, action,
 				plante, nutrition, localDate, comAuto, com);
 	}
+	
+	
+	
+	
+	//***********************//
+	//      Follower         //
+	//***********************//
 
+	@Override
+	public void creerFollower(Follower follower) throws ServiceException {
+		controleurServiceCrudFollower.creerFollower(follower);
+	}
+
+	@Override
+	public void supprimerFollower(int idFollower) throws ServiceException {
+		controleurServiceCrudFollower.supprimerFollower(idFollower);
+	}
+
+	@Override
+	public Follower getFollower(int idFollower) throws ServiceException {
+		return controleurServiceCrudFollower.getFollower(idFollower);
+	}
+
+	@Override
+	public void modifierFollower(Follower follower) throws ServiceException {
+		controleurServiceCrudFollower.modifierFollower(follower);
+		
+	}
+
+	@Override
+	public List<Follower> rechercherAllFollower(int idPlanning) throws ServiceException {
+		System.out.println("dans facade service");
+		return controleurServiceListerFollower.rechercherAllFollower(idPlanning);
+	}
 	
-	
-	
+	@Override
+	public Follower creationFollower() throws ServiceException {
+		return factoryPlanifier.creationFollower();
+	}
 
 }

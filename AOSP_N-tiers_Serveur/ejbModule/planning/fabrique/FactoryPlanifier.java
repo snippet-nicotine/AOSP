@@ -6,6 +6,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import planning.entity.Evenement;
+import planning.entity.Follower;
 import planning.entity.Nutrition;
 import planning.entity.Planning;
 import planning.entity.Plante;
@@ -65,6 +66,11 @@ public class FactoryPlanifier {
 	public Planning creationPlanning(){
 		Planning planning = new Planning();		
 		return planning;
+	}
+
+	public Follower creationFollower() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -5,6 +5,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import planning.dao.IDao;
+import planning.entity.Follower;
 import planning.entity.Planning;
 import planning.exception.DaoException;
 import planning.exception.ServiceException;
@@ -53,5 +54,16 @@ public class ControleurServiceCrudPlanning {
 		} catch (DaoException e) {
 			throw new ServiceException("ControleurServiceCrudPlanning modifierPlanning : Erreur de modification de planning");
 		}
+	}
+	
+	public Planning creationPlanning(Planning planning) throws ServiceException {
+		// TODO
+		return null;
+		
+	}
+	
+	public Planning creationPlanning(String nom, String prenom) {
+		// TODO
+		return null;
 	}
 }

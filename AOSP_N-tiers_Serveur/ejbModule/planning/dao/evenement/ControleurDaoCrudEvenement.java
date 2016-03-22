@@ -26,7 +26,7 @@ public class ControleurDaoCrudEvenement {
 	public ControleurDaoCrudEvenement() {
 	}
 
-	public void creerEvenement(Evenement evenement) throws DaoException {
+	public void addEvenement(Evenement evenement) throws DaoException {
 		
 		if (evenement == null) {
 			throw new DaoException("ControleurDaoCrudEvenement creerEvenement : l'objet évènement à créer est null");
@@ -51,7 +51,7 @@ public class ControleurDaoCrudEvenement {
 
 	}
 
-	public void supprimerEvenement(int idEvenement) throws DaoException {
+	public void delEvenement(int idEvenement) throws DaoException {
 		if (!Utilitaire.isEntierPositifNonNull(idEvenement)) {
 			throw new DaoException("ControleurDaoCrudEvenement supprimerEvenement : la valeur est négative ou nul");
 		}
@@ -73,7 +73,7 @@ public class ControleurDaoCrudEvenement {
 		}
 	}
 
-	public void modifierEvenement(Evenement evenement) throws DaoException {
+	public void updateEvenement(Evenement evenement) throws DaoException {
 		if (evenement == null) {
 			throw new DaoException("ControleurDaoCrudEvenement modifierEvenement : l'objet évènement à créer est null");
 		}
@@ -82,6 +82,11 @@ public class ControleurDaoCrudEvenement {
 		} catch (Exception e) {
 			throw new DaoException("ControleurDaoCrudEvenement modifierEvenement : Erreur de modification d'un évènement");
 		}
+	}
+	
+	public Evenement createEvenement(Evenement evenement) throws DaoException {
+		return evenement;
+		// TODO
 	}
 
 }
