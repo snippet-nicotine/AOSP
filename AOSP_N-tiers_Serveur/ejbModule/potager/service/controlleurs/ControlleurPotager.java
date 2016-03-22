@@ -37,19 +37,9 @@ public class ControlleurPotager {
 	public Potager ajouterPotager(Potager potager) 
 			throws NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException, DaoPotagerAjoutException{
 				
-		potagerManager.buildPotager(potager);
-		Potager daoPotager = daoGestionPotager.ajouterPotager(potager);
-		daoPotager.serialize();
-		
-		Potager testPotager = new Potager();
-		testPotager.setNom( daoPotager.getNom() );
-		testPotager.setCodePostal( daoPotager.getNom() );
-		testPotager.setProprietaire(daoPotager.getProprietaire());
-				
-		System.out.println(testPotager);
-		
-		return testPotager;
-				
+		potagerManager.buildPotager(potager);	
+		return daoGestionPotager.ajouterPotager(potager);
+						
 	}
 	
 	public Potager modifierPotager(Potager potager) throws DaoPotagerModificationException, NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException{

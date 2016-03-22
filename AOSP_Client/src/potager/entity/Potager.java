@@ -16,7 +16,6 @@ import utilisateur.entity.Jardinier;
  * Il a une dimension <i>(longueur x largeur)</i> et peut être géré par un jardinier.
  * Il est décomposé en plusieurs {@link potager.entity.Carre Carres} de potager. </p>
  */
-
 public class Potager implements Serializable{
 
 	private static final long serialVersionUID = -8065181790953611569L;
@@ -143,32 +142,8 @@ public class Potager implements Serializable{
 	public void addVisiteur(Jardinier visiteur){
 		if(!visiteurs.contains(visiteur) ){
 			visiteurs.add(visiteur);
-			visiteur.addPotagerPartage(this);
+			//visiteur.addPotagerPartage(this);
 		}
 	}
-	
-	public void serialize(){
-				
-		if(carres != null){	
-			ArrayList<Carre> serializedCarres = new ArrayList<Carre>();
-			for(Carre carre: carres){
-				System.out.println("serialize carre : " + carre);
-				serializedCarres.add(carre);			
-			}
-			carres = serializedCarres;
-		}
-		
-		if(visiteurs != null){
-			ArrayList<Jardinier> serializedVisiteurs = new ArrayList<Jardinier>();
-			for(Jardinier visiteur: visiteurs){
-				System.out.println("serialize visiteur : " + visiteur);
-				serializedVisiteurs.add(visiteur);
-			}
-			visiteurs = serializedVisiteurs;			
-		}
-		
-	}
-
-
 
 }

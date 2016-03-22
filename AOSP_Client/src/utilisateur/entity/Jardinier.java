@@ -23,6 +23,12 @@ public class Jardinier implements Serializable{
 		this.nom = "Jardinier temp";
 		this.potagerPartages = new ArrayList<Potager>();
 	}
+	
+	public Jardinier(String nom){
+		
+		this();
+		this.nom = "Jardinier temp";
+	}
 
 	public String getNom() {
 		return nom;

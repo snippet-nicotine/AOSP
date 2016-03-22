@@ -1,15 +1,9 @@
 package application;
 
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 import potager.clientServeur.ServiceGestionPotager;
 import potager.entity.Potager;
-import potager.service.exception.CPPotagerException;
-import potager.service.exception.DaoPotagerAjoutException;
-import potager.service.exception.DimensionPotagerException;
-import potager.service.exception.NomPotagerException;
-import potager.service.exception.ProprietairePotagerException;
 import utilisateur.entity.Jardinier;
 
 public class Application {
@@ -26,27 +20,31 @@ public class Application {
 			serviceGestionPotager = (ServiceGestionPotager) initialContext.lookup( "ejb:/AOSP_N-tiers_Serveur/FacadeServiceGestionPotager!potager.clientServeur.ServiceGestionPotager" );
 			
 			Jardinier proprio = new Jardinier();
-			proprio.setNom("Proprio");
-			
-			Jardinier visiteur1 = new Jardinier();
-			visiteur1.setNom("Visiteur 1");
-			
-			Jardinier visiteur2 = new Jardinier();
-			visiteur2.setNom("Visiteur 2");
 						
+			proprio.setNom("Proprio");
 			Potager potager = new Potager();
 			potager.setNom("Mon potager");
 			potager.setLargeur(150);
 			potager.setLongueur(150);
 			potager.setCodePostal("13006");
-			potager.setProprietaire(proprio);
-				
-			//potager.addVisiteur(visiteur1);
+			potager.setProprietaire(proprio);				
+		
+			Jardinier visiteur1 = new Jardinier();
+			visiteur1.setNom("Visiteur 1");
 			
-			serviceGestionPotager.ajouterPotager(potager);
+			Jardinier visiteur2 = new Jardinier();
+			visiteur2.setNom("Visiteur 2");
 			
+			potager.addVisiteur(visiteur1);
+			potager.addVisiteur(visiteur2);
 			
-		} catch (NamingException | NomPotagerException | CPPotagerException | ProprietairePotagerException | DimensionPotagerException | DaoPotagerAjoutException e) {
+			Potager newPotager = serviceGestionPotager.ajouterPotager(potager);
+			
+			for(Jardinier visiteur : newPotager.getVisiteurs() ){
+				System.out.println(visiteur.getIdJardinier());
+			}
+						
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

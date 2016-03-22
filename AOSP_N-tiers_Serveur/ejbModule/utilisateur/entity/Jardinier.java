@@ -103,19 +103,12 @@ public class Jardinier implements Serializable{
 		}
 		
 	}
-	
-	public void serialize(){
+
+	public void clean() {
 		
-		if(potagerPartages != null ){
-			ArrayList<Potager> dtoPotagers = new ArrayList<Potager>();
-			for(Potager potager : potagerPartages){
-				System.out.println("serialize visiteur : ");
-				potager.setVisiteurs( new ArrayList<Jardinier>() );
-				dtoPotagers.add( potager );
-			}
-			potagerPartages = dtoPotagers;
-		}
+		setPotagerPartages( new ArrayList<Potager>(potagerPartages) );
 		
 	}
+
 
 }
