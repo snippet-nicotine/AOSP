@@ -5,21 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import commun.config.Parametres;
 import utilisateur.entity.Jardinier;
 
 
@@ -31,43 +16,22 @@ import utilisateur.entity.Jardinier;
  * Il a une dimension <i>(longueur x largeur)</i> et peut être géré par un jardinier.
  * Il est décomposé en plusieurs {@link potager.entity.Carre Carres} de potager. </p>
  */
-@Entity
-@Table(name=Parametres.bddTablePotager)
 public class Potager implements Serializable{
 
 	private static final long serialVersionUID = -8065181790953611569L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	protected int idPotager;
-	
-	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="idProprietaire", unique=true)
-	protected Jardinier  proprietaire;
-	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinTable(name="aosp_potager_visiteur",
-		joinColumns        = @JoinColumn(name="id_potager"),
-		inverseJoinColumns = @JoinColumn(name="id_visiteur")	)
+
+	protected Jardinier  proprietaire;	
 	protected List<Jardinier> visiteurs;
 	
 	protected LocalDate  dateCreation;	
-	
-	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	protected List<Carre> carres;
-	
-	@Column(length=20, nullable=false)
 	private String nom;
-	
-	@Column(nullable=false)
 	private int longueur;
-	
-	@Column(nullable=false)
 	private int largeur;
-	
-	@Column(length=5, nullable=false)
 	private String codePostal;
-		
+	
 	private int nbCarresX;
 	private int nbCarresY;	
 	
@@ -181,18 +145,5 @@ public class Potager implements Serializable{
 			//visiteur.addPotagerPartage(this);
 		}
 	}
-	
-	public void clean(){
-		
-		proprietaire.clean();
-		setCarres(    new ArrayList<Carre>( carres ) );		
-		setVisiteurs( new ArrayList<Jardinier>( visiteurs ) );
-		
-		for(Jardinier visiteur : visiteurs){
-			visiteur.clean();
-		}
-		
-	}
-	
 
 }

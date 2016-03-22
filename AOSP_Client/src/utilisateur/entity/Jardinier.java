@@ -4,28 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-
-import commun.config.Parametres;
 import potager.entity.Potager;
 
-@Entity
-@Table(name=Parametres.bddTableJardinier)
 public class Jardinier implements Serializable{
 
 	private static final long serialVersionUID = 8754664668653019633L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int idJardinier;
-	
-	@ManyToMany(mappedBy="visiteurs", 	fetch=FetchType.EAGER)
 	private List<Potager> potagerPartages;
 	
 	private String nom;
@@ -35,8 +19,15 @@ public class Jardinier implements Serializable{
 	private String codePostal;
 	
 	public Jardinier(){
+		
 		this.nom = "Jardinier temp";
 		this.potagerPartages = new ArrayList<Potager>();
+	}
+	
+	public Jardinier(String nom){
+		
+		this();
+		this.nom = "Jardinier temp";
 	}
 
 	public String getNom() {
@@ -46,7 +37,6 @@ public class Jardinier implements Serializable{
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
 
 	public int getIdJardinier() {
 		return idJardinier;
@@ -102,12 +92,6 @@ public class Jardinier implements Serializable{
 		if(!potagerPartages.contains(potager)){
 			potagerPartages.add(potager);
 		}
-		
-	}
-
-	public void clean() {
-		
-		setPotagerPartages( new ArrayList<Potager>(potagerPartages) );
 		
 	}
 

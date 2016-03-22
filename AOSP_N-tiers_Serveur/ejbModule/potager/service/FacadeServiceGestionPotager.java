@@ -78,9 +78,11 @@ public class FacadeServiceGestionPotager implements ServiceGestionPotager{
 			throws NomPotagerException, CPPotagerException, ProprietairePotagerException, 
 			       DimensionPotagerException, DaoPotagerAjoutException 
 	{
+		System.out.println( potager.getIdPotager() );
+		Potager newPotager =  controlleurPotager.ajouterPotager(potager);
+		System.out.println(newPotager.getIdPotager() );
 		
-		return controlleurPotager.ajouterPotager(potager);
-	
+		return newPotager;
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import commun.config.Parametres;
 
 @Entity
-@Table(name=Parametres.bddPrefix + "carre" + Parametres.bddSuffix)
+@Table(name=Parametres.bddTableCarre)
 public class Carre implements Serializable{
 
 	private static final long serialVersionUID = 8695011214229733217L;

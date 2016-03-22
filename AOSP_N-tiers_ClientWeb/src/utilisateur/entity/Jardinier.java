@@ -1,22 +1,25 @@
 package utilisateur.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="aosp2_jardinier")
+import potager.entity.Potager;
+
 public class Jardinier implements Serializable{
 
 	private static final long serialVersionUID = 8754664668653019633L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)	
+
 	private int idJardinier;
+	private List<Potager> potagerPartages;
+	
 	private String nom;
 	private String prenom;
 	private String mail;
@@ -79,6 +82,15 @@ public class Jardinier implements Serializable{
 
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
+	}
+
+
+	public void setPotagerPartages(List<Potager> potagerPartages) {
+		this.potagerPartages = potagerPartages;
+	}
+
+	public List<Potager> getPotagerPartages() {
+		return potagerPartages;
 	}
 
 }

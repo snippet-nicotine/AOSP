@@ -37,9 +37,9 @@ public class ControlleurPotager {
 	public Potager ajouterPotager(Potager potager) 
 			throws NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException, DaoPotagerAjoutException{
 				
-		potagerManager.buildPotager(potager);
+		potagerManager.buildPotager(potager);	
 		return daoGestionPotager.ajouterPotager(potager);
-				
+						
 	}
 	
 	public Potager modifierPotager(Potager potager) throws DaoPotagerModificationException, NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException{
