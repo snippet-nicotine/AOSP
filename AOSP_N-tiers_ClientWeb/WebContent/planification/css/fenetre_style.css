@@ -1,0 +1,137 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: #c9c7af;
+	font-size: 12pt;
+	font-family: Helvetica, Arial;
+}
+
+#menu {
+	
+	font-size: 12pt;
+	font-family: Helvetica, Arial;
+}
+
+div#entete {
+	background-color: #c9c7af;
+	background-image: url("../ressources/welcome_background.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 170px;
+}
+
+#pied {
+	background-color: maroon;
+	color: white;
+	position: relative;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 20px;
+}
+
+.version_entete { /* pour les titres */
+	text-align: center;
+	font-size: 70px;
+	color: maroon;
+}
+
+.version_corps { /* pour les titres */
+	text-align: center;
+	font-size: 30px;
+	color: maroon;
+}
+
+div#corps {
+	margin: 0 auto;
+	width: 900px;
+	height: 100%;
+	background-color: #c9c7af;
+}
+
+div#explication {
+	margin: 0 auto;
+	width: 900px;
+	height: 25px;
+	background-color: #d9d9ff;
+	text-align: center;
+}
+
+div#explication2 {
+	margin: 0 auto;
+	width: 900px;
+	height: 25px;
+	background-color: #d9d9ff;
+	text-align: center;
+	color: #ff0000;
+}
+
+label {
+	display: inline-block;
+	width: 115px;
+	margin-right: 20px;
+	vertical-align: top;
+	text-align: right;
+}
+
+#saisie ol {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+#saisie ol li {
+	display: inline;
+}
+
+#saisie textarea {
+	width: 850px;
+	resize: none;
+}
+
+#bouton {
+	text-align: right;
+}
+
+button {
+	cursor: pointer;
+}
+
+#longlarge {
+	color: black;
+	background-color: #aeffd7;
+}
+
+#nomParcelle {
+	color: black;
+	background-color: #aeffd7;
+}
+
+#idParcelle {
+	color: black;
+	background-color: #aeffd7;
+}
+
+table.tablo tr:hover td {
+	background-color: #cf9e9e;
+	cursor: pointer;
+}
+
+caption {
+	background-color: #ffffd5;
+}
+
+table.tablo2 tr:hover td {
+	background-color: #cf9e9e;
+	cursor: pointer;
+}
+
+td:ACTIVE {
+	background-color: #7dcd72;
+}
+
+div#divTableau {
+	float: left;
+	padding-right: 20px;
+}
