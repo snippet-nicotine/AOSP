@@ -13,11 +13,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import commun.config.Parametres;
 import utilisateur.entity.Jardinier;
 
 
@@ -30,7 +31,7 @@ import utilisateur.entity.Jardinier;
  * Il est décomposé en plusieurs {@link potager.entity.Carre Carres} de potager. </p>
  */
 @Entity
-@Table(name = Parametres.bddPrefix + "potager" + Parametres.bddSuffix)
+@Table(name="aosp_potager")
 public class Potager implements Serializable{
 
 	private static final long serialVersionUID = -8065181790953611569L;
@@ -41,11 +42,17 @@ public class Potager implements Serializable{
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="idProprietaire", unique=true)
-	protected Jardinier  proprietaire;	
+	protected Jardinier  proprietaire;
+	
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinTable(name="aosp_potager_visiteur",
+		joinColumns        = @JoinColumn(name="id_potager"),
+		inverseJoinColumns = @JoinColumn(name="id_visiteur")	)
+	protected List<Jardinier> visiteurs;
 	
 	protected LocalDate  dateCreation;	
 	
-	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	protected List<Carre> carres;
 	
 	@Column(length=20, nullable=false)
@@ -59,22 +66,24 @@ public class Potager implements Serializable{
 	
 	@Column(length=5, nullable=false)
 	private String codePostal;
-	
+		
 	private int nbCarresX;
 	private int nbCarresY;	
 	
 	public Potager(){
-		
+		this.carres       = new ArrayList<Carre>();
+		this.visiteurs    = new ArrayList<Jardinier>();
 	}
 	
 	public Potager(String nom, int longueur, int largeur, String codePostal, Jardinier proprietaire){
+		this();
 		this.nom          = nom;
 		this.longueur     = longueur;
 		this.largeur      = largeur;
 		this.codePostal   = codePostal;
 		this.proprietaire = proprietaire;
 		this.dateCreation = LocalDate.now();
-		this.carres       = new ArrayList<Carre>();
+
 	}
 	
 	public int getIdPotager() {
@@ -156,5 +165,33 @@ public class Potager implements Serializable{
 	public void setNbCarresY(int nbCarresY) {
 		this.nbCarresY = nbCarresY;
 	}
+
+	public List<Jardinier> getVisiteurs() {
+		return this.visiteurs;
+	}
+
+	public void setVisiteurs(List<Jardinier> visiteurs) {
+		this.visiteurs = visiteurs;
+	}
+	
+	public void addVisiteur(Jardinier visiteur){
+		if(!visiteurs.contains(visiteur) ){
+			visiteurs.add(visiteur);
+			//visiteur.addPotagerPartage(this);
+		}
+	}
+	
+	public void clean(){
+		
+		proprietaire.clean();
+		setCarres(    new ArrayList<Carre>( carres ) );		
+		setVisiteurs( new ArrayList<Jardinier>( visiteurs ) );
+		
+		for(Jardinier visiteur : visiteurs){
+			visiteur.clean();
+		}
+		
+	}
+	
 
 }
