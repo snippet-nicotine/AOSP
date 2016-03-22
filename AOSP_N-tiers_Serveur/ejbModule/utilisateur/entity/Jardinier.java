@@ -12,10 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import commun.config.Parametres;
 import potager.entity.Potager;
 
 @Entity
-@Table(name="aosp_jardinier")
+@Table(name=Parametres.bddTableJardinier)
 public class Jardinier implements Serializable{
 
 	private static final long serialVersionUID = 8754664668653019633L;
