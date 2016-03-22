@@ -13,7 +13,7 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/log4j/log4j-api-2.5.jar"/>
-	<classpathentry kind="lib" path="lib/log4j/log4j-core-2.5.jar"/>
+	<classpathentry kind="lib" path="lib/log4J/log4j-api-2.5.jar"/>
+	<classpathentry kind="lib" path="lib/log4J/log4j-core-2.5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
