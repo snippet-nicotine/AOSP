@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import utilisateur.entity.Jardinier;
 
 
@@ -15,12 +16,12 @@ import utilisateur.entity.Jardinier;
  * Il a une dimension <i>(longueur x largeur)</i> et peut être géré par un jardinier.
  * Il est décomposé en plusieurs {@link potager.entity.Carre Carres} de potager. </p>
  */
-
 public class Potager implements Serializable{
 
 	private static final long serialVersionUID = -8065181790953611569L;
 
 	protected int idPotager;
+
 	protected Jardinier  proprietaire;	
 	protected List<Jardinier> visiteurs;
 	
@@ -35,18 +36,19 @@ public class Potager implements Serializable{
 	private int nbCarresY;	
 	
 	public Potager(){
-		
+		this.carres       = new ArrayList<Carre>();
+		this.visiteurs    = new ArrayList<Jardinier>();
 	}
 	
 	public Potager(String nom, int longueur, int largeur, String codePostal, Jardinier proprietaire){
+		this();
 		this.nom          = nom;
 		this.longueur     = longueur;
 		this.largeur      = largeur;
 		this.codePostal   = codePostal;
 		this.proprietaire = proprietaire;
 		this.dateCreation = LocalDate.now();
-		this.carres       = new ArrayList<Carre>();
-		this.visiteurs    = new ArrayList<Jardinier>();
+
 	}
 	
 	public int getIdPotager() {
@@ -130,12 +132,18 @@ public class Potager implements Serializable{
 	}
 
 	public List<Jardinier> getVisiteurs() {
-		return visiteurs;
+		return this.visiteurs;
 	}
 
 	public void setVisiteurs(List<Jardinier> visiteurs) {
 		this.visiteurs = visiteurs;
 	}
-
+	
+	public void addVisiteur(Jardinier visiteur){
+		if(!visiteurs.contains(visiteur) ){
+			visiteurs.add(visiteur);
+			//visiteur.addPotagerPartage(this);
+		}
+	}
 
 }

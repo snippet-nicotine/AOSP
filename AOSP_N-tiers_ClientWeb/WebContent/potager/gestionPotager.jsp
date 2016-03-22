@@ -95,6 +95,7 @@
 							<th>Nombre de carrés</th>
 							<th>Code Postal</th>
 							<th>Propriétaire</th>
+							<th>Visiteurs</th>
 							<th>Actions</th>
 						</tr>
 						
@@ -121,6 +122,12 @@
 								<td>${potager.codePostal}</td>
 								
 								<td> <a href="#" > ${potager.proprietaire.nom} </a> </td>
+								
+								<td> 
+									<c:forEach items="${potager.visiteurs}" var="visiteur">
+										${visiteur.nom},
+									</c:forEach>
+								 </td>
 								
 								<td>
 									<a class="bouton-afficher-modifier"  href="#">
