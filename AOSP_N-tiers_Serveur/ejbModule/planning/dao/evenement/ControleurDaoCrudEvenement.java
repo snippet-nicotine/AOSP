@@ -36,12 +36,12 @@ public class ControleurDaoCrudEvenement {
 			throw new DaoException("ControleurDaoCrudEvenement creerEvenement : l'objet Existe déjà !!!");
 		}else if (!Utilitaire.isEntierPositifNonNull(evenement.getIdEvenement())) {
 			throw new DaoException("L'id de l'évènement est négatif ou nul");
-		}else if (!Utilitaire.isEntierPositifNonNull(evenement.getIdPlanning())) {
-			throw new DaoException("L'id du planning est négatif ou nul");
-		} else if (!Utilitaire.isEntierPositifNonNull(evenement.getIdAction())) {
-			throw new DaoException("L'id de l'action est négatif ou nul");
-		} else if (!Utilitaire.isEntierPositifNonNull(evenement.getIdPlante())) {
-			throw new DaoException("l'id de la plante est négatif ou nul");
+		}else if (evenement.getPlanning() == null) {
+			throw new DaoException("Pas de planning  !! c'est trop nul...");
+		} else if (evenement.getAction() == null) {
+			throw new DaoException("Pad d'action !!! c'est louche...");
+		} else if (evenement.getPlante() == null) {
+			throw new DaoException("Pas de plante !!! c'est space...");
 		}
 		try {
 			em.persist(evenement);

@@ -6,7 +6,9 @@ import java.util.List;
 import planning.entity.Evenement;
 import planning.entity.Nutrition;
 import planning.entity.Planning;
+import planning.entity.Plante;
 import planning.exception.ServiceException;
+import planning.util.Action;
 
 /**
  * Interface qui permet de définir l'ensemble des services
@@ -29,6 +31,6 @@ public interface IService {
 	public List<Evenement> rechercherAllEvenement(int idPlanning) throws ServiceException;
 	public Evenement getEvenement(int idEvenement) throws ServiceException;
 	public Evenement creationEvenement() throws ServiceException;
-	public Evenement creationEvenement(int idEvenement, int idPlanning, int idAction,
-			int idPlante, Nutrition nutrition, LocalDate localDate, String comAuto, String com);
+	public Evenement creationEvenement(int idEvenement, Planning planning, Action action,
+			Plante plante, Nutrition nutrition, LocalDate localDate, String comAuto, String com);
 }

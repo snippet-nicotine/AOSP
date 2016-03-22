@@ -66,7 +66,7 @@ public class Potager implements Serializable{
 	
 	@Column(length=5, nullable=false)
 	private String codePostal;
-	
+		
 	private int nbCarresX;
 	private int nbCarresY;	
 	

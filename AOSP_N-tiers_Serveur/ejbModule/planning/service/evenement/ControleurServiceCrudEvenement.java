@@ -30,12 +30,12 @@ public class ControleurServiceCrudEvenement {
 		}
 		else if (!Utilitaire.isEntierPositifNonNull(evenement.getIdEvenement())) {
 			throw new ServiceException("L'id de l'évènement est négatif ou nul");
-		}else if (!Utilitaire.isEntierPositifNonNull(evenement.getIdPlanning())) {
-			throw new ServiceException("L'id du planning est négatif ou nul");
-		} else if (!Utilitaire.isEntierPositifNonNull(evenement.getIdAction())) {
-			throw new ServiceException("L'id de l'action est négatif ou nul");
-		} else if (!Utilitaire.isEntierPositifNonNull(evenement.getIdPlante())) {
-			throw new ServiceException("l'id de la plante est négatif ou nul");
+		}else if (evenement.getPlanning() == null) {
+			throw new ServiceException("Le planning est nul");
+		} else if (evenement.getAction() == null) {
+			throw new ServiceException("L'action est ou nul");
+		} else if (evenement.getPlante() == null) {
+			throw new ServiceException("la plante est nul");
 		}
 		try {
 			iDao.creerEvenement(evenement);
@@ -73,12 +73,12 @@ public class ControleurServiceCrudEvenement {
 		}
 		else if (!Utilitaire.isEntierPositifNonNull(evenement.getIdEvenement())) {
 			throw new ServiceException("L'id de l'évènement est négatif ou nul");
-		}else if (!Utilitaire.isEntierPositifNonNull(evenement.getIdPlanning())) {
-			throw new ServiceException("L'id du planning est négatif ou nul");
-		} else if (!Utilitaire.isEntierPositifNonNull(evenement.getIdAction())) {
-			throw new ServiceException("L'id de l'action est négatif ou nul");
-		} else if (!Utilitaire.isEntierPositifNonNull(evenement.getIdPlante())) {
-			throw new ServiceException("l'id de la plante est négatif ou nul");
+		}else if (evenement.getPlanning() == null) {
+			throw new ServiceException("Le planning est nul");
+		} else if (evenement.getAction() == null) {
+			throw new ServiceException("L'action est ou nul");
+		} else if (evenement.getPlante() == null) {
+			throw new ServiceException("la plante est nul");
 		}
 		try {
 			iDao.modifierEvenement(evenement);
