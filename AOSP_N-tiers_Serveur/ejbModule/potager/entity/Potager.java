@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import commun.config.Parametres;
 import utilisateur.entity.Jardinier;
 
 
@@ -31,7 +32,7 @@ import utilisateur.entity.Jardinier;
  * Il est décomposé en plusieurs {@link potager.entity.Carre Carres} de potager. </p>
  */
 @Entity
-@Table(name="aosp_potager")
+@Table(name=Parametres.bddTablePotager)
 public class Potager implements Serializable{
 
 	private static final long serialVersionUID = -8065181790953611569L;
