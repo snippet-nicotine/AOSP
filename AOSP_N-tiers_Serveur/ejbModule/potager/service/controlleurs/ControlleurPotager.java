@@ -44,12 +44,11 @@ public class ControlleurPotager {
 		Potager testPotager = new Potager();
 		testPotager.setNom( daoPotager.getNom() );
 		testPotager.setCodePostal( daoPotager.getNom() );
-		testPotager.setNom( daoPotager.getNom() );
+		testPotager.setProprietaire(daoPotager.getProprietaire());
+				
+		System.out.println(testPotager);
 		
-		
-		System.out.println(daoPotager);
-		
-		return daoPotager;
+		return testPotager;
 				
 	}
 	

@@ -42,9 +42,9 @@ public class Potager implements Serializable{
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="idProprietaire", unique=true)
-	protected Jardinier  proprietaire;	
+	protected Jardinier  proprietaire;
 	
-	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="aosp_potager_visiteur",
 		joinColumns        = @JoinColumn(name="id_potager"),
 		inverseJoinColumns = @JoinColumn(name="id_visiteur")	)
@@ -186,8 +186,8 @@ public class Potager implements Serializable{
 		if(carres != null){	
 			ArrayList<Carre> serializedCarres = new ArrayList<Carre>();
 			for(Carre carre: carres){
-				System.out.println("serialize carre : " + carre);
-				serializedCarres.add(carre);			
+				//System.out.println("serialize carre : " + carre);
+				//serializedCarres.add(carre);			
 			}
 			carres = serializedCarres;
 		}
@@ -196,20 +196,12 @@ public class Potager implements Serializable{
 			ArrayList<Jardinier> serializedVisiteurs = new ArrayList<Jardinier>();
 			for(Jardinier visiteur: visiteurs){
 				System.out.println("serialize visiteur : " + visiteur);
-				visiteur.serialize();
-				serializedVisiteurs.add(visiteur);
+				//visiteur.serialize();
+				//serializedVisiteurs.add(visiteur);
 			}
 			visiteurs = serializedVisiteurs;			
 		}
 		
-	}
-
-	@Override
-	public String toString() {
-		return "Potager [idPotager=" + idPotager + ", proprietaire=" + proprietaire + ", visiteurs=" + visiteurs
-				+ ", dateCreation=" + dateCreation + ", carres=" + carres + ", nom=" + nom + ", longueur=" + longueur
-				+ ", largeur=" + largeur + ", codePostal=" + codePostal + ", nbCarresX=" + nbCarresX + ", nbCarresY="
-				+ nbCarresY + "]";
 	}
 
 

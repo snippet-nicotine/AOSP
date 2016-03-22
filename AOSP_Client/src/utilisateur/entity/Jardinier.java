@@ -89,11 +89,5 @@ public class Jardinier implements Serializable{
 		
 	}
 
-	@Override
-	public String toString() {
-		return "Jardinier [idJardinier=" + idJardinier + ", potagerPartages=" + ", nom=" + nom
-				+ ", prenom=" + prenom + ", mail=" + mail + ", motPasse=" + motPasse + ", codePostal=" + codePostal
-				+ "]";
-	}
 
 }

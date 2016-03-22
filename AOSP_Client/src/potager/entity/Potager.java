@@ -169,13 +169,6 @@ public class Potager implements Serializable{
 		
 	}
 
-	@Override
-	public String toString() {
-		return "Potager [idPotager=" + idPotager + ", proprietaire=" + proprietaire + ", visiteurs=" + visiteurs
-				+ ", dateCreation=" + dateCreation + ", carres=" + carres + ", nom=" + nom + ", longueur=" + longueur
-				+ ", largeur=" + largeur + ", codePostal=" + codePostal + ", nbCarresX=" + nbCarresX + ", nbCarresY="
-				+ nbCarresY + "]";
-	}
 
 
 }

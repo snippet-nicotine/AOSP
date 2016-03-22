@@ -45,6 +45,7 @@ public class Application {
 			
 			serviceGestionPotager.ajouterPotager(potager);
 			
+			
 		} catch (NamingException | NomPotagerException | CPPotagerException | ProprietairePotagerException | DimensionPotagerException | DaoPotagerAjoutException e) {
 			e.printStackTrace();
 		}
