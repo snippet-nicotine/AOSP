@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import commun.config.Parametres;
 import planning.util.Parametre;
@@ -31,6 +32,7 @@ public class Plante implements Serializable {
 	initialValue = 1, allocationSize = 30)
 	private int idPlante;
 	
-	List<Evenement> eenements = new ArrayList<Evenement>();
+	@Transient
+	List<Evenement> evenements = new ArrayList<Evenement>();
 
 }
