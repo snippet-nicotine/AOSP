@@ -4,9 +4,14 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
+import javax.persistence.Version;
 
 /**
  * EJB Entity, classe Entity Serialisable. Actuellement et
@@ -20,14 +25,17 @@ import javax.persistence.Transient;
 public class Planning implements Serializable {
 
 
-	/**
-	 * 
-	 */
+	@Version
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(name="idPlanning", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "planningSequence")
+	@SequenceGenerator(name = "planningSequence", sequenceName = "planning_sequence",
+							initialValue = 1, allocationSize = 30)
 	private int idPlanning;
-	private int idCarre;
+	
+	private Carre idCarre;
 	private LocalDate dateCreation;
 	@Transient
 	private ArrayList<Evenement> evenements;
