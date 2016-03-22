@@ -35,7 +35,7 @@ public class Planning implements Serializable {
 							initialValue = 1, allocationSize = 30)
 	private int idPlanning;
 	
-	private Carre idCarre;
+	private int idCarre;
 	private LocalDate dateCreation;
 	@Transient
 	private ArrayList<Evenement> evenements;
