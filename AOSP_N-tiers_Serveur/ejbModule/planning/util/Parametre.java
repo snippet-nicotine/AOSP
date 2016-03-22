@@ -8,6 +8,12 @@ package planning.util;
 
 
 public class Parametre {
+		
+	public final static String NOM_TABLE_PLANNING = 			"planning";
+	public final static String NOM_TABLE_FOLLOWER = 			"follower";
+	public final static String NOM_TABLE_PLANNING_FOLLOWER = 	"planning_follower";
+	public final static String NOM_TABLE_EVENEMENT = 			"evenement";
+	public final static String NOM_TABLE_PLANTE = 				"plante";
 	
 	// nombre de mots cles maximum definissant un livre
 	public final static int NBMOTCLEMAX = 5;

@@ -32,7 +32,7 @@ public class ControleurDaoCrudPlanning {
 		}
 		else if (!Utilitaire.isEntierPositifNonNull(planning.getIdPlanning())) {
 			throw new DaoException("L'id du planning est négatif ou nul");
-		}else if (!Utilitaire.isEntierPositifNonNull(planning.getIdCarre())) {
+		}else if (planning.getCarre() == null) {
 			throw new DaoException("L'id du carré est négatif ou nul");
 		}
 		try {
@@ -68,7 +68,7 @@ public class ControleurDaoCrudPlanning {
 		}
 		else if (!Utilitaire.isEntierPositifNonNull(planning.getIdPlanning())) {
 			throw new DaoException("L'id du planning est négatif ou nul");
-		}else if (!Utilitaire.isEntierPositifNonNull(planning.getIdCarre())) {
+		}else if (planning.getCarre() == null) {
 			throw new DaoException("L'id du carré est négatif ou nul");
 		}
 		try {

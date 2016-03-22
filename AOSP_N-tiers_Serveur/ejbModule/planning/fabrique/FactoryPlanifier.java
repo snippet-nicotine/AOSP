@@ -8,6 +8,8 @@ import javax.ejb.Stateless;
 import planning.entity.Evenement;
 import planning.entity.Nutrition;
 import planning.entity.Planning;
+import planning.entity.Plante;
+import planning.util.Action;
 
 /**
  * La Design Pattern Factory utilisée pour la
@@ -28,13 +30,13 @@ public class FactoryPlanifier {
 	 * Permet d'instancier un évènement uniquement avec un id évènement
 	 * et un id planning
 	 * @param idEvenement
-	 * @param idPlanning
+	 * @param planning
 	 * @return évènement instancié
 	 */
-	public Evenement creationEvenement(int idEvenement, int idPlanning){
+	public Evenement creationEvenement(int idEvenement, Planning planning){
 		Evenement evenement = new Evenement();
 		evenement.setIdEvenement(idEvenement);
-		evenement.setIdPlanning(idPlanning);
+		evenement.setPlanning(planning);
 		return evenement;
 	}
 	
@@ -42,17 +44,17 @@ public class FactoryPlanifier {
 	 * Permet d'instancier un évènement uniquement avec un id évènement
 	 * et un id planning
 	 * @param idEvenement
-	 * @param idPlanning
+	 * @param planning
 	 * @return évènement instancié
 	 */
-	public Evenement creationEvenement(int idEvenement, int idPlanning, int idAction,
-			int idPlante, Nutrition nutrition, LocalDate localDate, String comAuto, String com){
+	public Evenement creationEvenement(int idEvenement, Planning planning, Action action,
+			Plante plante, Nutrition nutrition, LocalDate localDate, String comAuto, String com){
 		Evenement evenement = new Evenement();
 		evenement.setIdEvenement(idEvenement);
-		evenement.setIdPlanning(idPlanning);
-		evenement.setIdAction(idAction);
-		evenement.setIdPlante(idPlante);
-		evenement.setIdPlanning(idPlanning);
+		evenement.setPlanning(planning);
+		evenement.setAction(action);
+		evenement.setPlante(plante);
+		evenement.setPlanning(planning);
 		evenement.setNutrition(nutrition);
 		evenement.setDateEvenement(localDate);
 		evenement.setCommentaireAuto(comAuto);;

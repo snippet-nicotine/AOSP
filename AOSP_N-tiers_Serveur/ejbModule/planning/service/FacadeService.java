@@ -11,12 +11,14 @@ import planning.clientServeur.IService;
 import planning.entity.Evenement;
 import planning.entity.Nutrition;
 import planning.entity.Planning;
+import planning.entity.Plante;
 import planning.exception.ServiceException;
 import planning.fabrique.FactoryPlanifier;
 import planning.service.evenement.ControleurServiceCrudEvenement;
 import planning.service.evenement.ControleurServiceListerEvenement;
 import planning.service.planning.ControleurServiceCrudPlanning;
 import planning.service.planning.ControleurServiceListerPlanning;
+import planning.util.Action;
 
 /**
  * EJB session bean de type Stateless, Remote : façade de la 
@@ -115,11 +117,11 @@ public class FacadeService implements IService {
 	}
 
 	@Override
-	public Evenement creationEvenement(int idEvenement, int idPlanning, int idAction,
-			int idPlante, Nutrition nutrition,
+	public Evenement creationEvenement(int idEvenement, Planning planning, Action action,
+			Plante plante, Nutrition nutrition,
 			LocalDate localDate, String comAuto, String com) {
-		return factoryPlanifier.creationEvenement(idEvenement, idPlanning, idAction,
-				idPlante, nutrition, localDate, comAuto, com);
+		return factoryPlanifier.creationEvenement(idEvenement, planning, action,
+				plante, nutrition, localDate, comAuto, com);
 	}
 
 	
