@@ -32,7 +32,7 @@ public interface IService {
 	public List<Evenement> rechercherAllEvenement(int idPlanning) throws ServiceException;
 	public Evenement getEvenement(int idEvenement) throws ServiceException;
 	public Evenement creationEvenement() throws ServiceException;
-	public Evenement creationEvenement(int idEvenement, Planning planning, Action action,
+	public Evenement creationEvenement(Planning planning, Action action,
 			Plante plante, Nutrition nutrition, LocalDate localDate, String comAuto, String com) throws ServiceException;
 	
 	public void creerFollower(Follower follower) throws ServiceException;
@@ -40,5 +40,6 @@ public interface IService {
 	public Follower getFollower(int idFollower) throws ServiceException;
 	public void modifierFollower(Follower follower) throws ServiceException;
 	public List<Follower> rechercherAllFollower(int idPlanning) throws ServiceException;
+	public Follower creationFollower(String nom, String prenom) throws ServiceException;
 	public Follower creationFollower() throws ServiceException;
 }

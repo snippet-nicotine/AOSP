@@ -1,5 +1,6 @@
 package planning.dao.planning;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import planning.entity.Evenement;
 import planning.entity.Planning;
 import planning.exception.DaoException;
+import planning.fabrique.FactoryPlanifier;
 import planning.util.Utilitaire;
 
 /**
@@ -23,6 +25,9 @@ public class ControleurDaoCrudPlanning {
 
 	@PersistenceContext(unitName="AOSP_Hibernate")
 	EntityManager em;
+	
+	@EJB
+	FactoryPlanifier factoryPlanifier;
 	
 	public ControleurDaoCrudPlanning() {
 	}
@@ -78,9 +83,10 @@ public class ControleurDaoCrudPlanning {
 			throw new DaoException("ControleurDaoCrudPlanning modifierPlanning : Erreur de modification d'un planning");
 		}
 	}
-	public Planning createPlanning(Planning planning) throws DaoException {
-		return planning;
-		// TODO
+	
+	public Planning createPlanning() throws DaoException {
+		Planning Planning = null;
+		return factoryPlanifier.creationPlanning();
 	}
 	
 }

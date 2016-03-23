@@ -78,8 +78,8 @@ public class FacadeDao implements IDao {
 	}
 
 	@Override
-	public Planning creationPlanning(Planning planning) throws DaoException {
-		return controleurDaoCrudPlanning.createPlanning(planning);
+	public Planning creationPlanning() throws DaoException {
+		return controleurDaoCrudPlanning.createPlanning();
 	}
 
 	@Override
@@ -108,16 +108,16 @@ public class FacadeDao implements IDao {
 	}
 
 	@Override
-	public Evenement creationEvenement(Evenement evenement) throws DaoException {
-		return controleurDaoCrudEvenement.createEvenement(evenement);
+	public Evenement creationEvenement() throws DaoException {
+		return controleurDaoCrudEvenement.createEvenement();
 	}
 
 
 	@Override
 	public Evenement creationEvenement(Planning planning, Action action, Plante plante, Nutrition nutrition,
 			LocalDate localDate, String comAuto, String com) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+
+		return controleurDaoCrudEvenement.createEvenement(planning, action, plante, nutrition, localDate, comAuto, com);
 	}
 
 	@Override
@@ -127,39 +127,32 @@ public class FacadeDao implements IDao {
 
 	@Override
 	public void supprimerFollower(int idFollower) throws DaoException {
-		// TODO Auto-generated method stub
-		
+		controleurDaoCrudFollower.delFollower(idFollower);		
 	}
 
 	@Override
 	public void modifierFollower(Follower follower) throws DaoException {
-		// TODO Auto-generated method stub
-		
+		controleurDaoCrudFollower.updateFollower(follower);
 	}
 
 	@Override
 	public List<Follower> rechercherAllFollower(int idPlanning) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+		return controleurDaoListerFollower.getAllFollower(idPlanning);
 	}
 
 	@Override
-	public Follower creationFollower(Follower follower) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+	public Follower creationFollower() throws DaoException {
+		return controleurDaoCrudFollower.createFollower();
 	}
 
 	@Override
 	public Follower creationFollower(String nom, String prenom) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+		return controleurDaoCrudFollower.createFollower(nom, prenom);
 	}
 
 	@Override
 	public Follower getFollower(int idFollower) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+		return controleurDaoCrudFollower.getFollower(idFollower);
 	}
-
 	
 }

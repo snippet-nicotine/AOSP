@@ -14,6 +14,7 @@ import planning.entity.Planning;
 import planning.entity.Plante;
 import planning.exception.DaoException;
 import planning.exception.ServiceException;
+import planning.fabrique.FactoryPlanifier;
 import planning.util.Action;
 
 /**
@@ -63,13 +64,25 @@ public class ControleurServiceCrudFollower {
 	}
 	
 	public Follower creationFollower() throws ServiceException {
-		// TODO
+		Follower follower = null;
+		try {
+			iDao.creationFollower();
+		} catch (DaoException e) {
+			throw new ServiceException("ControleurServiceCrudFollower creerFollower : Erreur de création de follower");
+		}
 		return null;
-		
 	}
 	
 	public Follower creationFollower(String nom, String prenom) {
-		// TODO
-		return null;
+		Follower follower = null;
+		try {
+			follower = creationFollower();
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		follower.setNom(nom);
+		follower.setPrenom(prenom);
+		return follower;
 	}
 }

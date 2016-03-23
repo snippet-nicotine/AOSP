@@ -1,5 +1,6 @@
 package planning.dao.follower;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import planning.entity.Follower;
 import planning.entity.Planning;
 import planning.exception.DaoException;
+import planning.fabrique.FactoryPlanifier;
 import planning.util.Utilitaire;
 
 /**
@@ -23,6 +25,9 @@ public class ControleurDaoCrudFollower {
 
 	@PersistenceContext(unitName="AOSP_Hibernate")
 	EntityManager em;
+	
+	@EJB
+	FactoryPlanifier factoryPlanifier;
 	
 	public ControleurDaoCrudFollower() {
 	}
@@ -75,9 +80,13 @@ public class ControleurDaoCrudFollower {
 		}
 	}
 
-	public void createFollower(Follower follower) {
-		// TODO Auto-generated method stub
-		
+	public Follower createFollower() {
+		Follower Follower = null;
+		return factoryPlanifier.creationFollower();
 	}
 	
+	public Follower createFollower(String nom, String prenom) {
+		Follower Follower = null;
+		return factoryPlanifier.creationFollower(nom, prenom);
+	}
 }

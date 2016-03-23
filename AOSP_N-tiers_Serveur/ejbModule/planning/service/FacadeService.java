@@ -42,25 +42,22 @@ public class FacadeService implements IService {
 	private ControleurServiceCrudPlanning controleurServiceCrudPlanning;
 	@EJB
 	private ControleurServiceListerPlanning controleurServiceListerPlanning;
-	
+
 	@EJB
 	private ControleurServiceCrudEvenement controleurServiceCrudEvenement;
 	@EJB
 	private ControleurServiceListerEvenement controleurServiceListerEvenement;
-	
+
 	@EJB
 	private ControleurServiceCrudFollower controleurServiceCrudFollower;
 	@EJB
 	private ControleurServiceListerFollower controleurServiceListerFollower;
-	
-	@EJB
-	private FactoryPlanifier factoryPlanifier;
-	
-	
+
+
 	//***********************//
 	//      Planning         //
 	//***********************//
-	
+
 	@Override
 	public void creerPlanning(Planning planning) throws ServiceException {
 		controleurServiceCrudPlanning.creerPlanning(planning);
@@ -79,7 +76,6 @@ public class FacadeService implements IService {
 	@Override
 	public void modifierPlanning(Planning planning) throws ServiceException {
 		controleurServiceCrudPlanning.modifierPlanning(planning);
-		
 	}
 
 	@Override
@@ -90,62 +86,55 @@ public class FacadeService implements IService {
 
 	@Override
 	public Planning creationPlanning() throws ServiceException {
-		return factoryPlanifier.creationPlanning();
+		return controleurServiceCrudPlanning.creationPlanning();
 	}
 
-	
-	
+
 	//***********************//
 	//      Evenement        //
 	//***********************//
-	
-	
+
+
 	@Override
 	public void creerEvenement(Evenement evenement) throws ServiceException {
 		controleurServiceCrudEvenement.creerEvenement(evenement);
-		
 	}
 
 	@Override
 	public void supprimerEvenement(int idEvenement) throws ServiceException {
 		controleurServiceCrudEvenement.supprimerEvenement(idEvenement);
-		
 	}
 
 	@Override
 	public Evenement getEvenement(int idEvenement) throws ServiceException {
-
 		return controleurServiceCrudEvenement.getEvenement(idEvenement);
 	}
 
 	@Override
 	public void modifierEvenement(Evenement evenement) throws ServiceException {
 		controleurServiceCrudEvenement.modifierEvenement(evenement);
-		
 	}
 
 	@Override
 	public List<Evenement> rechercherAllEvenement(int idPlanning) throws ServiceException {
-		
 		return controleurServiceListerEvenement.rechercherAllEvenement(idPlanning);
 	}
 
 	@Override
 	public Evenement creationEvenement() throws ServiceException {
-		return factoryPlanifier.creationEvenement();
+		return controleurServiceCrudEvenement.creationEvenement();
 	}
 
 	@Override
-	public Evenement creationEvenement(int idEvenement, Planning planning, Action action,
+	public Evenement creationEvenement(Planning planning, Action action,
 			Plante plante, Nutrition nutrition,
-			LocalDate localDate, String comAuto, String com) {
-		return factoryPlanifier.creationEvenement(planning, action,
+			LocalDate localDate, String comAuto, String com) throws ServiceException {
+		return controleurServiceCrudEvenement.creationEvenement(planning, action,
 				plante, nutrition, localDate, comAuto, com);
 	}
-	
-	
-	
-	
+
+
+
 	//***********************//
 	//      Follower         //
 	//***********************//
@@ -163,12 +152,12 @@ public class FacadeService implements IService {
 	@Override
 	public Follower getFollower(int idFollower) throws ServiceException {
 		return controleurServiceCrudFollower.getFollower(idFollower);
-	}//
+	}
 
 	@Override
 	public void modifierFollower(Follower follower) throws ServiceException {
 		controleurServiceCrudFollower.modifierFollower(follower);
-		
+
 	}
 
 	@Override
@@ -176,10 +165,15 @@ public class FacadeService implements IService {
 		System.out.println("dans facade service");
 		return controleurServiceListerFollower.rechercherAllFollower(idPlanning);
 	}
-	
+
 	@Override
 	public Follower creationFollower() throws ServiceException {
-		return factoryPlanifier.creationFollower();
+		return controleurServiceCrudFollower.creationFollower();
+	}
+
+	@Override
+	public Follower creationFollower(String nom, String prenom) throws ServiceException {
+		return controleurServiceCrudFollower.creationFollower(nom, prenom);
 	}
 
 }

@@ -30,10 +30,6 @@ public class ControleurServiceCrudEvenement {
 
 	@EJB
 	private IDao iDao;
-	
-	@EJB
-	private FactoryPlanifier factoryPlanifier;
-	
 
 	public void creerEvenement(Evenement evenement) throws ServiceException {
 		if (evenement == null) {
@@ -99,13 +95,31 @@ public class ControleurServiceCrudEvenement {
 	}
 	
 	public Evenement creationEvenement() throws ServiceException {
-		return factoryPlanifier.creationEvenement();
+		Evenement evenement = null;
+		try {
+			iDao.creationEvenement();
+		} catch (DaoException e) {
+			throw new ServiceException(e.getMessage());
+		}
+		return evenement;
 	}
 	
 	public Evenement creationEvenement(Planning planning, Action action,
 			Plante plante, Nutrition nutrition,
-			LocalDate localDate, String comAuto, String com) {
-		return factoryPlanifier.creationEvenement(planning, action, plante, nutrition, localDate, comAuto, com);
+			LocalDate localDate, String comAuto, String com) throws ServiceException {
+		Evenement evenement = null;
+		if (planning == null) {
+			throw new ServiceException("Le planning est nul");
+		} else if (action == null) {
+			throw new ServiceException("L'action est ou nul");
+		} else if (plante == null) {
+			throw new ServiceException("la plante est nul");
+		}
+		try {
+			evenement = iDao.creationEvenement(planning, action, plante, nutrition, localDate, comAuto, com);
+		} catch (DaoException e) {
+			throw new ServiceException(e.getMessage());
+		}
+		return evenement;
 	}
-
 }

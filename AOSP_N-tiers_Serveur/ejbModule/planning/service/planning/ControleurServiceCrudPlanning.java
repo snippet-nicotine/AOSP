@@ -9,6 +9,8 @@ import planning.entity.Follower;
 import planning.entity.Planning;
 import planning.exception.DaoException;
 import planning.exception.ServiceException;
+import planning.fabrique.FactoryPlanifier;
+import potager.entity.Carre;
 
 /**
  * EJB session bean de type Stateless, LocalBean : Controleur de
@@ -56,14 +58,13 @@ public class ControleurServiceCrudPlanning {
 		}
 	}
 	
-	public Planning creationPlanning(Planning planning) throws ServiceException {
-		// TODO
-		return null;
-		
-	}
-	
-	public Planning creationPlanning(String nom, String prenom) {
-		// TODO
-		return null;
+	public Planning creationPlanning() throws ServiceException {
+		Planning planning = null;
+		try {
+			iDao.creationPlanning();
+		} catch (DaoException e) {
+			throw new ServiceException("ControleurServiceCrudPlanning creerPlanning : Erreur de création de planning");
+		}
+		return planning;
 	}
 }

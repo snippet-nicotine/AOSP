@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import planning.entity.Follower;
 import planning.entity.Planning;
 import planning.exception.DaoException;
 import planning.util.Utilitaire;
@@ -29,21 +30,21 @@ public class ControleurDaoListerFollower {
 	public ControleurDaoListerFollower() {
 	}
 
-	public List<Planning> getAllPlanning(int idCarre) throws DaoException {
-//		System.out.println("*** dans ControleurDaoListerPlanning - idCarre : " + idCarre);
-		if (!Utilitaire.isEntierPositifNonNull(idCarre)) {
-			throw new DaoException("ControleurDaoListerPlanning rechercherAllPlanning : la valeur est négative ou nul");
+	public List<Follower> getAllFollower(int idPlanning) throws DaoException {
+//		System.out.println("*** dans ControleurDaoListerFollower - planning : " + planning);
+		if (!Utilitaire.isEntierPositifNonNull(idPlanning)) {
+			throw new DaoException("ControleurDaoListerFollower rechercherAllFollower : la valeur est négative ou nul");
 		}	
 		try {
-			Query query = em.createQuery("select p from Planning p where p.idCarre = :idCarre",Planning.class);
-			query.setParameter("idCarre", idCarre);
+			Query query = em.createQuery("select f from Follower f where f.idPlanning = :idPlanning",Follower.class);
+			query.setParameter("idPlanning", idPlanning);
 //			@SuppressWarnings("unchecked")
-			List<Planning> plannings = (List<Planning>)query.getResultList();
-			System.out.println("*** dans ControleurDaoListerPlanning - plannings : " + plannings);
+			List<Follower> followers = (List<Follower>)query.getResultList();
+			System.out.println("*** dans ControleurDaoListerFollower - followers : " + followers);
 			
-			return 	plannings;		
+			return 	followers;		
 		} catch (Exception e) {
-			throw new DaoException("ControleurDaoListerPlanning rechercherAllPlanning : Erreur de recherche de la liste des plannings");
+			throw new DaoException("ControleurDaoListerFollower rechercherAllFollower : Erreur de recherche de la liste des followers");
 		}
 	}
 

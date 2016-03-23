@@ -25,14 +25,14 @@ public interface IDao {
 	public void modifierPlanning(Planning planning) throws DaoException;
 	public List<Planning> rechercherAllPlanning(int idCarre) throws DaoException;
 	public Planning getPlanning(int idPlanning) throws DaoException;
-	public Planning creationPlanning(Planning planning) throws DaoException;
+	public Planning creationPlanning() throws DaoException;
 	
 	public void creerEvenement(Evenement evenement) throws DaoException;
 	public void supprimerEvenement(int idEvenement) throws DaoException;
 	public void modifierEvenement(Evenement evenement) throws DaoException;
 	public List<Evenement> rechercherAllEvenement(int idPlanning) throws DaoException;
 	public Evenement getEvenement(int idEvenement) throws DaoException;
-	public Evenement creationEvenement(Evenement evenement) throws DaoException;
+	public Evenement creationEvenement() throws DaoException;
 	public Evenement creationEvenement(Planning planning, Action action, Plante plante,
 			Nutrition nutrition, LocalDate localDate, String comAuto, String com) throws DaoException;
 	
@@ -41,6 +41,6 @@ public interface IDao {
 	public Follower getFollower(int idFollower) throws DaoException;
 	public void modifierFollower(Follower follower) throws DaoException;
 	public List<Follower> rechercherAllFollower(int idPlanning) throws DaoException;
-	Follower creationFollower(Follower follower) throws DaoException;
-	Follower creationFollower(String nom, String prenom) throws DaoException;
+	public Follower creationFollower() throws DaoException;
+	public Follower creationFollower(String nom, String prenom) throws DaoException;
 }

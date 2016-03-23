@@ -11,6 +11,7 @@ import planning.entity.Nutrition;
 import planning.entity.Planning;
 import planning.entity.Plante;
 import planning.util.Action;
+import potager.entity.Carre;
 
 /**
  * La Design Pattern Factory utilisée pour la
@@ -65,9 +66,22 @@ public class FactoryPlanifier {
 		Planning planning = new Planning();		
 		return planning;
 	}
+	
+	public Planning creationPlanning(Carre carre){
+		Planning planning = new Planning();
+		planning.setCarre(carre);
+		return planning;
+	}
 
 	public Follower creationFollower() {
 		Follower follower = new Follower();
+		return follower;
+	}
+	
+	public Follower creationFollower(String nom, String prenom) {
+		Follower follower = new Follower();
+		follower.setNom(nom);
+		follower.setPrenom(prenom);
 		return follower;
 	}
 

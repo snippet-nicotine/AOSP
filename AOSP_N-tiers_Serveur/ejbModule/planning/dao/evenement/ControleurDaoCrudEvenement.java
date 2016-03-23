@@ -1,12 +1,20 @@
 package planning.dao.evenement;
 
+import java.time.LocalDate;
+
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import planning.entity.Evenement;
+import planning.entity.Nutrition;
+import planning.entity.Planning;
+import planning.entity.Plante;
 import planning.exception.DaoException;
+import planning.fabrique.FactoryPlanifier;
+import planning.util.Action;
 import planning.util.Utilitaire;
 
 /**
@@ -22,6 +30,9 @@ public class ControleurDaoCrudEvenement {
 
 	@PersistenceContext(unitName="AOSP_Hibernate")
 	EntityManager em;
+	
+	@EJB
+	FactoryPlanifier factoryPlanifier;
 
 	public ControleurDaoCrudEvenement() {
 	}
@@ -84,9 +95,15 @@ public class ControleurDaoCrudEvenement {
 		}
 	}
 	
-	public Evenement createEvenement(Evenement evenement) throws DaoException {
-		return evenement;
-		// TODO
+	public Evenement createEvenement() throws DaoException {
+		Evenement evenement = null;
+		return factoryPlanifier.creationEvenement();
+	}
+
+	public Evenement createEvenement(Planning planning, Action action, Plante plante, Nutrition nutrition,
+			LocalDate localDate, String comAuto, String com) {
+		Evenement evenement = null;
+		return factoryPlanifier.creationEvenement(planning, action, plante, nutrition, localDate, comAuto, com);
 	}
 
 }
