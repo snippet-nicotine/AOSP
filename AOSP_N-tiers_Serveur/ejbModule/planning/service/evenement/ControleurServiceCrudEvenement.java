@@ -13,6 +13,7 @@ import planning.entity.Planning;
 import planning.entity.Plante;
 import planning.exception.DaoException;
 import planning.exception.ServiceException;
+import planning.fabrique.FactoryPlanifier;
 import planning.util.Action;
 import planning.util.Utilitaire;
 
@@ -29,6 +30,10 @@ public class ControleurServiceCrudEvenement {
 
 	@EJB
 	private IDao iDao;
+	
+	@EJB
+	private FactoryPlanifier factoryPlanifier;
+	
 
 	public void creerEvenement(Evenement evenement) throws ServiceException {
 		if (evenement == null) {
@@ -94,16 +99,13 @@ public class ControleurServiceCrudEvenement {
 	}
 	
 	public Evenement creationEvenement() throws ServiceException {
-		// TODO
-		return null;
-		
+		return factoryPlanifier.creationEvenement();
 	}
 	
 	public Evenement creationEvenement(Planning planning, Action action,
 			Plante plante, Nutrition nutrition,
 			LocalDate localDate, String comAuto, String com) {
-		// TODO
-		return null;
+		return factoryPlanifier.creationEvenement(planning, action, plante, nutrition, localDate, comAuto, com);
 	}
 
 }

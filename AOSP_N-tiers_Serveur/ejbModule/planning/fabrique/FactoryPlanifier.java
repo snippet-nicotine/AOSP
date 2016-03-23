@@ -34,9 +34,8 @@ public class FactoryPlanifier {
 	 * @param planning
 	 * @return évènement instancié
 	 */
-	public Evenement creationEvenement(int idEvenement, Planning planning){
+	public Evenement creationEvenement(Planning planning){
 		Evenement evenement = new Evenement();
-		evenement.setIdEvenement(idEvenement);
 		evenement.setPlanning(planning);
 		return evenement;
 	}
@@ -48,10 +47,9 @@ public class FactoryPlanifier {
 	 * @param planning
 	 * @return évènement instancié
 	 */
-	public Evenement creationEvenement(int idEvenement, Planning planning, Action action,
+	public Evenement creationEvenement(Planning planning, Action action,
 			Plante plante, Nutrition nutrition, LocalDate localDate, String comAuto, String com){
 		Evenement evenement = new Evenement();
-		evenement.setIdEvenement(idEvenement);
 		evenement.setPlanning(planning);
 		evenement.setAction(action);
 		evenement.setPlante(plante);
@@ -69,8 +67,8 @@ public class FactoryPlanifier {
 	}
 
 	public Follower creationFollower() {
-		// TODO Auto-generated method stub
-		return null;
+		Follower follower = new Follower();
+		return follower;
 	}
 
 }

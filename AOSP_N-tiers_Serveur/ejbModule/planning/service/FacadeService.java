@@ -139,7 +139,7 @@ public class FacadeService implements IService {
 	public Evenement creationEvenement(int idEvenement, Planning planning, Action action,
 			Plante plante, Nutrition nutrition,
 			LocalDate localDate, String comAuto, String com) {
-		return factoryPlanifier.creationEvenement(idEvenement, planning, action,
+		return factoryPlanifier.creationEvenement(planning, action,
 				plante, nutrition, localDate, comAuto, com);
 	}
 	
@@ -163,7 +163,7 @@ public class FacadeService implements IService {
 	@Override
 	public Follower getFollower(int idFollower) throws ServiceException {
 		return controleurServiceCrudFollower.getFollower(idFollower);
-	}
+	}//
 
 	@Override
 	public void modifierFollower(Follower follower) throws ServiceException {
