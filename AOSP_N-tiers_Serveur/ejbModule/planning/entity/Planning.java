@@ -23,7 +23,6 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 import commun.config.Parametres;
-import planning.util.Parametre;
 import potager.entity.Carre;
 
 /**
@@ -32,7 +31,7 @@ import potager.entity.Carre;
  * @author Didier
  */
 @Entity
-@Table(name = Parametres.bddPrefix + Parametres.bddSeparator + Parametre.NOM_TABLE_PLANNING + Parametres.bddSuffix)
+@Table(name = Parametres.NOM_TABLE_PLANNING)
 public class Planning implements Serializable {
 
 	@Version
@@ -56,7 +55,7 @@ public class Planning implements Serializable {
 	private List<Evenement> evenements = new ArrayList<Evenement>();
 	
 	@ManyToMany(cascade = {CascadeType.PERSIST})
-	@JoinTable(name=Parametres.bddPrefix + Parametres.bddSeparator + Parametre.NOM_TABLE_PLANNING_FOLLOWER + Parametres.bddSuffix,
+	@JoinTable(name=Parametres.NOM_TABLE_PLANNING_FOLLOWER,
 			joinColumns = @JoinColumn(name="idPlanning") ,
 			inverseJoinColumns = @JoinColumn(name="idFollower") )
 	private List<Follower> followers = new ArrayList<Follower>();
@@ -69,7 +68,10 @@ public class Planning implements Serializable {
 			List<Follower> followers) {
 		super();
 		this.idPlanning = idPlanning;
-		this.carre = carre;
+		this.carre = carre;	
+		if (dateCreation == null) {
+			dateCreation = LocalDate.now();
+		}
 		this.dateCreation = dateCreation;
 		this.evenements = evenements;
 		this.followers = followers;

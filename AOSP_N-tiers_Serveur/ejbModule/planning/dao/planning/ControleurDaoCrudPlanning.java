@@ -11,6 +11,7 @@ import planning.entity.Planning;
 import planning.exception.DaoException;
 import planning.fabrique.FactoryPlanifier;
 import planning.util.Utilitaire;
+import potager.entity.Carre;
 
 /**
  * EJB session bean de type Stateless, LocalBean : Controleur de
@@ -84,9 +85,9 @@ public class ControleurDaoCrudPlanning {
 		}
 	}
 	
-	public Planning createPlanning() throws DaoException {
+	public Planning createPlanning(Carre carre) throws DaoException {
 		Planning Planning = null;
-		return factoryPlanifier.creationPlanning();
+		return factoryPlanifier.creationPlanning(carre);
 	}
 	
 }

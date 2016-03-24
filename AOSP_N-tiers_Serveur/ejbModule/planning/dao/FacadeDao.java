@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
+import commun.config.ActionEvenement;
 import planning.dao.evenement.ControleurDaoCrudEvenement;
 import planning.dao.evenement.ControleurDaoListerEvenement;
 import planning.dao.follower.ControleurDaoCrudFollower;
@@ -19,8 +20,7 @@ import planning.entity.Nutrition;
 import planning.entity.Planning;
 import planning.entity.Plante;
 import planning.exception.DaoException;
-import planning.exception.ServiceException;
-import planning.util.Action;
+import potager.entity.Carre;
 
 /**
  * EJB session bean de type Stateless, Local : façade, unique
@@ -78,8 +78,8 @@ public class FacadeDao implements IDao {
 	}
 
 	@Override
-	public Planning creationPlanning() throws DaoException {
-		return controleurDaoCrudPlanning.createPlanning();
+	public Planning creationPlanning(Carre carre) throws DaoException {
+		return controleurDaoCrudPlanning.createPlanning(carre);
 	}
 
 	@Override
@@ -108,13 +108,13 @@ public class FacadeDao implements IDao {
 	}
 
 	@Override
-	public Evenement creationEvenement() throws DaoException {
-		return controleurDaoCrudEvenement.createEvenement();
+	public Evenement creationEvenement(Planning planning) throws DaoException {
+		return controleurDaoCrudEvenement.createEvenement(planning);
 	}
 
 
 	@Override
-	public Evenement creationEvenement(Planning planning, Action action, Plante plante, Nutrition nutrition,
+	public Evenement creationEvenement(Planning planning, ActionEvenement action, Plante plante, Nutrition nutrition,
 			LocalDate localDate, String comAuto, String com) throws DaoException {
 
 		return controleurDaoCrudEvenement.createEvenement(planning, action, plante, nutrition, localDate, comAuto, com);
@@ -138,11 +138,6 @@ public class FacadeDao implements IDao {
 	@Override
 	public List<Follower> rechercherAllFollower(int idPlanning) throws DaoException {
 		return controleurDaoListerFollower.getAllFollower(idPlanning);
-	}
-
-	@Override
-	public Follower creationFollower() throws DaoException {
-		return controleurDaoCrudFollower.createFollower();
 	}
 
 	@Override

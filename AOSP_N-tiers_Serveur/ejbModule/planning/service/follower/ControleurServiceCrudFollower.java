@@ -1,21 +1,13 @@
 package planning.service.follower;
 
-import java.time.LocalDate;
-
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import planning.dao.IDao;
-import planning.entity.Evenement;
 import planning.entity.Follower;
-import planning.entity.Nutrition;
-import planning.entity.Planning;
-import planning.entity.Plante;
 import planning.exception.DaoException;
 import planning.exception.ServiceException;
-import planning.fabrique.FactoryPlanifier;
-import planning.util.Action;
 
 /**
  * EJB session bean de type Stateless, LocalBean : Controleur de
@@ -63,26 +55,12 @@ public class ControleurServiceCrudFollower {
 		}
 	}
 	
-	public Follower creationFollower() throws ServiceException {
-		Follower follower = null;
-		try {
-			iDao.creationFollower();
-		} catch (DaoException e) {
-			throw new ServiceException("ControleurServiceCrudFollower creerFollower : Erreur de création de follower");
-		}
-		return null;
-	}
 	
-	public Follower creationFollower(String nom, String prenom) {
-		Follower follower = null;
+	public Follower creationFollower(String nom, String prenom) throws ServiceException {
 		try {
-			follower = creationFollower();
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return iDao.creationFollower(nom, prenom);
+		} catch (DaoException e) {
+			throw new ServiceException("ControleurServiceCrudFollower creationFollower : Erreur de création de Follower");
 		}
-		follower.setNom(nom);
-		follower.setPrenom(prenom);
-		return follower;
 	}
 }

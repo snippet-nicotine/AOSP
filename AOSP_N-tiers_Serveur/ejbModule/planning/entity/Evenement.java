@@ -16,9 +16,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import commun.config.ActionEvenement;
 import commun.config.Parametres;
-import planning.util.Action;
-import planning.util.Parametre;
 
 /**
  * EJB Entity, classe Entity Serialisable la plus importante dans la
@@ -27,7 +26,7 @@ import planning.util.Parametre;
  *
  */
 @Entity
-@Table(name = Parametres.bddPrefix + Parametres.bddSeparator + Parametre.NOM_TABLE_EVENEMENT + Parametres.bddSuffix)
+@Table(name = Parametres.NOM_TABLE_EVENEMENT)
 public class Evenement implements Serializable {
 	
 	@Version
@@ -44,7 +43,7 @@ public class Evenement implements Serializable {
 	@JoinColumn(name = "idPlanning", nullable = true)
 	private Planning planning;
 	
-	private Action action;
+	private ActionEvenement action;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idPlante", nullable = true)
@@ -65,7 +64,7 @@ public class Evenement implements Serializable {
 		super();
 	}
 
-	public Evenement(int idEvenement, Planning planning, Action action, Plante plante, Nutrition nutrition,
+	public Evenement(int idEvenement, Planning planning, ActionEvenement action, Plante plante, Nutrition nutrition,
 			LocalDate dateEvenement, String commentaireAuto, String commentaire) {
 		super();
 		this.idEvenement = idEvenement;
@@ -73,6 +72,9 @@ public class Evenement implements Serializable {
 		this.action = action;
 		this.plante = plante;
 		this.nutrition = nutrition;
+		if (dateEvenement == null) {
+			dateEvenement = LocalDate.now();
+		}
 		this.dateEvenement = dateEvenement;
 		this.commentaireAuto = commentaireAuto;
 		this.commentaire = commentaire;
@@ -94,11 +96,11 @@ public class Evenement implements Serializable {
 		this.planning = planning;
 	}
 
-	public Action getAction() {
+	public ActionEvenement getAction() {
 		return action;
 	}
 
-	public void setAction(Action action) {
+	public void setAction(ActionEvenement action) {
 		this.action = action;
 	}
 

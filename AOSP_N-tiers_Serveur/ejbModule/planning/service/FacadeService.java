@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
+import commun.config.ActionEvenement;
 import planning.clientServeur.IService;
 import planning.entity.Evenement;
 import planning.entity.Follower;
@@ -14,14 +15,13 @@ import planning.entity.Nutrition;
 import planning.entity.Planning;
 import planning.entity.Plante;
 import planning.exception.ServiceException;
-import planning.fabrique.FactoryPlanifier;
 import planning.service.evenement.ControleurServiceCrudEvenement;
 import planning.service.evenement.ControleurServiceListerEvenement;
 import planning.service.follower.ControleurServiceCrudFollower;
 import planning.service.follower.ControleurServiceListerFollower;
 import planning.service.planning.ControleurServiceCrudPlanning;
 import planning.service.planning.ControleurServiceListerPlanning;
-import planning.util.Action;
+import potager.entity.Carre;
 
 /**
  * EJB session bean de type Stateless, Remote : façade de la 
@@ -85,8 +85,8 @@ public class FacadeService implements IService {
 	}
 
 	@Override
-	public Planning creationPlanning() throws ServiceException {
-		return controleurServiceCrudPlanning.creationPlanning();
+	public Planning creationPlanning(Carre carre) throws ServiceException {
+		return controleurServiceCrudPlanning.creationPlanning(carre);
 	}
 
 
@@ -121,12 +121,12 @@ public class FacadeService implements IService {
 	}
 
 	@Override
-	public Evenement creationEvenement() throws ServiceException {
-		return controleurServiceCrudEvenement.creationEvenement();
+	public Evenement creationEvenement(Planning planning) throws ServiceException {
+		return controleurServiceCrudEvenement.creationEvenement(planning);
 	}
 
 	@Override
-	public Evenement creationEvenement(Planning planning, Action action,
+	public Evenement creationEvenement(Planning planning, ActionEvenement action,
 			Plante plante, Nutrition nutrition,
 			LocalDate localDate, String comAuto, String com) throws ServiceException {
 		return controleurServiceCrudEvenement.creationEvenement(planning, action,
@@ -164,11 +164,6 @@ public class FacadeService implements IService {
 	public List<Follower> rechercherAllFollower(int idPlanning) throws ServiceException {
 		System.out.println("dans facade service");
 		return controleurServiceListerFollower.rechercherAllFollower(idPlanning);
-	}
-
-	@Override
-	public Follower creationFollower() throws ServiceException {
-		return controleurServiceCrudFollower.creationFollower();
 	}
 
 	@Override

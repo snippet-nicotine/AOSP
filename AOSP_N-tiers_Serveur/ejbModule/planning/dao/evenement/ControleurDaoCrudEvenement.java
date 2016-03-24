@@ -8,13 +8,13 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import commun.config.ActionEvenement;
 import planning.entity.Evenement;
 import planning.entity.Nutrition;
 import planning.entity.Planning;
 import planning.entity.Plante;
 import planning.exception.DaoException;
 import planning.fabrique.FactoryPlanifier;
-import planning.util.Action;
 import planning.util.Utilitaire;
 
 /**
@@ -95,12 +95,12 @@ public class ControleurDaoCrudEvenement {
 		}
 	}
 	
-	public Evenement createEvenement() throws DaoException {
+	public Evenement createEvenement(Planning planning) throws DaoException {
 		Evenement evenement = null;
-		return factoryPlanifier.creationEvenement();
+		return factoryPlanifier.creationEvenement(planning);
 	}
 
-	public Evenement createEvenement(Planning planning, Action action, Plante plante, Nutrition nutrition,
+	public Evenement createEvenement(Planning planning, ActionEvenement action, Plante plante, Nutrition nutrition,
 			LocalDate localDate, String comAuto, String com) {
 		Evenement evenement = null;
 		return factoryPlanifier.creationEvenement(planning, action, plante, nutrition, localDate, comAuto, com);

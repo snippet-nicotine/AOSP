@@ -79,11 +79,6 @@ public class ControleurDaoCrudFollower {
 			throw new DaoException("ControleurDaoCrudPlanning modifierPlanning : Erreur de modification d'un planning");
 		}
 	}
-
-	public Follower createFollower() {
-		Follower Follower = null;
-		return factoryPlanifier.creationFollower();
-	}
 	
 	public Follower createFollower(String nom, String prenom) {
 		Follower Follower = null;

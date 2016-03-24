@@ -1,6 +1,6 @@
-package planning.util;
+package commun.config;
 
-public enum Action {
+public enum ActionEvenement {
 
 	PLANTER,
 	RECOLTER,

@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import commun.config.ActionEvenement;
 import planning.dao.IDao;
 import planning.entity.Evenement;
 import planning.entity.Nutrition;
@@ -13,8 +14,6 @@ import planning.entity.Planning;
 import planning.entity.Plante;
 import planning.exception.DaoException;
 import planning.exception.ServiceException;
-import planning.fabrique.FactoryPlanifier;
-import planning.util.Action;
 import planning.util.Utilitaire;
 
 /**
@@ -94,17 +93,17 @@ public class ControleurServiceCrudEvenement {
 		}
 	}
 	
-	public Evenement creationEvenement() throws ServiceException {
+	public Evenement creationEvenement(Planning planning) throws ServiceException {
 		Evenement evenement = null;
 		try {
-			iDao.creationEvenement();
+			iDao.creationEvenement(planning);
 		} catch (DaoException e) {
 			throw new ServiceException(e.getMessage());
 		}
 		return evenement;
 	}
 	
-	public Evenement creationEvenement(Planning planning, Action action,
+	public Evenement creationEvenement(Planning planning, ActionEvenement action,
 			Plante plante, Nutrition nutrition,
 			LocalDate localDate, String comAuto, String com) throws ServiceException {
 		Evenement evenement = null;
