@@ -29,7 +29,7 @@ public class ControleurDaoListerPlanning {
 	public ControleurDaoListerPlanning() {
 	}
 
-	public List<Planning> rechercherAllPlanning(int idCarre) throws DaoException {
+	public List<Planning> getAllPlanning(int idCarre) throws DaoException {
 //		System.out.println("*** dans ControleurDaoListerPlanning - idCarre : " + idCarre);
 		if (!Utilitaire.isEntierPositifNonNull(idCarre)) {
 			throw new DaoException("ControleurDaoListerPlanning rechercherAllPlanning : la valeur est négative ou nul");

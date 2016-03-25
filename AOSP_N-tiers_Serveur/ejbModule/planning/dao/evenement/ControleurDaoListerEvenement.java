@@ -29,7 +29,7 @@ public class ControleurDaoListerEvenement {
 	public ControleurDaoListerEvenement() {
 	}
 	
-	public List<Evenement> rechercherAllEvenement(int idPlanning) throws DaoException {
+	public List<Evenement> getAllEvenement(int idPlanning) throws DaoException {
 		if (!Utilitaire.isEntierPositifNonNull(idPlanning)) {
 			throw new DaoException("ControleurDaoListerEvenement rechercherAllEvenement : la valeur est négative ou nul");
 		}

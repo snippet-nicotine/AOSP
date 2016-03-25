@@ -1,13 +1,17 @@
 package planning.dao.planning;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import planning.entity.Evenement;
 import planning.entity.Planning;
 import planning.exception.DaoException;
+import planning.fabrique.FactoryPlanifier;
 import planning.util.Utilitaire;
+import potager.entity.Carre;
 
 /**
  * EJB session bean de type Stateless, LocalBean : Controleur de
@@ -23,10 +27,13 @@ public class ControleurDaoCrudPlanning {
 	@PersistenceContext(unitName="AOSP_Hibernate")
 	EntityManager em;
 	
+	@EJB
+	FactoryPlanifier factoryPlanifier;
+	
 	public ControleurDaoCrudPlanning() {
 	}
 	
-	public void creerPlanning(Planning planning) throws DaoException {
+	public void addPlanning(Planning planning) throws DaoException {
 		if (planning == null) {
 			throw new DaoException("ControleurDaoCrudPlanning creerPlanning : l'objet planning à créer est null");
 		}
@@ -42,7 +49,7 @@ public class ControleurDaoCrudPlanning {
 		}
 	}
 	
-	public void supprimerPlanning(int idPlanning) throws DaoException {
+	public void delPlanning(int idPlanning) throws DaoException {
 		if (!Utilitaire.isEntierPositifNonNull(idPlanning)) 
 			throw new DaoException("L'id du planning est négatif ou nul");
 		try {
@@ -62,7 +69,7 @@ public class ControleurDaoCrudPlanning {
 		}
 	}
 
-	public void modifierPlanning(Planning planning) throws DaoException {
+	public void updatePlanning(Planning planning) throws DaoException {
 		if (planning == null) {
 			throw new DaoException("ControleurDaoCrudPlanning modifierPlanning : l'objet planning à créer est null");
 		}
@@ -76,6 +83,11 @@ public class ControleurDaoCrudPlanning {
 		} catch (Exception e) {
 			throw new DaoException("ControleurDaoCrudPlanning modifierPlanning : Erreur de modification d'un planning");
 		}
+	}
+	
+	public Planning createPlanning(Carre carre) throws DaoException {
+		Planning Planning = null;
+		return factoryPlanifier.creationPlanning(carre);
 	}
 	
 }

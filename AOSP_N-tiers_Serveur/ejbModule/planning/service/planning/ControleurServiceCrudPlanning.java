@@ -5,9 +5,12 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import planning.dao.IDao;
+import planning.entity.Follower;
 import planning.entity.Planning;
 import planning.exception.DaoException;
 import planning.exception.ServiceException;
+import planning.fabrique.FactoryPlanifier;
+import potager.entity.Carre;
 
 /**
  * EJB session bean de type Stateless, LocalBean : Controleur de
@@ -53,5 +56,15 @@ public class ControleurServiceCrudPlanning {
 		} catch (DaoException e) {
 			throw new ServiceException("ControleurServiceCrudPlanning modifierPlanning : Erreur de modification de planning");
 		}
+	}
+	
+	public Planning creationPlanning(Carre carre) throws ServiceException {
+		Planning planning = null;
+		try {
+			iDao.creationPlanning(carre);
+		} catch (DaoException e) {
+			throw new ServiceException("ControleurServiceCrudPlanning creerPlanning : Erreur de création de planning");
+		}
+		return planning;
 	}
 }
