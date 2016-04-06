@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.annotations.Expose;
+
 import utilisateur.entity.Jardinier;
 
 
@@ -19,20 +22,20 @@ import utilisateur.entity.Jardinier;
 public class Potager implements Serializable{
 
 	private static final long serialVersionUID = -8065181790953611569L;
-
-	protected int idPotager;
-	protected Jardinier  proprietaire;	
-	protected List<Jardinier> visiteurs;
 	
-	protected LocalDate  dateCreation;	
-	protected List<Carre> carres;
-	private String nom;
-	private int longueur;
-	private int largeur;
-	private String codePostal;
+	@Expose	protected int idPotager;
+	@Expose protected Jardinier  proprietaire;	
+	@Expose protected List<Jardinier> visiteurs;
 	
-	private int nbCarresX;
-	private int nbCarresY;	
+	@Expose protected LocalDate  dateCreation;	
+	@Expose protected List<Carre> carres;
+	@Expose private String nom;
+	@Expose private int longueur;
+	@Expose private int largeur;
+	@Expose private String codePostal;
+	
+	@Expose private int nbCarresX;
+	@Expose private int nbCarresY;	
 	
 	public Potager(){
 		

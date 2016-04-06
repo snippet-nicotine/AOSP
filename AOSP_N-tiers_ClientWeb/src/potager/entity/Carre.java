@@ -2,14 +2,16 @@ package potager.entity;
 
 import java.io.Serializable;
 
+import com.google.gson.annotations.Expose;
+
 
 public class Carre implements Serializable{
 
 	private static final long serialVersionUID = 8695011214229733217L;
 
-	private int idCarre;
-	private int x;
-	private int y;
+	@Expose private int idCarre;
+	@Expose private int x;
+	@Expose private int y;
 	private Potager potager;
 	
 	public Carre(){

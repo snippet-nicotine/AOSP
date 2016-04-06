@@ -107,7 +107,7 @@ public class Jardinier implements Serializable{
 
 	public void clean() {
 		
-		setPotagerPartages( new ArrayList<Potager>(potagerPartages) );
+		//setPotagerPartages( new ArrayList<Potager>(potagerPartages) );
 		
 	}
 

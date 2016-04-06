@@ -48,6 +48,11 @@ public class Dispatcher extends HttpServlet {
 				request.getRequestDispatcher("/ControlleurCarres").forward(request, response);
 				break;
 				
+			case "potagers":
+				System.out.println("Hehe");
+				request.getRequestDispatcher("/Potagers").forward(request, response);
+				break;
+
 			case "connexion":
 				request.getRequestDispatcher("/ControlleurConnexion").forward(request, response);		
 				break;
