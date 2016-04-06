@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	
+	<package name="aosp" namespace="/aosp" extends="struts-default">
+		
+		<action name="">
+			<result type="redirectAction">
+				<param name="actionName">accueil</param>
+			</result>
+		</action>
+		
+		<action name="accueil">
+			<result>/commun/html/connexion.jsp</result>
+		</action>
+		
+		<action name="css_style">
+			<result>/commun/css/style.css</result>
+		</action>
+		
+		<action name="css_layout">
+			<result>/commun/css/style.css</result>
+		</action>
+		
+		<action name="resources_logo">
+			<result>/commun/ressources/logo.png</result>		
+		</action>
+		
+		<action name="resources_accueil">
+			<result>/commun/ressources/accueil.png</result>
+		</action>
+
+	</package>
+
+</struts>

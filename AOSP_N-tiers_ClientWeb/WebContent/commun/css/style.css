@@ -1,3 +1,5 @@
+/* <%@ page contentType="text/css;charset=UTF-8" %> */
+
 html, body{
 	margin :0;
 	padding: 0;
@@ -5,7 +7,7 @@ html, body{
 }
 
 body{
-	background-image: url(../ressources/accueil.jpg);
+	background-image: url(${pageContext.request.contextPath}/commun/ressources/accueil.jpg);
 	background-size: cover;
 	box-sizing: border-box;
 	background-position: 50% 35%;

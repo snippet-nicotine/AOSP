@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css"	href="../css/style.css">
+<link rel="stylesheet" type="text/css"	href='<s:url namespace="/aosp" action="css_style"/>'/>
 
 
 <title>Avec ou sans patates - Gestion de potager en ligne -</title>
@@ -15,7 +15,7 @@
 
 	<div class="blur">
 		<header>
-			<img class="logo" alt="logo-avec ou sans patates" src="../ressources/logo.png">
+			<img class="logo" alt="logo-avec ou sans patates" src="<s:url namespace="/aosp" action="resources_logo"/>">
 		</header>
 		
 		<section id="slogan">
