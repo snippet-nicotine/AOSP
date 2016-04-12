@@ -328,10 +328,7 @@ public class ControlleurPotagers extends HttpServlet {
 			potagers = serviceGestionPotager.listerPotager();
 			request.setAttribute("potagers", potagers);
 			request.setAttribute("nbAnnulations", serviceGestionPotager.getNombreAnnulations() );
-			
-			LOG.debug("variable potagers: " + potagers);
-			LOG.debug("request ContextPath: " + request.getContextPath() );
-			LOG.debug("request param: " + request.getParameter("nom") );
+
 			
 		} catch (DaoPotagerQueryException e) {
 			

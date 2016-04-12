@@ -121,11 +121,11 @@
 								
 								<td>${potager.codePostal}</td>
 								
-								<td> <a href="#" > ${potager.proprietaire.nom} </a> </td>
+								<td> <a href="#" > ${potager.proprietaire.etatCivil.nom} </a> </td>
 								
 								<td> 
 									<c:forEach items="${potager.visiteurs}" var="visiteur">
-										${visiteur.nom},
+										${visiteur.etatCivil.nom},
 									</c:forEach>
 								 </td>
 								
