@@ -18,6 +18,22 @@ public class Specialite implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	public String getIdSpecialite() {
+		return idSpecialite;
+	}
+
+	public void setIdSpecialite(String idSpecialite) {
+		this.idSpecialite = idSpecialite;
+	}
+
+	public String getLibelle() {
+		return libelle;
+	}
+
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String idSpecialite;

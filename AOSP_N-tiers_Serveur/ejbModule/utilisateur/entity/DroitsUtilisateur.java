@@ -26,4 +26,20 @@ public class DroitsUtilisateur implements Serializable{
 	@Column(length = 30, nullable = true)
 	private String libelle;
 
+	public String getIdDroit() {
+		return idDroit;
+	}
+
+	public void setIdDroit(String idDroit) {
+		this.idDroit = idDroit;
+	}
+
+	public String getLibelle() {
+		return libelle;
+	}
+
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
+	}
+
 }

@@ -17,6 +17,16 @@ public class Specialiste extends AbstractJardinier{
 	private static final long serialVersionUID = 1L;
 	
 	
+	public Specialite getSpecialite() {
+		return specialite;
+	}
+
+
+	public void setSpecialite(Specialite specialite) {
+		this.specialite = specialite;
+	}
+
+
 	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idSpecialite", nullable = true)
 	private Specialite specialite;

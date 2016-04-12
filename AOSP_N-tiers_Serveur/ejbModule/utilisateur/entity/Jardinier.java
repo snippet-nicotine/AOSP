@@ -13,6 +13,14 @@ import potager.entity.Potager;
 @Table(name="aosp_jardinier")
 public class Jardinier extends AbstractJardinier {
 
+	public List<Potager> getPotagerPartages() {
+		return potagerPartages;
+	}
+
+	public void setPotagerPartages(List<Potager> potagerPartages) {
+		this.potagerPartages = potagerPartages;
+	}
+
 	/**
 	 * 
 	 */

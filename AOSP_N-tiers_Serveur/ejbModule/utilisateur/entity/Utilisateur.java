@@ -37,7 +37,7 @@ public abstract class Utilisateur implements Serializable{
 	
 	@OneToOne ( cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "idEtatcivil", unique = true, nullable = true)
-	EtatCivil etatCivil;
+	private EtatCivil etatCivil;
 	
 	@Column(name="mail", length = 30, nullable = true)
 	private String mail;
@@ -45,6 +45,46 @@ public abstract class Utilisateur implements Serializable{
 	@Column(name = "motPasse", length = 30, nullable = true)	
 	private String motPasse;
 	
+	public String getIdUtilisateur() {
+		return idUtilisateur;
+	}
+
+	public void setIdUtilisateur(String idUtilisateur) {
+		this.idUtilisateur = idUtilisateur;
+	}
+
+	public EtatCivil getEtatCivil() {
+		return etatCivil;
+	}
+
+	public void setEtatCivil(EtatCivil etatCivil) {
+		this.etatCivil = etatCivil;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getMotPasse() {
+		return motPasse;
+	}
+
+	public void setMotPasse(String motPasse) {
+		this.motPasse = motPasse;
+	}
+
+	public Collection<DroitsUtilisateur> getListeDroits() {
+		return listeDroits;
+	}
+
+	public void setListeDroits(Collection<DroitsUtilisateur> listeDroits) {
+		this.listeDroits = listeDroits;
+	}
+
 	@ManyToMany(cascade= { CascadeType.DETACH}, fetch = FetchType.EAGER)
 	@JoinTable(name="aosp_droits_utilisateur",
 	 joinColumns = @JoinColumn(name="idUtilisateur") ,
