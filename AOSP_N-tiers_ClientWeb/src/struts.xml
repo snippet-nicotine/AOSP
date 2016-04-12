@@ -6,14 +6,16 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="true" />
 	
-	<include file="dispatch_aosp.xml"></include>
+	<include file="struts_resources.xml"></include>
+	<include file="struts_aosp.xml"></include>
+	<include file="potager/struts_potager.xml"></include>
 	
 	<package name="default" extends="struts-default">
 	
 		<default-action-ref name="todo" />
 		
 		<action name="todo">
-			<result>/commun/html/todo.jsp</result>
+			<result>/potager/test.jsp</result>
 		</action>
 
 	</package>

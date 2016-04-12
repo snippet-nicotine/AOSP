@@ -45,7 +45,7 @@ public class Potager implements Serializable{
 	@JoinColumn(name="idProprietaire", unique=true)
 	protected Jardinier  proprietaire;
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
 	@JoinTable(name="aosp_potager_visiteur",
 		joinColumns        = @JoinColumn(name="id_potager"),
 		inverseJoinColumns = @JoinColumn(name="id_visiteur")	)

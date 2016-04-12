@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	
+	<package name="resources" namespace="/resources" extends="struts-default">
+				
+		<action name="css_style">
+			<result>/WEB-INF/commun/css/style.css</result>
+		</action>
+		
+		<action name="css_layout">
+			<result>/WEB-INF/commun/css/style.css</result>
+		</action>
+		
+		<action name="resources_logo">
+			<result>/WEB-INF/commun/ressources/logo.png</result>		
+		</action>
+		
+		<action name="resources_accueil">
+			<result>/WEB-INF/commun/ressources/accueil.png</result>
+		</action>
+		
+		<action name="css_bootstrap">
+			<result>/WEB-INF/commun/css/bootstrap-3.3.6-dist/css/bootstrap.min.css</result>
+		</action>
+		
+		<action name="css_potager_style">
+			<result>/WEB-INF/potager/css/style.css</result>
+		</action>
+		
+
+	</package>
+
+</struts>

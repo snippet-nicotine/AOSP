@@ -1,17 +1,28 @@
 <%@page import="commun.config.Parametres"%>
 <%@page import="potager.entity.Potager"%>
 <%@page import="java.util.List"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="s"  uri="/struts-tags" %>
+<%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
+<s:url namespace="/resources" action="css_potager_style" var="css_style"/>
+
 <!DOCTYPE html">
 
-<html>
+<html lang="fr">
 <head>
+
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/potager/css/bootstrap-3.3.6-dist/css/bootstrap.css">
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/potager/css/style.css">
+	<sb:head/>
+	<link rel="stylesheet" href='${css_style}'>
 	
 	
 <title>Administration des potagers</title>
@@ -19,14 +30,15 @@
 <body>
 	
 	<%@ include file="/WEB-INF/vuesPartielles/header.jsp"%>
-	
+		
 	<div id="contenu" class="container-fluid">	
 			
 			<section id="titre" class="page-header">
 			  <h1>Administration des potagers</h1>
-			</section>		
-		
+			</section>			
+            		
 			<section class="well">
+				
 				<a href="<%= request.getContextPath() %>/aosp/potager/annuler" class="btn btn-danger">
 					<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
 					Annuler (${nbAnnulations})
@@ -35,53 +47,50 @@
 			</section>
 		
 			<!-- Ajouter un potager -->
+						
 			<section id="ajouter">
-				<form class="form-inline well" id="formulaire-ajouter" method="POST" action="<%= request.getContextPath() %>/aosp/<%=Parametres.CONTROLLEUR_GESTION_POTAGER%>">
-				  
-				  <div class="form-group ${ erreurNom != null ? 'has-error' : '' }">
-				    <label for="nom">Nom</label>
-				    <input type="text" class="form-control" id="nom" 
-				    		value="${param.nom}"
-				    		name="nom" 
-				    		placeholder="Nom" 
-				    		data-toggle="tooltip" 
-				    		title="${ erreurNom != null ? erreurNom : 'Entrez le nom du potager' }">
-				  </div>
-				  
-				  <div class="form-group ${ erreurDimension != null ? 'has-error' : '' }">
-				  
-				    <label for="longueur">Dimension</label>
-
-				    <input type="number" class="form-control" id="largeur" 
-				    		value="${param.largeur}"
-				    		name="largeur" 
-				    		placeholder="Largeur" 
-				    		data-toggle="tooltip" 
-				    		title="${ erreurDimension != null ? erreurDimension : 'Entrez la largeur en cm' }">
-				    X
-				    <input type="number" class="form-control" id="longueur"
-				    		value="${param.longueur}"
-				    		name="longueur" 
-				    		placeholder="Longueur" 
-				    		data-toggle="tooltip" 
-				    		title="${ erreurDimension != null ? erreurDimension : 'Entrez la longueur en cm' }">
-				    
-				    
-				  </div>
-				  
-				  <div class="form-group ${ erreurCodepostal != null ? 'has-error' : '' }">
-				    <label for="codePostal">Code Postal</label>
-				    <input type="text" class="form-control" id="codePostal" 
-				    		value="${param.codePostal}"
-				    		name="codePostal"
-				    		placeholder="Code Postal"
-				    		data-toggle="tooltip"
-				    		title="${ erreurCodepostal != null ? erreurCodepostal : 'Entrez le code postal (5 chiffres)' }">
-				  </div>
-				  		  
-				  <button type="submit" class="btn btn-default">+ Ajouter</button>
-				  
-				</form>
+	
+				<s:form namespace="/potager" id="formulaire-ajouter" action="ajouterBeanPotager" theme="bootstrap" cssClass="well form-inline" >
+						
+						<s:textfield
+								label="Nom"
+								name="potager.nom"
+								tooltip="Nom du potager"
+						/>
+					
+					<div class="form-group">
+						<s:textfield
+								label="Longueur"
+								name="potager.longueur"
+								tooltip="Longueur du potager"
+						/>
+						X
+						<s:textfield
+								label="Largeur"
+								name="potager.largeur"
+								tooltip="Largeur du potager"
+						/>					
+					</div>
+					
+					<s:textfield
+							label="Code Postal"
+							name="potager.codePostal"
+							tooltip="Code postal (format: 13000, 65000,...)"
+					/>
+					
+					<s:select
+                        tooltip="Visiteurs"
+                        label="Visiteurs"
+                        list="{'Red', 'Blue', 'Green'}"
+                        name="favouriteColor"
+                        emptyOption="true"
+                        headerKey="None"
+                        headerValue="None"/>
+					
+					<s:submit cssClass="btn btn-default" value="+ Ajouter"/>
+					
+				</s:form>			
+				
 			</section>
 			
 			<section id="lister">
@@ -200,6 +209,11 @@
 			</div>
 		</div>
 	</div>
+	
+	<section id="infos">
+		<s:actionerror theme="bootstrap"/>
+        <s:actionmessage theme="bootstrap"/>
+    </section>
 	
 
 </body>

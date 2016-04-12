@@ -1,0 +1,62 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.2//EN" "http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd">
+
+<validators>
+
+	<field name="potager.nom">
+	
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message key="erreur.potager.nom.obligatoire"></message>
+		</field-validator>
+	
+		<field-validator type="stringlength">
+			<param name="minLength">3</param>
+			<param name="maxLength">255</param>
+			<param name="trim">true</param>
+			<message key="erreur.potager.nom.longueur"></message>
+		</field-validator>
+				
+	</field>
+	
+	<field name="potager.codePostal">
+	
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message key="erreur.potager.codePostal"></message>
+		</field-validator>
+	
+	
+		<field-validator type="regex">
+			<param name="regex"><![CDATA[^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$]]></param>
+			<message key="erreur.potager.codePostal"></message>
+		</field-validator>
+		
+	</field>
+	
+	<field name="potager.longueur">
+	
+		<field-validator type="required">
+			<message key="potager.erreur.longueur"></message>
+		</field-validator>
+		
+		<field-validator type="int">
+			<param name="min">100</param>
+			<message key="erreur.potager.longueur"></message>
+		</field-validator>
+		
+	</field>
+	
+	<field name="potager.largeur">
+	
+		<field-validator type="required">
+			<message key="potager.erreur.largeur"></message>
+		</field-validator>
+		
+		<field-validator type="int">
+			<param name="min">100</param>
+			<message key="erreur.potager.largeur"></message>
+		</field-validator>
+		
+	</field>
+	
+</validators>

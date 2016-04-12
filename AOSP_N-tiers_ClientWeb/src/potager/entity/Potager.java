@@ -38,18 +38,20 @@ public class Potager implements Serializable{
 	@Expose private int nbCarresY;	
 	
 	public Potager(){
-		
+		this.carres       = new ArrayList<Carre>();
+		this.visiteurs    = new ArrayList<Jardinier>();		
 	}
 	
 	public Potager(String nom, int longueur, int largeur, String codePostal, Jardinier proprietaire){
+		this();
+		
 		this.nom          = nom;
 		this.longueur     = longueur;
 		this.largeur      = largeur;
 		this.codePostal   = codePostal;
 		this.proprietaire = proprietaire;
 		this.dateCreation = LocalDate.now();
-		this.carres       = new ArrayList<Carre>();
-		this.visiteurs    = new ArrayList<Jardinier>();
+		
 	}
 	
 	public int getIdPotager() {

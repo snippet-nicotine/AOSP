@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+	<include file="struts_resources.xml"></include>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	
+	<package name="potager" namespace="/potager" extends="struts-default">
+		
+		<action name="*Bean*" method="{1}" class="potager.actions.Gestion{2}">
+			<result name="error">/WEB-INF/potager/gestion{2}.jsp</result>
+			<result name="input">/WEB-INF/potager/gestion{2}.jsp</result>
+			<result name="success">/WEB-INF/potager/gestion{2}.jsp</result>
+
+			<interceptor-ref name="defaultStack">
+				<param name="validation.excludeMethods">lister</param>
+			</interceptor-ref> 
+			
+		</action>
+
+	</package>
+
+</struts>

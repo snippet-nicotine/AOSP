@@ -10,28 +10,16 @@
 		
 		<action name="">
 			<result type="redirectAction">
-				<param name="actionName">accueil</param>
+				<param name="actionName">login</param>
 			</result>
 		</action>
 		
-		<action name="accueil">
+		<action name="login">
 			<result>/commun/html/connexion.jsp</result>
 		</action>
 		
-		<action name="css_style">
-			<result>/commun/css/style.css</result>
-		</action>
-		
-		<action name="css_layout">
-			<result>/commun/css/style.css</result>
-		</action>
-		
-		<action name="resources_logo">
-			<result>/commun/ressources/logo.png</result>		
-		</action>
-		
-		<action name="resources_accueil">
-			<result>/commun/ressources/accueil.png</result>
+		<action name="potager">
+			<result>/potager/gestionPotager.jsp</result>
 		</action>
 
 	</package>
