@@ -21,18 +21,33 @@ public class DroitsUtilisateur implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String idDroit;
+	private int idDroit;
 	
 	@Column(length = 30, nullable = true)
 	private String libelle;
 
-	public String getIdDroit() {
+	
+	public DroitsUtilisateur() {
+		super();
+	}	
+	
+
+	public DroitsUtilisateur(String libelle) {
+		super();
+		this.libelle = libelle;
+	}
+
+	
+
+	public int getIdDroit() {
 		return idDroit;
 	}
 
-	public void setIdDroit(String idDroit) {
+
+	public void setIdDroit(int idDroit) {
 		this.idDroit = idDroit;
 	}
+
 
 	public String getLibelle() {
 		return libelle;

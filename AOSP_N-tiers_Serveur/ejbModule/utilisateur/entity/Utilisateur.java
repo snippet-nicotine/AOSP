@@ -33,7 +33,7 @@ public abstract class Utilisateur implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="ref_droit")
-	private String idUtilisateur;
+	private int idUtilisateur;
 	
 	@OneToOne ( cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "idEtatcivil", unique = true, nullable = true)
@@ -44,12 +44,12 @@ public abstract class Utilisateur implements Serializable{
 	
 	@Column(name = "motPasse", length = 30, nullable = true)	
 	private String motPasse;
-	
-	public String getIdUtilisateur() {
+
+	public int getIdUtilisateur() {
 		return idUtilisateur;
 	}
 
-	public void setIdUtilisateur(String idUtilisateur) {
+	public void setIdUtilisateur(int idUtilisateur) {
 		this.idUtilisateur = idUtilisateur;
 	}
 
