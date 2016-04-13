@@ -29,11 +29,13 @@ public class Jardinier extends AbstractJardinier {
 	
 	
 	public String getNom(){
-		return "test";
+		return super.getEtatCivil().getNom();
 	}
 	
-	public void setNom(){
-		
+	public void setNom(String nom){
+		EtatCivil etatCivil = new EtatCivil();
+		etatCivil.setNom(nom);
+		super.setEtatCivil(etatCivil);
 	}
 
 	public List<Potager> getPotagers() {
