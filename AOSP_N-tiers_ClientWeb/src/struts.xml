@@ -7,7 +7,7 @@
 	<constant name="struts.devMode" value="true" />
 	
 	<include file="struts_resources.xml"></include>
-	<include file="struts_aosp.xml"></include>
+	<include file="commun/struts_commun.xml"></include>
 	<include file="potager/struts_potager.xml"></include>
 	
 	<package name="default" extends="struts-default">

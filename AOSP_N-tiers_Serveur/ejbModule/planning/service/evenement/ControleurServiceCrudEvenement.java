@@ -1,11 +1,17 @@
 package planning.service.evenement;
 
+import java.time.LocalDate;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import commun.config.ActionEvenement;
 import planning.dao.IDao;
 import planning.entity.Evenement;
+import planning.entity.Nutrition;
+import planning.entity.Planning;
+import planning.entity.Plante;
 import planning.exception.DaoException;
 import planning.exception.ServiceException;
 import planning.util.Utilitaire;
@@ -86,5 +92,33 @@ public class ControleurServiceCrudEvenement {
 			throw new ServiceException("ControleurServiceCrudEvenement modifierEvenement : Erreur de modification d'evenement");
 		}
 	}
-
+	
+	public Evenement creationEvenement(Planning planning) throws ServiceException {
+		Evenement evenement = null;
+		try {
+			iDao.creationEvenement(planning);
+		} catch (DaoException e) {
+			throw new ServiceException(e.getMessage());
+		}
+		return evenement;
+	}
+	
+	public Evenement creationEvenement(Planning planning, ActionEvenement action,
+			Plante plante, Nutrition nutrition,
+			LocalDate localDate, String comAuto, String com) throws ServiceException {
+		Evenement evenement = null;
+		if (planning == null) {
+			throw new ServiceException("Le planning est nul");
+		} else if (action == null) {
+			throw new ServiceException("L'action est ou nul");
+		} else if (plante == null) {
+			throw new ServiceException("la plante est nul");
+		}
+		try {
+			evenement = iDao.creationEvenement(planning, action, plante, nutrition, localDate, comAuto, com);
+		} catch (DaoException e) {
+			throw new ServiceException(e.getMessage());
+		}
+		return evenement;
+	}
 }

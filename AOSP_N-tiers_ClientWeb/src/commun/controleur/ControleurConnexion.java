@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import utilisateur.entity.EtatCivil;
 import utilisateur.entity.Jardinier;
 
 /**
@@ -49,7 +50,9 @@ public class ControleurConnexion extends HttpServlet {
 		
 		if( !login.isEmpty() ){
 			jardinier = new Jardinier();
-			jardinier.setNom(login);
+			EtatCivil etatCivil = new EtatCivil();
+			etatCivil.setNom(login);
+			jardinier.setEtatCivil(etatCivil);
 		}		
 		
 		session.setAttribute("user", jardinier);		

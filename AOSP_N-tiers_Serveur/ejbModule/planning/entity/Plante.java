@@ -14,10 +14,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import commun.config.Parametres;
-import planning.util.Parametre;
 
 @Entity
-@Table(name = Parametres.bddPrefix + Parametres.bddSeparator + Parametre.NOM_TABLE_PLANTE + Parametres.bddSuffix)
+@Table(name = Parametres.NOM_TABLE_PLANTE)
 public class Plante implements Serializable {
 
 	/**

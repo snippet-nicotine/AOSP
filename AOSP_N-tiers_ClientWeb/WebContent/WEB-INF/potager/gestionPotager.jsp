@@ -77,16 +77,7 @@
 							name="potager.codePostal"
 							tooltip="Code postal (format: 13000, 65000,...)"
 					/>
-					
-					<s:select
-                        tooltip="Visiteurs"
-                        label="Visiteurs"
-                        list="{'Red', 'Blue', 'Green'}"
-                        name="favouriteColor"
-                        emptyOption="true"
-                        headerKey="None"
-                        headerValue="None"/>
-					
+										
 					<s:submit cssClass="btn btn-default" value="+ Ajouter"/>
 					
 				</s:form>			
