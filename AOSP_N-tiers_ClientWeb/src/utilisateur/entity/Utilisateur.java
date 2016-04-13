@@ -1,6 +1,7 @@
 package utilisateur.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -36,7 +37,7 @@ public abstract class Utilisateur implements Serializable{
 	
 	@OneToOne ( cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "idEtatcivil", unique = true, nullable = true)
-	private EtatCivil etatCivil;
+	EtatCivil etatCivil;
 	
 	@Column(name="mail", length = 30, nullable = true)
 	private String mail;
@@ -44,27 +45,11 @@ public abstract class Utilisateur implements Serializable{
 	@Column(name = "motPasse", length = 30, nullable = true)	
 	private String motPasse;
 	
-		
-
 	@ManyToMany(cascade= { CascadeType.DETACH}, fetch = FetchType.EAGER)
 	@JoinTable(name="aosp_droits_utilisateur",
 	 joinColumns = @JoinColumn(name="idUtilisateur") ,
 	 inverseJoinColumns = @JoinColumn(name="idDroit") )
 	Collection<DroitsUtilisateur> listeDroits;
-	
-	
-	// ---- Ajouté par nicolas  -----
-	public String getNom(){
-		return getEtatCivil().getNom();
-	}
-	
-	public void setNom(String nom){
-		EtatCivil etatCivil = new EtatCivil();
-		etatCivil.setNom(nom);
-		setEtatCivil(etatCivil);
-	}
-	
-	// -----------------------------
 
 	public int getIdUtilisateur() {
 		return idUtilisateur;

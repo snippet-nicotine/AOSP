@@ -9,43 +9,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name="aosp_specialite")
-public class Specialite implements Serializable{
+@Table(name = "aosp_droits_utilisateur")
+public class DroitsUtilisateur implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idSpecialite;
+	private int idDroit;
 	
 	@Column(length = 30, nullable = true)
 	private String libelle;
 
-	
-	
-	public Specialite() {
-		super();
-	}
-	
-
-	public Specialite(String libelle) {
-		super();
-		this.libelle = libelle;
+	public int getIdDroit() {
+		return idDroit;
 	}
 
-
-	public int getIdSpecialite() {
-		return idSpecialite;
-	}
-
-	public void setIdSpecialite(int idSpecialite) {
-		this.idSpecialite = idSpecialite;
+	public void setIdDroit(int idDroit) {
+		this.idDroit = idDroit;
 	}
 
 	public String getLibelle() {

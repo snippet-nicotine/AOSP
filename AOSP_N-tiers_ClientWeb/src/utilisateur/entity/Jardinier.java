@@ -1,96 +1,61 @@
 package utilisateur.entity;
 
-import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import potager.entity.Potager;
 
-public class Jardinier implements Serializable{
+@Entity
+@Table(name="aosp_jardinier")
+public class Jardinier extends AbstractJardinier {
 
-	private static final long serialVersionUID = 8754664668653019633L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-	private int idJardinier;
+	@OneToMany(mappedBy="proprietaire", cascade = {CascadeType.ALL} )
+	private List<Potager> potagers;
+	
+	// Ajouté par nicolas.
+	@ManyToMany(mappedBy="visiteurs", fetch=FetchType.EAGER)
 	private List<Potager> potagerPartages;
 	
-	private String nom;
-	private String prenom;
-	private String mail;
-	private String motPasse;
-	private String codePostal;
 	
-	public Jardinier(){
-		this.nom = "Jardinier temp";
+	public String getNom(){
+		return "test";
+	}
+	
+	public void setNom(){
+		
 	}
 
-	public String getNom() {
-		return nom;
+	public List<Potager> getPotagers() {
+		return potagers;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	@Override
-	public String toString() {
-		return "Jardinier [idJardinier=" + idJardinier + ", nom=" + nom + ", prenom=" + prenom + ", mail=" + mail
-				+ ", motPasse=" + motPasse + ", codePostal=" + codePostal + "]";
-	}
-
-	public int getIdJardinier() {
-		return idJardinier;
-	}
-
-	public void setIdJardinier(int idJardinier) {
-		this.idJardinier = idJardinier;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-
-	public String getMotPasse() {
-		return motPasse;
-	}
-
-	public void setMotPasse(String motPasse) {
-		this.motPasse = motPasse;
-	}
-
-	public String getCodePostal() {
-		return codePostal;
-	}
-
-	public void setCodePostal(String codePostal) {
-		this.codePostal = codePostal;
-	}
-
-
-	public void setPotagerPartages(List<Potager> potagerPartages) {
-		this.potagerPartages = potagerPartages;
+	public void setPotagers(List<Potager> potagers) {
+		this.potagers = potagers;
 	}
 
 	public List<Potager> getPotagerPartages() {
 		return potagerPartages;
 	}
+
+	public void setPotagerPartages(List<Potager> potagerPartages) {
+		this.potagerPartages = potagerPartages;
+	}
+
+	public void clean() {
+		// TODO Auto-generated method stub		
+	}
+	
+
 
 }

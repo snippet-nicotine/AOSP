@@ -83,7 +83,7 @@ public class Potager implements Serializable{
 		this.largeur      = largeur;
 		this.codePostal   = codePostal;
 		this.proprietaire = proprietaire;
-		this.dateCreation = LocalDate.now();
+		this.dateCreation = LocalDate.now();		
 
 	}
 	

@@ -14,5 +14,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/log4J/log4j-api-2.5.jar"/>
 	<classpathentry kind="lib" path="lib/log4J/log4j-core-2.5.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/persistenceHibernate"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

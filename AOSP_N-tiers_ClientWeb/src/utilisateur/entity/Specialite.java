@@ -18,27 +18,12 @@ public class Specialite implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idSpecialite;
 	
 	@Column(length = 30, nullable = true)
 	private String libelle;
-
-	
-	
-	public Specialite() {
-		super();
-	}
-	
-
-	public Specialite(String libelle) {
-		super();
-		this.libelle = libelle;
-	}
-
 
 	public int getIdSpecialite() {
 		return idSpecialite;
