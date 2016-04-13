@@ -50,6 +50,20 @@ public abstract class Utilisateur implements Serializable{
 	 joinColumns = @JoinColumn(name="idUtilisateur") ,
 	 inverseJoinColumns = @JoinColumn(name="idDroit") )
 	Collection<DroitsUtilisateur> listeDroits;
+	
+	
+	// ---- Ajouté par nicolas  -----
+	public String getNom(){
+		return getEtatCivil().getNom();
+	}
+	
+	public void setNom(String nom){
+		EtatCivil etatCivil = new EtatCivil();
+		etatCivil.setNom(nom);
+		setEtatCivil(etatCivil);
+	}
+	
+	// -----------------------------
 
 	public int getIdUtilisateur() {
 		return idUtilisateur;

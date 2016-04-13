@@ -20,23 +20,13 @@ public class Jardinier extends AbstractJardinier {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	// Ajouté par nicolas
 	@OneToMany(mappedBy="proprietaire", cascade = {CascadeType.ALL} )
 	private List<Potager> potagers;
 	
 	// Ajouté par nicolas.
 	@ManyToMany(mappedBy="visiteurs", fetch=FetchType.EAGER)
 	private List<Potager> potagerPartages;
-	
-	
-	public String getNom(){
-		return super.getEtatCivil().getNom();
-	}
-	
-	public void setNom(String nom){
-		EtatCivil etatCivil = new EtatCivil();
-		etatCivil.setNom(nom);
-		super.setEtatCivil(etatCivil);
-	}
 
 	public List<Potager> getPotagers() {
 		return potagers;
