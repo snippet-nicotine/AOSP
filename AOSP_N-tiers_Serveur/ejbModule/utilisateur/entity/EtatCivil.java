@@ -26,6 +26,24 @@ public class EtatCivil implements Serializable{
 	@Column(name="nom", length = 30, nullable = true)
 	private String nom;
 	
+	@Column(name="prenom", length = 30, nullable = true)
+	private String prenom;
+	
+	
+	public EtatCivil() {
+		super();
+	}
+	
+	
+
+	public EtatCivil(String nom, String prenom) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+	}
+
+
+
 	public String getNom() {
 		return nom;
 	}
@@ -42,16 +60,16 @@ public class EtatCivil implements Serializable{
 		this.prenom = prenom;
 	}
 
-	@Column(name="prenom", length = 30, nullable = true)
-	private String prenom;
-
+	public int getIdEtatCivil() {
+		return idEtatCivil;
+	}
 
 	public void setIdEtatCivil(int idEtatCivil) {
 		this.idEtatCivil = idEtatCivil;
 	}
 
-	public int getIdEtatCivil() {
-		return idEtatCivil;
-	}
+	
+
+	
 
 }

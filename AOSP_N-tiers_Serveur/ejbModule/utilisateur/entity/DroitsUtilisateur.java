@@ -25,8 +25,10 @@ public class DroitsUtilisateur implements Serializable{
 	
 	@Column(length = 30, nullable = true)
 	private String libelle;
-
-
+	
+	public DroitsUtilisateur() {
+		super();
+	}	
 	
 
 	public DroitsUtilisateur(String libelle) {
@@ -34,18 +36,15 @@ public class DroitsUtilisateur implements Serializable{
 		this.libelle = libelle;
 	}
 
-	public DroitsUtilisateur() {
-		super();
-	}
-
+	
 	public int getIdDroit() {
 		return idDroit;
 	}
 
 	public void setIdDroit(int idDroit) {
-
 		this.idDroit = idDroit;
 	}
+
 
 	public String getLibelle() {
 		return libelle;
