@@ -18,22 +18,18 @@ public class Specialite implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idSpecialite;
 	
 	@Column(length = 30, nullable = true)
 	private String libelle;
-
-	
-	
+		
 	public Specialite() {
 		super();
 	}
 	
-
+	
 	public Specialite(String libelle) {
 		super();
 		this.libelle = libelle;
@@ -48,6 +44,7 @@ public class Specialite implements Serializable{
 		this.idSpecialite = idSpecialite;
 	}
 
+
 	public String getLibelle() {
 		return libelle;
 	}
@@ -55,5 +52,6 @@ public class Specialite implements Serializable{
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
+
 
 }

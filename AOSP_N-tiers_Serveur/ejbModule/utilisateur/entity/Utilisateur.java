@@ -43,8 +43,6 @@ public abstract class Utilisateur implements Serializable{
 	
 	@Column(name = "motPasse", length = 30, nullable = true)	
 	private String motPasse;
-	
-		
 
 	@ManyToMany(cascade= { CascadeType.DETACH}, fetch = FetchType.EAGER)
 	@JoinTable(name="aosp_droits_utilisateur",
