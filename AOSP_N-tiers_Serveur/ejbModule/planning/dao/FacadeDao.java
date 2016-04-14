@@ -1,6 +1,7 @@
 package planning.dao;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -39,18 +40,18 @@ public class FacadeDao implements IDao {
 	private ControleurDaoCrudPlanning controleurDaoCrudPlanning;	
 	@EJB
 	private ControleurDaoListerPlanning controleurDaoListerPlanning;
-	
+
 	@EJB
 	private ControleurDaoCrudEvenement controleurDaoCrudEvenement;
 	@EJB
 	private ControleurDaoListerEvenement controleurDaoListerEvenement;
-	
+
 	@EJB
 	private ControleurDaoCrudFollower controleurDaoCrudFollower;
 	@EJB
 	private ControleurDaoListerFollower controleurDaoListerFollower;
-	
-		
+
+
 	@Override
 	public void creerPlanning(Planning planning) throws DaoException {
 		controleurDaoCrudPlanning.addPlanning(planning);
@@ -63,7 +64,7 @@ public class FacadeDao implements IDao {
 
 	@Override
 	public Planning getPlanning(int idPlanning) throws DaoException {
-		return controleurDaoCrudPlanning.getPlanning(idPlanning);
+		return controleurDaoCrudPlanning.getPlanning(idPlanning).getDto();
 	}
 
 	@Override
@@ -73,8 +74,14 @@ public class FacadeDao implements IDao {
 
 	@Override
 	public List<Planning> rechercherAllPlanning(int idCarre) throws DaoException {
-		System.out.println("dans FacadeDao");
-		return controleurDaoListerPlanning.getAllPlanning(idCarre);
+		System.out.println("dans FacadeDao : List<Planning> rechercherAllPlanning(int idCarre)");
+		List<Planning> lp = controleurDaoListerPlanning.getAllPlanning(idCarre);
+		List<Planning> lpDto = new ArrayList<Planning>();
+		for (Planning planning : lp) {
+			Planning planningDto = planning.getDto();
+			lpDto.add(planningDto);
+		}
+		return lpDto;
 	}
 
 	@Override
@@ -104,7 +111,14 @@ public class FacadeDao implements IDao {
 
 	@Override
 	public List<Evenement> rechercherAllEvenement(int idPlanning) throws DaoException {
-		return controleurDaoListerEvenement.getAllEvenement(idPlanning);
+		System.out.println("dans FacadeDao : List<Evenement> rechercherAllEvenement(int idPlanning)");
+		List<Evenement> le = controleurDaoListerEvenement.getAllEvenement(idPlanning);
+		List<Evenement> leDto = new ArrayList<Evenement>();
+		for (Evenement evenement : le) {
+			Evenement evenementDto = evenement;
+			leDto.add(evenementDto);
+		}
+		return leDto;
 	}
 
 	@Override
@@ -149,5 +163,5 @@ public class FacadeDao implements IDao {
 	public Follower getFollower(int idFollower) throws DaoException {
 		return controleurDaoCrudFollower.getFollower(idFollower);
 	}
-	
+
 }

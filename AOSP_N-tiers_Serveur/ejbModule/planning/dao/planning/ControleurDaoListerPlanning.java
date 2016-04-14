@@ -35,7 +35,8 @@ public class ControleurDaoListerPlanning {
 			throw new DaoException("ControleurDaoListerPlanning rechercherAllPlanning : la valeur est négative ou nul");
 		}	
 		try {
-			Query query = em.createQuery("select p from Planning p where p.idCarre = :idCarre",Planning.class);
+//			Query query = em.createQuery("select p from Planning p where p.idCarre = :idCarre",Planning.class);
+			Query query = em.createQuery("select p from Planning p where p.carre.idCarre = :idCarre",Planning.class);
 			query.setParameter("idCarre", idCarre);
 //			@SuppressWarnings("unchecked")
 			List<Planning> plannings = (List<Planning>)query.getResultList();

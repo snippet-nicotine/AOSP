@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+		"http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+<package name="Planning" namespace="/Planning" extends="struts-default">
+
+	<action name="*Bean*Action" method="{1}{2}"  class="planning.beanAction.GestionPlanningFormAction">
+		<result name="gest">/planification/html_jsp/planifier_depart.jsp</result>
+		<result name="cat">/vue/biblio/catalogue/{1}Form{2}.jsp</result>
+		<result name="acc">/vue/biblio/{1}Form{2}.jsp</result>
+		<result name="afficheGestAuteur">/vue/biblio/gestion/creationFormAuteur.jsp</result>
+		<result name="afficheGestDocument">/vue/biblio/gestion/creationFormDocument.jsp</result>
+		<result name="afficheGestTheme">/vue/biblio/gestion/creationFormTheme.jsp</result>
+		<result name="success">/vue/biblio/gestion/{1}Form{2}.jsp</result>
+		<result name="input">/vue/biblio/gestion/{1}Form{2}.jsp</result>
+	
+	</action>
+	
+<!-- 	<action name="css">
+		<result>/WEB-INF/vuesPartielles/globale_css.js</result>
+	</action> -->
+	
+<!--<action name="accueil">
+ 		<result>/vue/biblio/accueil.jsp</result>
+ 	</action>
+ 	
+ 	<action name="crudAuteur" class="beanAction.AfficheAuteur">
+ 		<result>/vue/biblio/gestion/formAuteur.jsp</result>
+	</action>
+	
+		<action name="crudDocument" class="beanAction.CrudDocument">
+ 		<result>/vue/biblio/gestion/formDocument.jsp</result>
+	</action>
+ 	
+	<action name="css">
+		<result>/css/biblio/formAuteur.css</result>
+	</action>
+
+ 	
+ 	 	<action name="creerAuteur" class="beanAction.CreerAuteur">
+ 		<result>/vue/biblio/gestion/formAuteur.jsp</result>
+ 	</action>
+ 	
+ 	 	<action name="modifAuteur" class="beanAction.ModifAuteur">
+ 		<result>/vue/biblio/accueil.jsp</result>
+ 	</action>
+ 	
+ 	 	<action name="supprAuteur" class="beanAction.SupprAuteur">
+ 		<result>/vue/biblio/accueil.jsp</result>
+ 	</action>
+ 	
+ 	<action name="rechRefAuteur" class="beanAction.RechRefAuteur">
+ 		<result>/vue/biblio/accueil.jsp</result>
+ 	</action> -->
+ 	
+</package>
+
+</struts>

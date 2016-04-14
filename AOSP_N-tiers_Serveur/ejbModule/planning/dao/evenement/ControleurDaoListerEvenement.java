@@ -12,6 +12,8 @@ import planning.entity.Evenement;
 import planning.exception.DaoException;
 import planning.util.Utilitaire;
 
+
+
 /**
  * EJB session bean de type Stateless, LocalBean : Controleur de
  * la couche dao qui gère la partie lister d'un évènement.
@@ -30,16 +32,24 @@ public class ControleurDaoListerEvenement {
 	}
 	
 	public List<Evenement> getAllEvenement(int idPlanning) throws DaoException {
+		System.out.println("query = em.createQuery 0000000000000000000000000000000");
 		if (!Utilitaire.isEntierPositifNonNull(idPlanning)) {
-			throw new DaoException("ControleurDaoListerEvenement rechercherAllEvenement : la valeur est négative ou nul");
+			throw new DaoException("ControleurDaoListerEvenement getAllEvenement : la valeur est négative ou nul");
 		}
 		try {
-			TypedQuery<Evenement> query = em.createQuery("select e from Evenement e where e.idPlanning = :idPlanning",Evenement.class);
+//			TypedQuery<Evenement> query = em.createQuery("select e from Evenement e join e.idPlanning p where p.idPlanning = :idPlanning",Evenement.class);
+			TypedQuery<Evenement> query = em.createQuery("select e from Evenement e where e.planning.idPlanning = :idPlanning",Evenement.class);
+			System.out.println("query = em.createQuery 1111111111111111111111111111");
 			query.setParameter("idPlanning", idPlanning);
 			List<Evenement> evenements = query.getResultList();
+			for (Evenement evenement : evenements) {
+				System.out.println(evenement.getPlanning().getIdPlanning());
+			}
+			System.out.println(" XXXXXXXXXXXXXXXXXXXXXXXXXX   dans ControleurDaoListerEvenement getAllEvenement : dddddddddddddddddddd evenements : " + evenements);
 			return evenements;			
 		} catch (Exception e) {
-			throw new DaoException("ControleurDaoListerEvenement rechercherAllEvenement : Erreur lors de la recherche de tous les évènements");
+			System.out.println("query = em.createQuery 22222222222222222222222222222222");
+			throw new DaoException("ControleurDaoListerEvenement getAllEvenement : Erreur lors de la recherche de tous les évènements");
 		}
 	}
 

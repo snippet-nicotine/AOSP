@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 import commun.config.ActionEvenement;
 import commun.config.Parametres;
@@ -29,7 +28,7 @@ import commun.config.Parametres;
 @Table(name = Parametres.NOM_TABLE_EVENEMENT)
 public class Evenement implements Serializable {
 	
-	@Version
+//	@Version
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -143,7 +142,7 @@ public class Evenement implements Serializable {
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Evenement [idEvenement=" + idEvenement + ", planning=" + planning + ", action=" + action + ", plante="

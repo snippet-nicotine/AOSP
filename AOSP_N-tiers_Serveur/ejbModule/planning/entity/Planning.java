@@ -117,13 +117,55 @@ public class Planning implements Serializable {
 		this.followers = followers;
 	}
 
-	@Override
-	public String toString() {
-		return "Planning [idPlanning=" + idPlanning + ", idCarre=" + carre + ", dateCreation=" + dateCreation
-				+ ", evenements=" + evenements + ", followers=" + followers + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Planning [idPlanning=" + idPlanning + ", idCarre=" + carre + ", dateCreation=" + dateCreation
+//				+ ", evenements=" + evenements + ", followers=" + followers + "]";
+//	}
 
 	
+	// utilise pout obtenir un data Transfert Object
+	// Neccessaire pour transformer un proxy (hibernate) en objet transiant (pas dans le contexte)
+	// lors de la communication avec l'application cliente
+	// sinon, hibernate gère les collections dans un type persistentBag propre a hibernate
+	// Pour eviter la propagation du persistentBag (ArrayList<Theme>) dans la couche cliente qui ne le connait pas
+	// Il faut le transformer en ArrayList
+	public Planning getDto () {
 
+		Planning planDto = new Planning(this.getIdPlanning(), null, this.getDateCreation(),
+				null, this.getFollowers());
+
+		if (this.getCarre() != null) planDto.setCarre(this.getCarre());
+
+
+		//		// on ajoute les themes du persistantBag dans le nouveau docDto
+		if (this.getEvenements() != null) {
+			ArrayList<Evenement> listeDto = new ArrayList<>();
+			for (Evenement evenement : this.getEvenements()) {
+				Evenement evenementDto = evenement;
+				// Theme themeDto = new Theme(theme.getId(), theme.getNom(), theme.getDescription());
+				// themeDto.setDocuments(theme.getDocuments()); => persistentBag (la liste des documents dans le theme)
+				listeDto.add(evenementDto);
+			}
+			planDto.setEvenements(listeDto);
+		}
+		return planDto;
+	}
+	
+	public Planning getDtoSansFollowerSansEvennement () {
+
+		Planning planDto = new Planning(this.getIdPlanning(), null, this.getDateCreation(),
+				null, null);
+		
+		if (this.getCarre() != null) planDto.setCarre(this.getCarre());
+		
+		return planDto;
+	}
+
+	@Override
+	public String toString() {
+		return "Planning [idPlanning=" + idPlanning + ", carre=" + carre + ", dateCreation=" + dateCreation
+				+ ", evenements="  + ", followers=" +  "]";
+	}
 
 }

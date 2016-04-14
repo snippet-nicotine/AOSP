@@ -9,15 +9,38 @@
 <%@page import="planning.util.ConstanteString"%>
 <%@page import="planning.util.Parametre"%>
 
+<!-- Récupération des 2 arrayLists  evenements et plannings -->
+<%
+	List<Evenement> evenements = (List<Evenement>) request.getAttribute("mesEvenements");
+	System.out.println("** planifier_depart.jsp : evenements : " + evenements);
+
+	List<Planning> plannings = (List<Planning>) request.getAttribute("mesPlannings");
+	
+	String lePlaningActif = (String) request.getAttribute("planningActif");
+// String lePlaningActif = "toto";
+	System.out.println("lePlaningActif : " + lePlaningActif);
+	if ((lePlaningActif.equals(null)) || (lePlaningActif.equals("")) || (lePlaningActif.equals(" "))) {
+		lePlaningActif = "Planning par défaut";
+	}
+
+	String monMessageErreur = (String) request.getAttribute("messageErreur");
+	if (monMessageErreur != null) {
+		System.out.println("monMessageErreur : " + monMessageErreur);
+	} else {
+		monMessageErreur = "";
+	}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<%-- <link rel="stylesheet" href="<s:url namespace="/Planning" action="css" />" /> --%>
 <%@ include file="/WEB-INF/vuesPartielles/globale_css.jsp"%>
 
-<script	src="<%=request.getContextPath()%>/planification/script/tableau.js"></script>
-<script	src="<%=request.getContextPath()%>/planification/script/gestionEvenement.js"></script>
+<script
+	src="<%=request.getContextPath()%>/planification/script/tableau.js"></script>
+<script
+	src="<%=request.getContextPath()%>/planification/script/gestionEvenement.js"></script>
 
 <title>Gestion des évènements</title>
 </head>
@@ -25,7 +48,17 @@
 	<%@ include file="/WEB-INF/vuesPartielles/header.jsp"%>
 	<div id="corps">
 		<!-- Récupération du nom de l'utilisateur uniquement en version projet complet -->
-		<h1 class="version_corps">	Gestion des plannings, planning actif :	</h1>
+		<h1 class="version_corps">
+			Gestion des plannings, planning actif : <%
+			if (session != null && session.getAttribute("login") != null) {
+		%>
+			<%=(String) session.getAttribute("login")%>
+			<%
+				;
+				}
+			%>
+			<%=lePlaningActif %>
+		</h1>
 		<div id="explication">Pour lister les évènements d'un planning,
 			Veuillez d'abord sélectionner un planning puis cliquer sur "Lister
 			par planning"</div>
@@ -41,12 +74,22 @@
 					</tr>
 				</thead>
 				<tbody>
-					<s:iterator value="plannings" >
-					<tr>
-            			<td><s:property value="idPlanning"/><br /></td>
-						<td><s:property value="dateCreation"/><br /></td>
-						</tr>
-					</s:iterator>
+					<%
+						int k = 1;
+						for (Planning planning : plannings) {
+					%>
+					<!-- Chargement de l'arrayList des plannings
+					Si une ligne est sélectionnée : chgt de couleur de la ligne et saisie information de ligne active -->
+					<tr id="maLignePlanning" name="nameMaLignePlaning<%=k%>"
+						onclick="selectionne_planning(this,<%=k%>);">
+						<td id="tdidPlanning<%=k%>" name="tdNamePlanning<%=k%>"><%=planning.getIdPlanning()%></td>
+						<td><%=planning.getIdPlanning()%></td>
+						<td><%=planning.getDateCreation()%></td>
+					</tr>
+					<%
+						k = k + 1;
+						}
+					%>
 				</tbody>
 			</table>
 		</div>
@@ -71,20 +114,37 @@
 					</tr>
 				</thead>
 				<tbody>
-					<s:iterator value="evenements" >
-						<tr>
-            				<td><s:property value="idEvenement"/><br /></td>
-							<td><s:property value="idPlanning"/><br /></td>
-							<td><s:property value="idAction"/><br /></td>
-							<td><s:property value="idPlante"/><br /></td>
-							<td><s:property value="nutrition.n"/><br /></td>
-							<td><s:property value="nutrition.p"/><br /></td>
-							<td><s:property value="nutrition.k"/><br /></td>
-							<td><s:property value="dateEvenement"/><br /></td>
-							<td><s:property value="commentaireAuto"/><br /></td>
-							<td><s:property value="commentaire"/><br /></td>
-						</tr>
-					</s:iterator>
+					<%
+						int i = 1;
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+						String s_laDate = "";
+						for (Evenement evenement : evenements) {
+							LocalDate laDate = evenement.getDateEvenement();
+							if (laDate == null) {
+								s_laDate = "";
+							} else {
+								s_laDate = laDate.format(formatter);
+							}
+					%>
+					<!-- Chargement de l'arrayList des évènements
+					Si une ligne est sélectionnée : chgt de couleur de la ligne et saisie information de ligne active -->
+					<tr id="monEvenement<%=i%>"
+						onclick="selectionne_evenement(this,<%=evenement.getIdEvenement()%>,<%=i%>);">
+						<td><%=evenement.getIdEvenement()%></td>
+						<td><%=evenement.getIdPlanning()%></td>
+						<td><%=evenement.getIdAction()%></td>
+						<td><%=evenement.getIdPlante()%></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><%=s_laDate%></td>
+						<td><%=evenement.getCommentaireAuto()%></td>
+						<td><%=evenement.getCommentaire()%></td>
+					</tr>
+					<%
+						i = i + 1;
+						}
+					%>
 				</tbody>
 			</table>
 		</div>
@@ -93,7 +153,7 @@
 		<div id="saisie">
 			<section>
 				<h3>Saisie / modification d'un évènement :</h3>
-	<%-- 			<div id="explication2"><%=monMessageErreur%></div> --%>
+				<div id="explication2"><%=monMessageErreur%></div>
 				<form id="gestion" method="post" action="#">
 					<fieldset>
 						<legend>Informations de l'évènement :</legend>
@@ -152,6 +212,9 @@
 				</form>
 			</section>
 		</div>
+
 	</div>
+	<!-- 	<%@ include file="/WEB-INF/vuesPartielles/footer.jsp"%>
+ -->
 </body>
 </html>

@@ -27,13 +27,15 @@ public class ControleurServiceListerEvenement {
 	private IDao iDao;
 
 	public List<Evenement> rechercherAllEvenement(int idPlanning) throws ServiceException {
+		List<Evenement> le = null;
 		if (!Utilitaire.isEntierPositifNonNull(idPlanning)) {
 			throw new ServiceException("ControleurServiceListerEvenement rechercherAllEvenement : la valeur est négative ou nul");
 		}
 		try {
-			return iDao.rechercherAllEvenement(idPlanning);
+			le = iDao.rechercherAllEvenement(idPlanning);
 		} catch (DaoException e) {
 			throw new ServiceException("ControleurServiceListerEvenement rechercherAllEvenement : Erreur de recherche tous les evenements");
 		}
+		return le;
 	}
 }

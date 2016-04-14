@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
   
@@ -18,7 +19,7 @@
       <ul class="nav navbar-nav">
         <li><a href="<%=request.getContextPath() %>/aosp/potagers">Potagers</a></li>
         <li><a href="#">Plantes</a></li>
-        <li><a href="#">Planning</a></li>        
+        <li><s:a namespace="/Planning" 	action="afficheBeanPlanningAction">Planning ddd</s:a></li>
         <li><a href="#">Utilisateurs</a></li>
       </ul>
       
@@ -31,9 +32,9 @@
             <li role="separator" class="divider"></li>
             <li><a href="<%=request.getContextPath() %>/aosp/logout">Se déconnecter</a></li>
           </ul>
-        </li>
-        
+        </li>  
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<br /><br />
