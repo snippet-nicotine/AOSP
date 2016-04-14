@@ -17,7 +17,7 @@ import utilisateur.entity.Utilisateur;
 
 @Stateless
 @LocalBean
-public class DaoLister {
+public class DaoListerUtilisateur {
 
 	@PersistenceContext(unitName = "AOSP_Hibernate")
 	EntityManager em;	
@@ -32,7 +32,7 @@ public class DaoLister {
 //	}
 
 	@SuppressWarnings("unchecked")
-	public List<Utilisateur> listerParId(){
+	public List<Utilisateur> listerUtilisateurParId(){
 		Query query = em.createQuery("select u from Utilisateur u order by u.idUtilisateur");
 		return query.getResultList();		
 	}

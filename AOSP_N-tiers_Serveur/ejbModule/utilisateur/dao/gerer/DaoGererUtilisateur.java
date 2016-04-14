@@ -1,40 +1,38 @@
 package utilisateur.dao.gerer;
 
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import utilisateur.dao.lister.DaoLister;
+import utilisateur.dao.lister.DaoListerUtilisateur;
 import utilisateur.entity.Specialite;
 import utilisateur.entity.Utilisateur;
 
 @Stateless
 @LocalBean
 
-public class DaoGerer {
+public class DaoGererUtilisateur {
 	
 	@EJB
-	DaoLister daoLister;
+	DaoListerUtilisateur daoLister;
 
 	@PersistenceContext(unitName = "AOSP_Hibernate")
 	EntityManager em;
 
-	public void ajouter(Utilisateur utilisateur){
+	public void ajouterUtilisateur(Utilisateur utilisateur){
 
 		em.persist(utilisateur);
 		em.flush();
 
 	}
 
-	public void modifier(Utilisateur utilisateur){
+	public void modifierUtilisateur(Utilisateur utilisateur){
 		em.merge(utilisateur);
 	}
 
-	public void supprimer(Utilisateur utilisateur){
+	public void supprimerUtilisateur(Utilisateur utilisateur){
 		em.remove(em.contains(utilisateur)? utilisateur : em.merge(utilisateur));
 	}
 
