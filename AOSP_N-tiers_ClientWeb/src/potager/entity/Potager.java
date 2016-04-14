@@ -25,7 +25,7 @@ public class Potager implements Serializable{
 	
 	@Expose	protected int idPotager;
 	@Expose protected Jardinier  proprietaire;	
-	@Expose protected List<Jardinier> visiteurs;
+	@Expose protected ArrayList<Jardinier> visiteurs;
 	
 	@Expose protected LocalDate  dateCreation;	
 	@Expose protected List<Carre> carres;
@@ -134,11 +134,11 @@ public class Potager implements Serializable{
 		this.nbCarresY = nbCarresY;
 	}
 
-	public List<Jardinier> getVisiteurs() {
+	public ArrayList<Jardinier> getVisiteurs() {
 		return visiteurs;
 	}
 
-	public void setVisiteurs(List<Jardinier> visiteurs) {
+	public void setVisiteurs(ArrayList<Jardinier> visiteurs) {
 		this.visiteurs = visiteurs;
 	}
 

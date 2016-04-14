@@ -6,9 +6,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="s"  uri="/struts-tags" %>
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
-<s:url namespace="/resources" action="css_potager_style" var="css_style"/>
+<s:url namespace="/resources" action="css_potager_style"    var="css_style"/>
+<s:url namespace="/js"   action="gestion_potager" var="gestion_potager"/>
 
 <!DOCTYPE html">
 
@@ -25,8 +29,11 @@
 	<link rel="stylesheet" href='${css_style}'>
 	
 	
-<title>Administration des potagers</title>
+	<title>Administration des potagers</title>
+	
 </head>
+
+
 <body>
 	
 	<%@ include file="/WEB-INF/vuesPartielles/header.jsp"%>
@@ -38,12 +45,15 @@
 			</section>			
             		
 			<section class="well">
-				
-				<a href="<%= request.getContextPath() %>/aosp/potager/annuler" class="btn btn-danger">
-					<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-					Annuler (${nbAnnulations})
-			 	</a>
+			 	
+			 	<s:url namespace="/actions" action="/annuler_potager" var="annuler"/>
+			 	<s:a href="%{annuler}" class="btn btn-danger">
+			 		<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+			 		Annuler (<s:property value="nombreAnnulations" />)
+			 	</s:a>
+			 	
 			 	<a href="<%= request.getContextPath() %>/aosp/message" class="btn btn-default">Demande d'arrosage</a> ( sur tout les potagers listés (Message) )		
+			
 			</section>
 		
 			<!-- Ajouter un potager -->
@@ -64,7 +74,7 @@
 								name="potager.longueur"
 								tooltip="Longueur du potager"
 						/>
-						X
+						<b>X</b>
 						<s:textfield
 								label="Largeur"
 								name="potager.largeur"
@@ -77,7 +87,7 @@
 							name="potager.codePostal"
 							tooltip="Code postal (format: 13000, 65000,...)"
 					/>
-										
+															
 					<s:submit cssClass="btn btn-default" value="+ Ajouter"/>
 					
 				</s:form>			
@@ -95,6 +105,7 @@
 							<th>Nombre de carrés</th>
 							<th>Code Postal</th>
 							<th>Propriétaire</th>
+							<th>Date de création</th>
 							<th>Visiteurs</th>
 							<th>Actions</th>
 						</tr>
@@ -102,6 +113,7 @@
 					</thead>
 						
 					<tbody>
+										
 						<c:forEach items="${potagers}" var="potager">
 							<tr 
 								data-potager-id="${potager.idPotager}"
@@ -111,8 +123,9 @@
 								data-potager-codePostal="${potager.codePostal}"
 							>				
 								
-								<td><a href="<c:url value="/aosp/potager/${potager.idPotager}"/>"> 
-									${potager.nom} </a>
+								<td> 
+									<s:url namespace="/actions" action="/voir_potager" var="voirPotager"/>
+									<s:a href="%{voirPotager}">${potager.nom}</s:a>								
 								</td>
 								
 								<td>${potager.largeur} x ${potager.longueur}</td>
@@ -123,6 +136,11 @@
 								
 								<td> <a href="#" > ${potager.proprietaire.nom} </a> </td>
 								
+								<td> 																
+									<tags:localDate  pattern="dd/MM/yyyy" date="${potager.dateCreation}"/>														
+																						
+								</td>
+							
 								<td> 
 									<c:forEach items="${potager.visiteurs}" var="visiteur">
 										${visiteur.nom},
@@ -133,10 +151,14 @@
 									<a class="bouton-afficher-modifier"  href="#">
 										<i class="glyphicon glyphicon-pencil"></i>
 									</a>
+																		
+									<s:url namespace="/actions" action="/supprimer_potager" var="supprimerPotager">
+										<s:param name="id">${potager.idPotager}</s:param>
+									</s:url>
 									
-									<a data-button-id="${potager.idPotager}" class="bouton-supprimer" href="#">
-										<i  class="glyphicon glyphicon-remove"></i>
-									</a>
+									<s:a href="%{supprimerPotager}" class="">
+										<i  class="glyphicon glyphicon-remove"></i>										
+									</s:a>
 									
 								</td>
 							</tr>

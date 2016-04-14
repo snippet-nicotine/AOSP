@@ -9,6 +9,7 @@
 	<include file="struts_resources.xml"></include>
 	<include file="commun/struts_commun.xml"></include>
 	<include file="potager/struts_potager.xml"></include>
+	<include file="potager/struts_js.xml"></include>
 	
 	<package name="default" extends="struts-default">
 	

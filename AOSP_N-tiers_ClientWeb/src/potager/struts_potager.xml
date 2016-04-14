@@ -4,24 +4,27 @@
 
 <struts>
 
-	<include file="struts_resources.xml"></include>
 
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="true" />
-	
-	<package name="potager" namespace="/potager" extends="struts-default">
+
+	<package name="potager" namespace="/actions" extends="struts-default">
 		
-		<action name="*Bean*" method="{1}" class="potager.actions.Gestion{2}">
-			<result name="error">/WEB-INF/potager/gestion{2}.jsp</result>
-			<result name="input">/WEB-INF/potager/gestion{2}.jsp</result>
-			<result name="success">/WEB-INF/potager/gestion{2}.jsp</result>
+		<action name="/*_*" method="{1}" class="{2}.actions.Gestion_{2}">
+			<result name="error">/WEB-INF/{2}/gestion_{2}.jsp</result>
+			<result name="input">/WEB-INF/{2}/gestion_{2}.jsp</result>
+			<result name="success">/WEB-INF/{2}/gestion_{2}.jsp</result>
 
 			<interceptor-ref name="defaultStack">
-				<param name="validation.excludeMethods">lister</param>
+				<param name="validation.excludeMethods">lister,supprimer,annuler</param>
 			</interceptor-ref> 
 			
 		</action>
-
+		
+		<action name="visualiser">
+			<result>/WEB-INF/potager/visualiser.jsp</result>
+		</action>
+		
 	</package>
 
 </struts>

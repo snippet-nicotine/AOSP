@@ -8,6 +8,10 @@
 			org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter
 		</filter-class>
 	</filter>
+
+	<welcome-file-list>
+		<welcome-file>/potager/listerBeanPotager</welcome-file>
+	</welcome-file-list>
   
   <filter-mapping>
   	<filter-name>struts2</filter-name>

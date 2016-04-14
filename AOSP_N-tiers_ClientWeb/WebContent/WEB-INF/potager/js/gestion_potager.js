@@ -85,7 +85,7 @@ var gestionPotager = {
 		
 		supprimer : function(id){
 			
-			var url =  "/" + id + "/supprimer";	
+			var url =  "/potager/supprimerBeanPotager";
 			this.submit(this.form, url, "POST");
 			
 		},
@@ -97,7 +97,7 @@ var gestionPotager = {
 			
 			form.submit();
 		}
-		
+
 }
 
 
