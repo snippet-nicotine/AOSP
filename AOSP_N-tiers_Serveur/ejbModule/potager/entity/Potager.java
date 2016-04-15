@@ -182,10 +182,13 @@ public class Potager implements Serializable{
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public void clean(){
 		
 		proprietaire.clean();
-		setCarres(    new ArrayList<Carre>( carres ) );		
+		setCarres( new ArrayList<Carre>( carres ) );		
 		setVisiteurs( new ArrayList<Jardinier>( visiteurs ) );
 		
 		for(Jardinier visiteur : visiteurs){

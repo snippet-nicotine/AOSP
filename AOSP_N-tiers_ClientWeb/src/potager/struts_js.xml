@@ -9,6 +9,10 @@
 	<package name="js" namespace="/js" extends="struts-default">
 	
 		<action name="gestion_*">
+			<result>/WEB-INF/{1}/js/gerer.js</result>
+		</action>
+		
+		<action name="bootstrap">
 			<result>/WEB-INF/{1}/js/gestion_{1}.js</result>
 		</action>
 

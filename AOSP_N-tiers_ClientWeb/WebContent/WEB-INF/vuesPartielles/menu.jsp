@@ -1,3 +1,9 @@
+<%@ taglib uri="/struts-tags" prefix="s"%>
+
+<!-- Ici on défini les actions du menu -->
+<s:url namespace="/actions" action="lister_potager" var ="gererPotager"/>
+
+
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
   
@@ -16,7 +22,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     
       <ul class="nav navbar-nav">
-        <li><a href="<%=request.getContextPath() %>/aosp/potagers">Potagers</a></li>
+      	<li>      		
+        	<s:a href="%{gererPotager}">Potagers</s:a>
+        </li>
+        
         <li><a href="#">Plantes</a></li>
         <li><a href="#">Planning</a></li>        
         <li><a href="#">Utilisateurs</a></li>

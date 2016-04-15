@@ -44,7 +44,7 @@
 								Carre carre = potager.getCarres().get(index);
 								request.setAttribute("carre", carre);
 						%>								
-								<jsp:include page="carre.jsp"></jsp:include>
+								<jsp:include page="vuesPartielles/carre.jsp"></jsp:include>
 						<% } %>
 					
 					</div>

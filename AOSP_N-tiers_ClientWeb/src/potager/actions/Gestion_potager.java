@@ -23,45 +23,37 @@ import potager.service.exception.NomPotagerException;
 import potager.service.exception.ProprietairePotagerException;
 import utilisateur.entity.Jardinier;
 
-public class Gestion_potager extends AospAction implements ServletRequestAware{
+public class Gestion_potager extends PotagerAction implements ServletRequestAware{
 
 	private static final long serialVersionUID = 1L;
 	
+	private final String TITRE = "Gestion des potagers";
 	private int id;
-	private ServiceGestionPotager serviceGestionPotager;
+	
 	private ArrayList<Potager> potagers;
 	private Potager potager;
 	private ArrayList<Jardinier> utilisateurs;
 	private HttpServletRequest httpRequest;
 	
-	/**
-	 * Méthode qui instancie le service distant EJB
-	 * @return true si tout c'est bien passé <br/>
-	 *         false en cas d'erreur : Ajoute une erreur (addActionError)
-	 */
+		
+	@Override 
 	public boolean init(){
 		
-		boolean result = true;
+		boolean isValid = super.init();
+		titre = TITRE;
 		
-		InitialContext initialContext;
-		potagers     = new ArrayList<Potager>();
-		utilisateurs = new ArrayList<Jardinier>();
-		
-		if(serviceGestionPotager == null){
-			
-			try {
-				initialContext = new InitialContext();
-				serviceGestionPotager = (ServiceGestionPotager) initialContext.lookup( Parametres.EJB_SERVICE_GESTION_POTAGER ); 
-				
-			} catch (NamingException e) {
-				result = false;
-				addActionError("Le service distant n'a pas pu être instancié."); 
-			}
-		
+		if(isValid){
+			potagers     = new ArrayList<Potager>();
+			utilisateurs = new ArrayList<Jardinier>();			
 		}
 		
-		return result;
-		
+		return isValid;
+	}
+	
+	@Override
+	public String execute(){
+		System.out.println("test");
+		return lister();
 	}
 	
 	public String index(){		

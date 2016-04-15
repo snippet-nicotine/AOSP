@@ -5,14 +5,19 @@
 
 window.onload = function(){
 	
+	/*
 	//Initialisation des tooltips
 	$(function () {
 		$('[data-toggle="tooltip"]').tooltip();
 	});
+	*/
+	
 	
 	// Init du modal
 	var isModalVisible = $("#modal-modifier").hasClass("visible");
 	console.log(isModalVisible);
+	
+	
 	if( isModalVisible ) {
 		$('#modal-modifier').modal('show') ;    
 	}

@@ -11,9 +11,9 @@
 	<package name="potager" namespace="/actions" extends="struts-default">
 		
 		<action name="/*_*" method="{1}" class="{2}.actions.Gestion_{2}">
-			<result name="error">/WEB-INF/{2}/gestion_{2}.jsp</result>
-			<result name="input">/WEB-INF/{2}/gestion_{2}.jsp</result>
-			<result name="success">/WEB-INF/{2}/gestion_{2}.jsp</result>
+			<result name="error">/WEB-INF/{2}/gerer.jsp</result>
+			<result name="input">/WEB-INF/{2}/gerer.jsp</result>
+			<result name="success">/WEB-INF/{2}/gerer.jsp</result>
 
 			<interceptor-ref name="defaultStack">
 				<param name="validation.excludeMethods">lister,supprimer,annuler</param>
@@ -21,10 +21,11 @@
 			
 		</action>
 		
-		<action name="visualiser">
-			<result>/WEB-INF/potager/visualiser.jsp</result>
+		<action name="/voir_*" method="{1}" class="{1}.actions.Visualiser_{1}">
+			<result>/WEB-INF/{1}/visualiser.jsp</result>
+			<result>/WEB-INF/{1}/notFound.jsp</result>
 		</action>
 		
-	</package>
+	</package> 
 
 </struts>
