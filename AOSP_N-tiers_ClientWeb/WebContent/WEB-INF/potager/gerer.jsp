@@ -117,8 +117,10 @@
 							>				
 								
 								<td> 
-									<s:url namespace="/actions" action="/voir_potager" var="voirPotager"/>
-									<s:a href="%{voirPotager}">${potager.nom}</s:a>								
+									<s:url namespace="/actions" action="visualiser_potager" var="visualiserPotager">
+										 <s:param name="id" value="${potager.id}"/>
+									</s:url>
+									<s:a href="%{visualiserPotager}" >${potager.nom}</s:a>						
 								</td>
 								
 								<td>${potager.largeur} x ${potager.longueur}</td>

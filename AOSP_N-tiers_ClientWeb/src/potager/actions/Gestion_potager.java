@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-import commun.actions.AospAction;
+import commun.actions.GestionAction;
 import commun.config.Parametres;
 import potager.clientServeur.ServiceGestionPotager;
 import potager.entity.Potager;
@@ -23,7 +23,7 @@ import potager.service.exception.NomPotagerException;
 import potager.service.exception.ProprietairePotagerException;
 import utilisateur.entity.Jardinier;
 
-public class Gestion_potager extends PotagerAction implements ServletRequestAware{
+public class Gestion_potager extends GestionAction implements ServletRequestAware{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -35,21 +35,40 @@ public class Gestion_potager extends PotagerAction implements ServletRequestAwar
 	private ArrayList<Jardinier> utilisateurs;
 	private HttpServletRequest httpRequest;
 	
+	protected ServiceGestionPotager serviceGestionPotager;
+
+	
+	/**
+	 * Méthode qui instancie le service distant EJB
+	 * @return true si tout c'est bien passé <br/>
+	 *         false en cas d'erreur : Ajoute une erreur (addActionError)
+	 */
+	@Override
+	protected boolean init(){
 		
-	@Override 
-	public boolean init(){
+		boolean result = true;
 		
-		boolean isValid = super.init();
-		titre = TITRE;
+		InitialContext initialContext;		
 		
-		if(isValid){
-			potagers     = new ArrayList<Potager>();
-			utilisateurs = new ArrayList<Jardinier>();			
+		if(serviceGestionPotager == null){
+			
+			try {
+				initialContext = new InitialContext();
+				serviceGestionPotager = (ServiceGestionPotager) initialContext.lookup( Parametres.EJB_SERVICE_GESTION_POTAGER );
+				potagers     = new ArrayList<Potager>();
+				utilisateurs = new ArrayList<Jardinier>();	
+				
+			} catch (NamingException e) {
+				result = false;
+				addActionError("Le service distant n'a pas pu être instancié."); 
+			}
+		
 		}
 		
-		return isValid;
+		return result;
+		
 	}
-	
+				
 	@Override
 	public String execute(){
 		System.out.println("test");
@@ -85,9 +104,6 @@ public class Gestion_potager extends PotagerAction implements ServletRequestAwar
 		return result;
 	}
 	
-	public String view(){
-		return SUCCESS;
-	}
 	
 	public String ajouter(){
 		
@@ -202,6 +218,31 @@ public class Gestion_potager extends PotagerAction implements ServletRequestAwar
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		this.httpRequest = request;
-	}	
+	}
+	
+	public String visualiser(){
+		
+		String result = SUCCESS;
+		
+		if( ! init() ){
+			result = "ERROR";
+		} 
+		else{
+			
+			try {
+				
+				potager = serviceGestionPotager.getPotager(id);
+				
+			} catch (DaoPotagerGetException e) {
+				
+				addActionError( e.getMessage() );
+				result = ERROR;
+				
+			}
+			
+		}
+		
+		return VISUALISER;
+	}
 
 }

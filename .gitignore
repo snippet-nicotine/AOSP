@@ -67,4 +67,6 @@ local.properties
 .cproject
  
 # PDT-specific
-.buildpath
+.buildpath/AjaxP1Demo/
+/AjaxP1Exo/
+/AjaxP1Demo/
