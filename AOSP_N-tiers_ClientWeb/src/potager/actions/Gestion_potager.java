@@ -139,6 +139,42 @@ public class Gestion_potager extends GestionAction implements ServletRequestAwar
 		return lister();
 	}
 	
+	public String modifier(){
+		
+		String result = SUCCESS;
+		
+		if( !init() ){
+			result = ERROR;
+		} 
+		else {
+			
+			try {
+				//TODO: Gérer le login
+				Jardinier user = new Jardinier();
+				user.setNom("nico");
+				potager.setProprietaire( user );
+				serviceGestionPotager.modifierPotager(potager);
+				
+			} catch (NomPotagerException e) {		
+				addFieldError("potager.nom", e.getMessage() );
+			} catch (CPPotagerException e) {		
+				addFieldError("potager.codePostal", e.getMessage() );
+			} catch (ProprietairePotagerException e) {
+				addFieldError("potager.proprietaire", e.getMessage() );
+			} catch (DimensionPotagerException e) {
+				addFieldError("potager.longueur", e.getMessage() );
+				addFieldError("potager.largeur", e.getMessage() );
+			} catch (DaoPotagerModificationException e) {
+				addActionError( e.getMessage() );
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return lister();
+		
+	}
+	
 	public String supprimer(){
 		String result = SUCCESS;
 		

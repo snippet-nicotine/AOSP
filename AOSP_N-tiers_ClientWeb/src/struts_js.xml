@@ -12,9 +12,10 @@
 			<result>/WEB-INF/{1}/js/gerer.js</result>
 		</action>
 		
-		<action name="bootstrap">
-			<result>/WEB-INF/{1}/js/gestion_{1}.js</result>
+		<action name="formAjax">
+			<result>/WEB-INF/commun/js/formAjax.js</result>
 		</action>
+
 
 	</package>
 

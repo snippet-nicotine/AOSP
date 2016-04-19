@@ -11,7 +11,7 @@
 	
 		<field-validator type="stringlength">
 			<param name="minLength">3</param>
-			<param name="maxLength">255</param>
+			<param name="maxLength">50</param>
 			<param name="trim">true</param>
 			<message key="erreur.potager.nom.longueur"></message>
 		</field-validator>

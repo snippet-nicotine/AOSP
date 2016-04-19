@@ -51,12 +51,13 @@ public class Potager implements Serializable{
 		inverseJoinColumns = @JoinColumn(name="id_visiteur")	)
 	protected List<Jardinier> visiteurs;
 	
+	@Column(nullable=false)
 	protected LocalDate  dateCreation;	
 	
 	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	protected List<Carre> carres;
 	
-	@Column(length=20, nullable=false)
+	@Column(length=150, nullable=false)
 	private String nom;
 	
 	@Column(nullable=false)
@@ -74,6 +75,7 @@ public class Potager implements Serializable{
 	public Potager(){
 		this.carres       = new ArrayList<Carre>();
 		this.visiteurs    = new ArrayList<Jardinier>();
+		this.dateCreation = LocalDate.now();
 	}
 	
 	public Potager(String nom, int longueur, int largeur, String codePostal, Jardinier proprietaire){
@@ -83,7 +85,7 @@ public class Potager implements Serializable{
 		this.largeur      = largeur;
 		this.codePostal   = codePostal;
 		this.proprietaire = proprietaire;
-		this.dateCreation = LocalDate.now();		
+		
 
 	}
 	

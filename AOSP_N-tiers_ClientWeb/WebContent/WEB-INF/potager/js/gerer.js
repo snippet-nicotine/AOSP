@@ -1,17 +1,13 @@
 /*
  * author: Nicolas LAMBERT
+ * 
  */
 
+// TODO: Refactoriser, car l'intégration de jQuery a chamboulé le code...
+// TODO: Généraliser ce script pour tout type de form
 
 window.onload = function(){
-	
-	/*
-	//Initialisation des tooltips
-	$(function () {
-		$('[data-toggle="tooltip"]').tooltip();
-	});
-	*/
-	
+
 	
 	// Init du modal
 	var isModalVisible = $("#modal-modifier").hasClass("visible");
@@ -27,18 +23,21 @@ window.onload = function(){
 
 }
 
-
+/**
+ * Controlleur de la page gestion de potager
+ * $variable = variable de type jquery
+ */
 var gestionPotager = {
 		
 		baseUrl: "/aosp/potagers",
 		form: null,
-		self: this,
+		self: this,		
 		
 		init: function() {
 			
 			this.form         = $("#formulaire-ajouter");
 			this.formModifier = $("#formulaire-modifier");
-			this.initEvents();
+			this.initEvents();						
 			
 		},
 		
@@ -46,20 +45,31 @@ var gestionPotager = {
 			
 			var form = this.form;
 			var obj  = this;
+			pageContext = $("#context").html();
 			
+			var $id = $(form).find('input[name="potager.idPotager"]');
+			
+			// S'il n'y a pas de valeurs dans id, alors on ajoute, sinon on modifie				
+			obj.setFormBoutonAction( $(form), $id );
+
+			$id.change('change', function(event){	
+				obj.setFormBoutonAction( $(form) , $(this) );
+			} );
+									
 			$('.bouton-afficher-modifier').on('click', function(e){
 				
 				e.preventDefault();
-				var ligne = $(this).parent().parent();
+				var $ligne = $(this).parents("tr");
+				var $form  = $("#formulaire-ajouter");
 				
-				$("#modifier-nom").val( ligne.data("potagerNom") );
-				$("#modifier-longueur").val( ligne.data("potagerLongueur") );
-				$("#modifier-largeur").val( ligne.data("potagerLargeur") );
-				$("#modifier-codePostal").val( ligne.data("potagerCodepostal") );
-				$('#modal-modifier .bouton-modifier').data("buttonId", ligne.data("potagerId") );
+				$('input[name="potager.nom"]').val( $ligne.data("potagerNom") );
+				$('input[name="potager.longueur"]').val( $ligne.data("potagerLongueur") );
+				$('input[name="potager.largeur"]').val( $ligne.data("potagerLargeur") );
+				$('input[name="potager.codePostal"]').val( $ligne.data("potagerCodepostal") );
+				$form.find('input[name="potager.idPotager"]').val($ligne.data("potagerId") ).change();
 								
-				$('#modal-modifier').modal('show');
-				
+				obj.changerInputsClass( $("#formulaire-ajouter"), "has-warning" );
+												
 			});
 			
 			$('.bouton-modifier').on('click', function(e){
@@ -80,18 +90,61 @@ var gestionPotager = {
 			});
 			
 		},
+		/**
+		 * Modifie la classe de tout les inputs du formulaire concerné
+		 * 
+		 */		
+		changerInputsClass: function($form, classNames){
+			
+			// On supprime toutes les éventuelles erreurs
+			$form.find(".erreur").remove();
+			
+			// Remove de toutes les classes commencant par "has-*" et ajout des classes entrée en parametres
+			$form.find(".form-group").removeClass( function (index, css) {
+			    return (css.match (/(^|\s)has-\S+/g) || []).join(' ');
+			}).addClass(classNames);
+			
+			
+		},
 		
 		modifier : function(id){
-			
-			var url =  "/" + id + "/modifier";
+						
+			var url =  "/potager/modifier";
 			this.submit(this.formModifier, url, "POST");
 			
 		}, 
+		
+		edit: function(){
+			
+			
+			
+		},
 		
 		supprimer : function(id){
 			
 			var url =  "/potager/supprimerBeanPotager";
 			this.submit(this.form, url, "POST");
+			
+		},
+		
+		setFormBoutonAction : function($form, $id){
+			console.log($id.val());
+			
+			var button = $form.find("#submitButton");
+			
+			if( $id.val() ){
+				
+				button.val("Mettre a jour");
+				button.removeClass();
+				button.addClass("btn btn-primary");
+				$form.attr('action', pageContext + '/actions/modifier_potager');
+			}
+			else {
+				button.val(" + Ajouter");
+				button.removeClass();
+				button.addClass("btn btn-success");
+				$form.attr('action', pageContext + '/actions/ajouter_potager');
+			}
 			
 		},
 		

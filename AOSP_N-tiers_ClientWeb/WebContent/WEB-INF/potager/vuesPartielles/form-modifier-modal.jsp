@@ -12,7 +12,7 @@
 				</div>
 				<div class="modal-body">
 				
-				<form class="form well" id="formulaire-modifier" method="POST" action="">
+				<form class="ajax form well" id="formulaire-modifier" method="POST" action="/potager/modifier_potager.action">
 		  
 				  <div class="form-group ${ erreurNom != null ? 'has-error' : '' }">
 				    <label for="nom">Nom</label>

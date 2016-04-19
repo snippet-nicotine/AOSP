@@ -8,13 +8,21 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="true" />
 
-	<package name="potager" namespace="/actions" extends="struts-default">
+	<package name="potager" namespace="/actions" extends="json-default">
 		
+<!-- 	Gestion des erreurs avec AJAX -->
+		<global-results>
+			<result name="input" type="json">
+			  <param name="root">fieldErrors</param>
+			  <param name="wrapPrefix"><![CDATA[{ "erreurs" : ]]></param>
+			  <param name="wrapSuffix"><![CDATA[}]]></param>
+			</result>
+	   </global-results>	
+	   
 		<action name="*_*" method="{1}" class="{2}.actions.Gestion_{2}">
 			<result name="error">/WEB-INF/{2}/gerer.jsp</result>
-			<result name="input">/WEB-INF/{2}/gerer.jsp</result>
 			<result name="success">/WEB-INF/{2}/gerer.jsp</result>
-			<result name="visualiser">/WEB-INF/{2}/test.jsp</result>
+			<result name="visualiser">/WEB-INF/{2}/visualiser.jsp</result>
 
 			<interceptor-ref name="defaultStack">
 				<param name="validation.excludeMethods">lister,supprimer,annuler,visualiser</param>

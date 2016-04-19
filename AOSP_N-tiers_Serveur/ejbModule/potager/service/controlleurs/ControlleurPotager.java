@@ -59,7 +59,6 @@ public class ControlleurPotager {
 		} catch (DaoPotagerSuppressionException | DaoPotagerGetException e) {
 			throw e;
 		}
-		//daoGestionPotager.supprimerPotager(idPotager);
 		
 	}
 	

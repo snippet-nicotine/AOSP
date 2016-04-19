@@ -1,5 +1,6 @@
 package potager.service.logic;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.ejb.LocalBean;
@@ -55,6 +56,7 @@ public class PotagerManager {
 		
 		setDimension(potager);
 		validerPotager(potager);
+		potager.setDateCreation( LocalDate.now() );
 
 	}
 	

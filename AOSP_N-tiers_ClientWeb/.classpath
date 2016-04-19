@@ -58,5 +58,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/phantomjsdriver-1.2.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts2-bootstrap-plugin-2.0.4.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/testng-6.9.9.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts2-json-plugin-2.3.28.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
