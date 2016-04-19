@@ -11,8 +11,8 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "aosp_droits_utilisateur")
-public class DroitsUtilisateur implements Serializable{
+@Table(name = "aosp_droit")
+public class DroitUtilisateur implements Serializable{
 
 	/**
 	 * 
@@ -26,12 +26,12 @@ public class DroitsUtilisateur implements Serializable{
 	@Column(length = 30, nullable = true)
 	private String libelle;
 	
-	public DroitsUtilisateur() {
+	public DroitUtilisateur() {
 		super();
 	}	
 	
 
-	public DroitsUtilisateur(String libelle) {
+	public DroitUtilisateur(String libelle) {
 		super();
 		this.libelle = libelle;
 	}
@@ -52,6 +52,12 @@ public class DroitsUtilisateur implements Serializable{
 
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
+	}
+
+
+	@Override
+	public String toString() {
+		return "DroitUtilisateur [idDroit=" + idDroit + ", libelle=" + libelle + "]";
 	}
 
 }

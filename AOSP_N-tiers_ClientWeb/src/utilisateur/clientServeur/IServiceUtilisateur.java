@@ -1,6 +1,6 @@
 package utilisateur.clientServeur;
 
-import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -15,8 +15,7 @@ public interface IServiceUtilisateur {
 	public void ajouterUtilisateur(Utilisateur utilisateur);
 	public void modifierUtilisateur(Utilisateur utilisateur);
 	public void supprimerUtilisateur(Utilisateur utilisateur);
-	public Utilisateur rechercherParIdUtilisateur(int idUtilisateur);
-	
+	public Utilisateur rechercherParIdUtilisateur(int idUtilisateur) throws NonTrouveServiceException;	
 	
 	public void ajouterSpecialite(Specialite specialite);
 	public void modifierSpecialite(Specialite specialite);

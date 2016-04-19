@@ -54,4 +54,10 @@ public class Specialite implements Serializable{
 	}
 
 
+	@Override
+	public String toString() {
+		return "Specialite [idSpecialite=" + idSpecialite + ", libelle=" + libelle + "]";
+	}
+
+
 }

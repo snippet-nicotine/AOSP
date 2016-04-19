@@ -7,61 +7,82 @@
 	<package name="utilisateur" namespace="/utilisateur/vue"
 		extends="struts-default">
 
+		<!-- actions correspondant au CRUD utilisateur + liste utilisateur -->
 		<action name="*Utilisateur" method="{1}"
 			class="utilisateur.webApp.CRUDUtilisateur">
 
+			<!-- la page en cas de SUCCESS -->
 			<result>/WEB-INF/utilisateur/vue/formUtilisateur.jsp</result>
+
+			<!-- en cas d'erreur d'entrée des propriétés -->
 			<result name="input">/WEB-INF/utilisateur/vue/formUtilisateur.jsp
 			</result>
+
+			<!-- en cas de click sur le bouton "Remplir" -->
 			<result name="remplirOK">/WEB-INF/utilisateur/vue/formUtilisateur.jsp
 			</result>
+
+			<!-- résultat obtenu lors de l'exécution de l'action detail qui fait une 
+				requete AJAX -->
 			<result name="detail">/WEB-INF/utilisateur/vue/reponseAjax.jsp</result>
 
+			<!-- les actions qui ne doivent pas être validées -->
 			<interceptor-ref name="defaultStack">
 				<param name="validation.excludeMethods">suppression, remplir, rechercherParId</param>
 			</interceptor-ref>
 
 		</action>
 
+		<!-- l'action qui correspond au fichier javascript de la page formUtilisateur.jsp -->
 		<action name="formUtilisateurJs">
-			<result>/WEB-INF/utilisateur/js/formUtilisateur.js</result>
 
+			<!-- la page en cas de SUCCESS -->
+			<result>/WEB-INF/utilisateur/js/formUtilisateur.js</result>
 		</action>
 
-
+		<!-- actions correspondant au CRUD droits -->
 		<action name="*Droits" method="{1}" class="utilisateur.webApp.CRUDDroits">
-
 			<result>/WEB-INF/utilisateur/vue/formDroits.jsp</result>
+
+			<!-- en cas d'erreur d'entrée des propriétés -->
 			<result name="input">/WEB-INF/utilisateur/vue/formDroits.jsp</result>
+
+			<!-- en cas de click sur le bouton "Remplir" -->
 			<result name="remplirOK">/WEB-INF/utilisateur/vue/formDroits.jsp</result>
 
+			<!-- les actions qui ne doivent pas être validées -->
 			<interceptor-ref name="defaultStack">
 				<param name="validation.excludeMethods">suppression, remplir, rechercherParId</param>
 			</interceptor-ref>
 		</action>
 
+
+		<!-- actions correspondant au CRUD specialite -->
 		<action name="*Specialite" method="{1}"
 			class="utilisateur.webApp.CRUDSpecialite">
 
+			<!-- la page en cas de SUCCESS -->
 			<result>/WEB-INF/utilisateur/vue/formSpecialite.jsp</result>
+
+			<!-- en cas d'erreur d'entrée des propriétés -->
 			<result name="input">/WEB-INF/utilisateur/vue/formSpecialite.jsp
 			</result>
+
+			<!-- en cas de click sur le bouton "Remplir" -->
 			<result name="remplirOK">/WEB-INF/utilisateur/vue/formSpecialite.jsp
 			</result>
 
+			<!-- les actions qui ne doivent pas être validées -->
 			<interceptor-ref name="defaultStack">
 				<param name="validation.excludeMethods">suppression, remplir, rechercherParId</param>
 			</interceptor-ref>
 		</action>
 
+
+		<!-- action vers la css commune -->
 		<action name="cssCommun">
 			<result>/WEB-INF/utilisateur/css/cssCommun.css</result>
 		</action>
-
-		 <action name="detail" class="utilisateur.webApp.CRUDUtilisateur">
-			<result>/WEB-INF/utilisateur/vue/reponseAjax.jsp</result>
-		</action>
-
 	</package>
 
 </struts>

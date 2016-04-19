@@ -2,14 +2,6 @@ package utilisateur.entity;
 
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-
 public class Specialiste extends AbstractJardinier{
 
 	/**
@@ -39,6 +31,9 @@ public class Specialiste extends AbstractJardinier{
 		this.specialite = specialite;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return super.toString()+" Specialiste [specialite=" + specialite + "]";
+	}
 
 }

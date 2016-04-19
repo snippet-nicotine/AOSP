@@ -1,25 +1,7 @@
 package utilisateur.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-
 
 public abstract class Utilisateur implements Serializable{
 
@@ -96,6 +78,10 @@ public abstract class Utilisateur implements Serializable{
 		this.listeDroits = listeDroits;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Utilisateur [idUtilisateur=" + idUtilisateur + ", etatCivil=" + etatCivil + ", mail=" + mail
+				+ ", motPasse=" + motPasse + ", listeDroits=" + listeDroits + "]";
+	}
 
 }

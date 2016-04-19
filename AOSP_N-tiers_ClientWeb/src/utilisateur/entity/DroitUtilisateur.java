@@ -2,15 +2,6 @@ package utilisateur.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-
-
 public class DroitUtilisateur implements Serializable{
 
 	/**
@@ -51,4 +42,8 @@ public class DroitUtilisateur implements Serializable{
 		this.libelle = libelle;
 	}
 
+	@Override
+	public String toString() {
+		return "DroitUtilisateur [idDroit=" + idDroit + ", libelle=" + libelle + "]";
+	}
 }

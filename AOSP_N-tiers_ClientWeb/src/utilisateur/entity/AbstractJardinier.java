@@ -1,10 +1,5 @@
 package utilisateur.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-
 public abstract class AbstractJardinier extends Utilisateur {
 
 	/**
@@ -26,4 +21,8 @@ public abstract class AbstractJardinier extends Utilisateur {
 		this.codePostal = codePostal;
 	}
 
+	@Override
+	public String toString() {
+		return super.toString()+" AbstractJardinier [codePostal=" + codePostal + "]";
+	}
 }

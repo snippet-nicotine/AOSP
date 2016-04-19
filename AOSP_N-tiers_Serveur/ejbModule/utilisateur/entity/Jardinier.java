@@ -1,5 +1,6 @@
 package utilisateur.entity;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,10 +35,12 @@ public class Jardinier extends AbstractJardinier {
 		super();
 	}
 	
-	public Jardinier(EtatCivil etatCivil, String mail, String motPasse, String codePostal){
+	public Jardinier(EtatCivil etatCivil, String mail, String motPasse,
+			Collection<DroitUtilisateur> listeDroits, String codePostal){
 		setEtatCivil(etatCivil);
 		setMail(mail);
 		setMotPasse(motPasse);
+		setListeDroits(listeDroits);
 		setCodePostal(codePostal);
 	}
 	
@@ -54,20 +57,29 @@ public class Jardinier extends AbstractJardinier {
 	public void clean() {
 	}
 
+	// Ajouté par nicolas
 	public List<Potager> getPotagers() {
 		return potagers;
 	}
 	
+	// Ajouté par nicolas
 	public void setPotagers(List<Potager> potagers) {
 		this.potagers = potagers;
 	}
 	
+	// Ajouté par nicolas
 	public List<Potager> getPotagerPartages() {
 		return potagerPartages;
 	}
 
+	// Ajouté par nicolas
 	public void setPotagerPartages(List<Potager> potagerPartages) {
 		this.potagerPartages = potagerPartages;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString()+" Jardinier [potagers=" + potagers + ", potagerPartages=" + potagerPartages + "]";
 	}
 
 

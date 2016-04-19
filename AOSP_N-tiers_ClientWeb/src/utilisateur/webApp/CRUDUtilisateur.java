@@ -7,6 +7,7 @@ import java.util.List;
 import javax.naming.InitialContext;
 
 import utilisateur.clientServeur.IServiceUtilisateur;
+import utilisateur.clientServeur.NonTrouveServiceException;
 import utilisateur.clientServeur.TypeUtilisateur;
 import utilisateur.entity.Administrateur;
 import utilisateur.entity.DroitUtilisateur;
@@ -29,6 +30,7 @@ public class CRUDUtilisateur extends MyActionSupport {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private String messageNonTrouve;
 
 	private String type;					// valeur du bouton radio sélectionné pour le type d'utilisateur
 	private int idUtilisateur;
@@ -42,20 +44,20 @@ public class CRUDUtilisateur extends MyActionSupport {
 
 	private String[] selectionDroit;
 	private List<DroitUtilisateur> lesDroits;
-	
-	
+
+
 	private int idListUtilisateur;
 	private List<Utilisateur> lesUtilisateurs;
-	
+
 	private Utilisateur utilisateurSelectionne;
 	private Collection<DroitUtilisateur> lesDroitsSelectionnes;
 
 	private IServiceUtilisateur serviceUtilisateur;
 
 
-/**
- * Constructeur initialisant le service EJB, le type d'utilisateur par au lancement du formulaire et les listes
- */
+	/**
+	 * Constructeur initialisant le service EJB, le type d'utilisateur par au lancement du formulaire et les listes
+	 */
 	public CRUDUtilisateur() {
 
 		InitialContext initialContext;
@@ -137,9 +139,14 @@ public class CRUDUtilisateur extends MyActionSupport {
 	 * Méthode sélectionnant le type de l'utilisateur correspondant à l'idUtilisateur
 	 */
 	private void setTypeUtilisateur(){
-		Utilisateur utilisateur;
-		utilisateur = serviceUtilisateur.rechercherParIdUtilisateur(idUtilisateur);
-		
+		Utilisateur utilisateur = null;
+		try {
+			utilisateur = serviceUtilisateur.rechercherParIdUtilisateur(idUtilisateur);
+		} catch (NonTrouveServiceException e) {
+
+			messageNonTrouve = e.getMessagePerso();
+		}
+
 		// Selon le type de l'utilisateur retourné, on set la valeur de type
 		if(utilisateur instanceof Administrateur)
 			type=Param.STR_ADMINISTRATEUR;
@@ -155,12 +162,19 @@ public class CRUDUtilisateur extends MyActionSupport {
 	 */
 	public String modification(){	
 		Utilisateur utilisateur;
-		setTypeUtilisateur();
-		utilisateur=creerUtilisateur();
-		utilisateur.setIdUtilisateur(idUtilisateur);
-		serviceUtilisateur.modifierUtilisateur(utilisateur);
+		try{
+			utilisateur=serviceUtilisateur.rechercherParIdUtilisateur(idUtilisateur);
+			setTypeUtilisateur();
+			utilisateur=creerUtilisateur();
+			utilisateur.setIdUtilisateur(idUtilisateur);
+			serviceUtilisateur.modifierUtilisateur(utilisateur);
+			
+			lesUtilisateurs=serviceUtilisateur.listerUtilisateurParId();
+		}
+		catch (NonTrouveServiceException e){
+			messageNonTrouve = e.getMessagePerso();
+		}
 		videChamps();
-		lesUtilisateurs=serviceUtilisateur.listerUtilisateurParId();
 		return SUCCESS;
 	}
 
@@ -185,23 +199,29 @@ public class CRUDUtilisateur extends MyActionSupport {
 	 * @return
 	 */
 	public String rechercherParId(){
-		Utilisateur utilisateur = serviceUtilisateur.rechercherParIdUtilisateur(idUtilisateur);
-		nom=utilisateur.getEtatCivil().getNom();
-		prenom=utilisateur.getEtatCivil().getPrenom();
-		mail=utilisateur.getMail();
-		motPasse=utilisateur.getMotPasse();
-		type=Param.STR_ADMINISTRATEUR;
-		if((utilisateur instanceof Jardinier)){
-			codePostal=((Jardinier)(utilisateur)).getCodePostal();
-			type=Param.STR_JARDINIER;
+		Utilisateur utilisateur = null;
+		try {
+			utilisateur = serviceUtilisateur.rechercherParIdUtilisateur(idUtilisateur);
+			nom=utilisateur.getEtatCivil().getNom();
+			prenom=utilisateur.getEtatCivil().getPrenom();
+			mail=utilisateur.getMail();
+			motPasse=utilisateur.getMotPasse();
+			type=Param.STR_ADMINISTRATEUR;
+			if((utilisateur instanceof Jardinier)){
+				codePostal=((Jardinier)(utilisateur)).getCodePostal();
+				type=Param.STR_JARDINIER;
+			}
+			Specialite specialite;
+			if(utilisateur instanceof Specialiste){
+				specialite=((Specialiste)(utilisateur)).getSpecialite();
+				codePostal=((Specialiste)(utilisateur)).getCodePostal();
+				intSpecialite=specialite.getIdSpecialite();
+				type=Param.STR_SPECIALISTE;
+			}
+		} catch (NonTrouveServiceException e) {
+			messageNonTrouve = e.getMessagePerso();
 		}
-		Specialite specialite;
-		if(utilisateur instanceof Specialiste){
-			specialite=((Specialiste)(utilisateur)).getSpecialite();
-			codePostal=((Specialiste)(utilisateur)).getCodePostal();
-			intSpecialite=specialite.getIdSpecialite();
-			type=Param.STR_SPECIALISTE;
-		}
+
 		return SUCCESS;
 	}
 
@@ -236,18 +256,22 @@ public class CRUDUtilisateur extends MyActionSupport {
 			addFieldError("motPasse", "Le mot de passe doit être renseignée");
 
 	}
-	
+
 	public String detail(){
-		
-		utilisateurSelectionne = serviceUtilisateur.rechercherParIdUtilisateur(idListUtilisateur);
+
+		try {
+			utilisateurSelectionne = serviceUtilisateur.rechercherParIdUtilisateur(idListUtilisateur);
+		} catch (NonTrouveServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		lesDroitsSelectionnes=utilisateurSelectionne.getListeDroits();
-		System.out.println("idList "+idListUtilisateur);
 		return "detail";
 	}
 
-	
+
 	//************************** Getters et Setters
-	
+
 	public int getIdUtilisateur() {
 		return idUtilisateur;
 	}
@@ -376,7 +400,15 @@ public class CRUDUtilisateur extends MyActionSupport {
 		this.lesDroitsSelectionnes = lesDroitsSelectionnes;
 	}
 
-	
+	public String getMessageNonTrouve() {
+		return messageNonTrouve;
+	}
+
+	public void setMessageNonTrouve(String messageNonTrouve) {
+		this.messageNonTrouve = messageNonTrouve;
+	}
+
+
 
 
 }

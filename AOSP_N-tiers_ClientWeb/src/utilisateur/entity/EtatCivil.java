@@ -2,14 +2,6 @@ package utilisateur.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-
 public class EtatCivil implements Serializable{
 
 	/**
@@ -20,7 +12,7 @@ public class EtatCivil implements Serializable{
 	private int idEtatCivil;
 
 	private String nom;
-
+	private String prenom;
 
 
 
@@ -50,8 +42,7 @@ public class EtatCivil implements Serializable{
 		this.prenom = prenom;
 	}
 
-	@Column(name="prenom", length = 30, nullable = true)
-	private String prenom;
+	
 
 
 	public void setIdEtatCivil(int idEtatCivil) {
@@ -61,5 +52,11 @@ public class EtatCivil implements Serializable{
 	public int getIdEtatCivil() {
 		return idEtatCivil;
 	}
+	
+	@Override
+	public String toString() {
+		return "EtatCivil [idEtatCivil=" + idEtatCivil + ", nom=" + nom + ", prenom=" + prenom + "]";
+	}
 
+	
 }

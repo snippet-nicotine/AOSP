@@ -2,6 +2,8 @@ package utilisateur.entity;
 
 
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -19,10 +21,15 @@ public class Administrateur extends Utilisateur {
 	}
 
 	
-	public Administrateur(EtatCivil etatCivil, String mail, String motPasse){
-		setEtatCivil(etatCivil);
-		setMail(mail);
-		setMotPasse(motPasse);
+	public Administrateur(EtatCivil etatCivil, String mail, String motPasse, Collection<DroitUtilisateur> droits){
+		super(etatCivil, mail, motPasse, droits);
+		
+	}
+
+
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 	
 	

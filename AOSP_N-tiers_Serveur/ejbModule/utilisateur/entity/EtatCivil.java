@@ -68,6 +68,13 @@ public class EtatCivil implements Serializable{
 		this.idEtatCivil = idEtatCivil;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "EtatCivil [idEtatCivil=" + idEtatCivil + ", nom=" + nom + ", prenom=" + prenom + "]";
+	}
+
 	
 
 	

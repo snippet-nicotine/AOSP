@@ -1,5 +1,7 @@
 package utilisateur.entity;
 
+import java.util.Collection;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,11 +27,12 @@ public class Specialiste extends AbstractJardinier{
 		super();
 	}
 	
-	public Specialiste(EtatCivil etatCivil, String mail, String motPasse, String codePostal, 
-			Specialite specialite){
+	public Specialiste(EtatCivil etatCivil, String mail, String motPasse, 
+			Collection<DroitUtilisateur> listeDroits, String codePostal, Specialite specialite){
 		setEtatCivil(etatCivil);
 		setMail(mail);
 		setMotPasse(motPasse);
+		setListeDroits(listeDroits);
 		setCodePostal(codePostal);
 		setSpecialite(specialite);
 	}
@@ -43,5 +46,10 @@ public class Specialiste extends AbstractJardinier{
 
 	public void setSpecialite(Specialite specialite) {
 		this.specialite = specialite;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString()+" Specialiste [specialite=" + specialite + "]";
 	}
 }

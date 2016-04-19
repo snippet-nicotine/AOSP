@@ -3,11 +3,13 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
 "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
+
 	<package name="application" namespace="" extends="struts-default">
+
+		<!-- action au démarage -->
 		<action name="accueil">
 			<result>/WEB-INF/utilisateur/vue/accueil.jsp</result>
 		</action>
 	</package>
 
-	
 </struts>

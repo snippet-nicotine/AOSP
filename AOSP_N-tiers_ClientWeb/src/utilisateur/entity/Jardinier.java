@@ -2,14 +2,6 @@ package utilisateur.entity;
 
 import java.util.Collection;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import potager.entity.Potager;
 
 
@@ -72,6 +64,9 @@ public class Jardinier extends AbstractJardinier {
 		// TODO Auto-generated method stub		
 	}
 	
-
+	@Override
+	public String toString() {
+		return super.toString()+" Jardinier [potagers=" + potagers + ", potagerPartages=" + potagerPartages + "]";
+	}
 
 }

@@ -4,9 +4,6 @@ package utilisateur.entity;
 
 import java.util.Collection;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 
 public class Administrateur extends Utilisateur {
 
@@ -28,5 +25,9 @@ public class Administrateur extends Utilisateur {
 		
 	}
 	
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 
 }

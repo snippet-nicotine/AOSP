@@ -31,7 +31,7 @@ public abstract class Utilisateur implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="ref_droit")
+	@Column(name="ref_utilisateur")
 	private int idUtilisateur;
 	
 	@OneToOne ( cascade = CascadeType.ALL, fetch=FetchType.EAGER)
@@ -46,11 +46,24 @@ public abstract class Utilisateur implements Serializable{
 
 	@ManyToMany(cascade= { CascadeType.DETACH}, fetch = FetchType.EAGER)
 	@JoinTable(name="aosp_droits_utilisateur",
-	 joinColumns = @JoinColumn(name="idUtilisateur") ,
-	 inverseJoinColumns = @JoinColumn(name="idDroit") )
-	Collection<DroitsUtilisateur> listeDroits;
+			joinColumns = @JoinColumn(name="idUtilisateur") ,
+			 inverseJoinColumns = @JoinColumn(name="idDroit") )
+	private Collection<DroitUtilisateur> listeDroits;
 	
+		
 	
+	public Utilisateur() {
+		super();
+	}
+
+	public Utilisateur(EtatCivil etatCivil, String mail, String motPasse, Collection<DroitUtilisateur> listeDroits) {
+		super();
+		this.etatCivil = etatCivil;
+		this.mail = mail;
+		this.motPasse = motPasse;
+		this.listeDroits = listeDroits;
+	}
+
 	// ---- Ajouté par nicolas  -----
 	public String getNom(){
 		return getEtatCivil().getNom();
@@ -96,12 +109,18 @@ public abstract class Utilisateur implements Serializable{
 		this.motPasse = motPasse;
 	}
 
-	public Collection<DroitsUtilisateur> getListeDroits() {
+	public Collection<DroitUtilisateur> getListeDroits() {
 		return listeDroits;
 	}
 
-	public void setListeDroits(Collection<DroitsUtilisateur> listeDroits) {
+	public void setListeDroits(Collection<DroitUtilisateur> listeDroits) {
 		this.listeDroits = listeDroits;
+	}
+
+	@Override
+	public String toString() {
+		return "Utilisateur [idUtilisateur=" + idUtilisateur + ", etatCivil=" + etatCivil + ", mail=" + mail
+				+ ", motPasse=" + motPasse + ", listeDroits=" + listeDroits + "]";
 	}
 	
 	

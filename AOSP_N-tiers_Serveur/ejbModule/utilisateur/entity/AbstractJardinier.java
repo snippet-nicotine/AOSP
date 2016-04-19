@@ -27,4 +27,9 @@ public abstract class AbstractJardinier extends Utilisateur {
 		this.codePostal = codePostal;
 	}
 
+	@Override
+	public String toString() {
+		return super.toString()+" AbstractJardinier [codePostal=" + codePostal + "]";
+	}
+
 }

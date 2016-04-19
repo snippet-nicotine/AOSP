@@ -4,7 +4,6 @@ import javax.naming.InitialContext;
 
 import utilisateur.clientServeur.IServiceUtilisateur;
 import utilisateur.entity.DroitUtilisateur;
-import utilisateur.entity.Specialite;
 import utilisateur.util.Param;
 
 /**
