@@ -1,43 +1,11 @@
 @CHARSET "ISO-8859-1";
 
-/* mammouthland 
-gris clair : #D2D7DA;
-gris fonce : #4F6F83;
-bleu clair : #87C4E8;
-bleu fonce : #044B74;
-background : #3B8AB8;
-violet     : #F7B8F7; contour input ...
-violet     : #FFD9FF; zone de saisie
-*/
+
 body {
 	background: #eeeeee;
 }
 
-.italic {
-	font-style: italic;
-}
 
-fieldset {
-	padding: 0 20px 20px 20px;
-	margin-bottom: 10px;
-	margin-left: 30px;
-	width: 740px;
-	border: 1px solid #044B74;
-}
-
-legend {
-	color: #044B74;
-	font-weight: bold;
-	margin-bottom: 10px;
-}
-
-/* ===== formulaires =============== */
-#d1,#d2,#d4 {
-	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	font-size: 14px;
-	/* top right bottom left */
-	margin: 20px 10px 30px 30px;
-}
 
 input[type=radio] {
 	background-color: transparent;
@@ -48,18 +16,10 @@ input[type=radio] {
 
 
 input, textarea, select, option {
-	background-color: #80ff00;
+	background-color: #80ff80;
 }
 
-button[type=submit], button[type=reset] {
-	width: 100px;
-	margin-left: 5px;
-	box-shadow: 1px 1px 1px #D2D7DA;
-	color: #80ff00;
-	font-weight: bold;
-	cursor: pointer;
-	background-color: #80ff00;
-}
+
 
 input, textarea, select {
 	padding: 3px;
@@ -97,4 +57,11 @@ ul#menu li a:hover {
 	background: #044B74;
 	font-weight: bold;
 	color: #87C4E8; /* bleu fonce */
+}
+
+#listeUtilisateur{
+	width: 200px;
+}
+.divUtil{
+	float:left;
 }

@@ -8,8 +8,7 @@
 
  <include file="utilisateurApp.xml" />
   	<include file="utilisateur.xml" />
-	<!-- <include file="pers.xml" />
-	<include file="todo.xml" />-->
+	
 
 	<package name="default" extends="struts-default">
 		<default-action-ref name="accueil" />

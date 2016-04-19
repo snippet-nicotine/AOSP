@@ -10,21 +10,30 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-@Entity
-@Table(name = "aosp_droits_utilisateur")
-public class DroitsUtilisateur implements Serializable{
+
+public class DroitUtilisateur implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idDroit;
 	
-	@Column(length = 30, nullable = true)
 	private String libelle;
+
+	public DroitUtilisateur() {
+		super();
+	}
+	
+	
+
+	public DroitUtilisateur(String libelle) {
+		super();
+		this.libelle = libelle;
+	}
+
+
 
 	public int getIdDroit() {
 		return idDroit;

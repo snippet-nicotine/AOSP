@@ -4,58 +4,63 @@
 "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
 
-	<package name="utilisateur" namespace="/utilisateur/vue" extends="struts-default">
-		 <action name="*Utilisateur" method="{1}" class="utilisateur.webApp.CRUDUtilisateur">
+	<package name="utilisateur" namespace="/utilisateur/vue"
+		extends="struts-default">
+
+		<action name="*Utilisateur" method="{1}"
+			class="utilisateur.webApp.CRUDUtilisateur">
+
 			<result>/WEB-INF/utilisateur/vue/formUtilisateur.jsp</result>
-			<result name="input">/WEB-INF/utilisateur/vue/formUtilisateur.jsp</result>
+			<result name="input">/WEB-INF/utilisateur/vue/formUtilisateur.jsp
+			</result>
+			<result name="remplirOK">/WEB-INF/utilisateur/vue/formUtilisateur.jsp
+			</result>
+			<result name="detail">/WEB-INF/utilisateur/vue/reponseAjax.jsp</result>
+
+			<interceptor-ref name="defaultStack">
+				<param name="validation.excludeMethods">suppression, remplir, rechercherParId</param>
+			</interceptor-ref>
+
 		</action>
-		
-		
+
+		<action name="formUtilisateurJs">
+			<result>/WEB-INF/utilisateur/js/formUtilisateur.js</result>
+
+		</action>
+
+
 		<action name="*Droits" method="{1}" class="utilisateur.webApp.CRUDDroits">
+
 			<result>/WEB-INF/utilisateur/vue/formDroits.jsp</result>
 			<result name="input">/WEB-INF/utilisateur/vue/formDroits.jsp</result>
+			<result name="remplirOK">/WEB-INF/utilisateur/vue/formDroits.jsp</result>
+
+			<interceptor-ref name="defaultStack">
+				<param name="validation.excludeMethods">suppression, remplir, rechercherParId</param>
+			</interceptor-ref>
 		</action>
-		
-		
-		<action name="*Specialite" method="{1}" class="utilisateur.webApp.CRUDSpecialite">
+
+		<action name="*Specialite" method="{1}"
+			class="utilisateur.webApp.CRUDSpecialite">
+
 			<result>/WEB-INF/utilisateur/vue/formSpecialite.jsp</result>
-			<result name="input">/WEB-INF/utilisateur/vue/formSpecialite.jsp</result>
+			<result name="input">/WEB-INF/utilisateur/vue/formSpecialite.jsp
+			</result>
+			<result name="remplirOK">/WEB-INF/utilisateur/vue/formSpecialite.jsp
+			</result>
+
+			<interceptor-ref name="defaultStack">
+				<param name="validation.excludeMethods">suppression, remplir, rechercherParId</param>
+			</interceptor-ref>
 		</action>
-
-		 <!-- <action name="*Auteur" method="{1}"  class="webapp.biblio.CRUDAuteur">
-			<result>/vue/biblio/gestion/formAuteur.jsp</result>
-			<result name="input">/vue/biblio/gestion/formAuteur.jsp</result>
-		<interceptor-ref name="defaultStack" >	
-			<param name="validation.excludeMethods">suppression</param>
-			<param name="validation.excludeMethods">rechercherParId</param>
-		</interceptor-ref> 	
-		</action>
-		
-
-		
-		<action name="*Document" method="{1}" class="webapp.biblio.CRUDDoc">
-			<result >/vue/biblio/gestion/formDocument.jsp</result>
-			<result name="input">/vue/biblio/gestion/formDocument.jsp</result>
-			<result name="remplirOK">/vue/biblio/gestion/formDocument.jsp</result>
-			<interceptor-ref name="defaultStack" >
- 				<param name="validation.excludeMethods">remplir</param>
- 				<param name="validation.excludeMethods">suppression</param>
-			
- 				
-			</interceptor-ref> 
-		</action>-->
-
-
 
 		<action name="cssCommun">
 			<result>/WEB-INF/utilisateur/css/cssCommun.css</result>
 		</action>
-		<!-- <action name="cssDroits">
-			<result>/WEB-INF/utilisateur/css/cssDroits.css</result>
+
+		 <action name="detail" class="utilisateur.webApp.CRUDUtilisateur">
+			<result>/WEB-INF/utilisateur/vue/reponseAjax.jsp</result>
 		</action>
-		<action name="cssSpecialite">
-			<result>/WEB-INF/utilisateur/css/cssSpecialite.css</result>
-		</action>-->
 
 	</package>
 

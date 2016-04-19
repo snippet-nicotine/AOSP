@@ -1,5 +1,6 @@
 package utilisateur.entity;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,8 +12,7 @@ import javax.persistence.Table;
 
 import potager.entity.Potager;
 
-@Entity
-@Table(name="aosp_jardinier")
+
 public class Jardinier extends AbstractJardinier {
 
 	/**
@@ -20,12 +20,28 @@ public class Jardinier extends AbstractJardinier {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany(mappedBy="proprietaire", cascade = {CascadeType.ALL} )
+	
 	private List<Potager> potagers;
 	
-	// Ajouté par nicolas.
-	@ManyToMany(mappedBy="visiteurs", fetch=FetchType.EAGER)
+	
 	private List<Potager> potagerPartages;
+	
+	
+	
+	
+	public Jardinier() {
+		super();
+	}
+
+
+	public Jardinier(EtatCivil etatCivil, String mail, String motPasse,
+			Collection<DroitUtilisateur> listeDroits, String codePostal){
+		setEtatCivil(etatCivil);
+		setMail(mail);
+		setMotPasse(motPasse);
+		setListeDroits(listeDroits);
+		setCodePostal(codePostal);
+	}
 	
 	
 	public String getNom(){

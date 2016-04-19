@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="C:/httpd/lib/strutsLib/log4j-core-2.5.jar"/>
 	<classpathentry kind="lib" path="C:/httpd/lib/strutsLib/log4j-jboss-logmanager-1.1.2.Final.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Web App libraries"/>
+	<classpathentry kind="src" path="/AOSP_N-tiers_Serveur"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

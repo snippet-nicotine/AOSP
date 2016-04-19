@@ -1,5 +1,12 @@
 package utilisateur.webApp;
 
+import javax.naming.InitialContext;
+
+
+import utilisateur.clientServeur.IServiceUtilisateur;
+import utilisateur.entity.Specialite;
+import utilisateur.util.Param;
+
 public class CRUDSpecialite extends MyActionSupport {
 
 	/**
@@ -7,8 +14,31 @@ public class CRUDSpecialite extends MyActionSupport {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private int idSpecialite;
+	private String libelle;
 	
+	private IServiceUtilisateur serviceUtilisateur;
 	
+	public CRUDSpecialite() {
+		InitialContext initialContext;
+		try {
+			initialContext 		= new InitialContext();			
+			serviceUtilisateur  	= (IServiceUtilisateur)  initialContext.lookup(Param.EJB_SERVICE_UTILISATEUR);																   
+		}
+		catch (Exception e) {
+			System.err.println("Erreur lors de la liaison des EJB");
+			System.err.println(e);
+		}	
+	}
+	
+	/**
+	 * Methode permettant de vider les champs de saisie 
+	 */
+	private void videControles(){
+		idSpecialite=0;
+		libelle="";
+	}
+
 	@Override
 	public String execute(){
 		return SUCCESS;
@@ -20,29 +50,68 @@ public class CRUDSpecialite extends MyActionSupport {
 	}
 	
 	public String creation(){
-		System.out.println("creation spécialité");
+		Specialite specialite;
+		specialite = new Specialite(libelle);
+		serviceUtilisateur.ajouterSpecialite(specialite);
+		videControles();
 		return SUCCESS;
 	}
 	public String modification(){	
-		System.out.println("modification spécialité");
-
+		Specialite specialite;
+		specialite = new Specialite(libelle);
+		specialite.setIdSpecialite(idSpecialite);
+		serviceUtilisateur.modifierSpecialite(specialite);
+		videControles();
 		return SUCCESS;
 	}
 	public String suppression(){
-		System.out.println("suppression spécialité");
-
+		Specialite specialite = new Specialite();
+		specialite.setIdSpecialite(idSpecialite);
+		serviceUtilisateur.supprimerSpecialite(specialite);
+		videControles();
 		return SUCCESS;
 	}
 	public String rechercherParId(){
-		System.out.println("rechercherParId spécialité");
-
+		Specialite specialite = serviceUtilisateur.rechercherParIdSpecialite(idSpecialite);
+		libelle = specialite.getLibelle();
 		return SUCCESS;
 	}
 	
 	public String remplir(){
-		System.out.println("remplir spécialité");
-
-		return SUCCESS;
+		idSpecialite=0;
+		libelle = "Libellé par défaut";
+		return "remplirOK";
 	}
+	
+	@Override
+	public void validate(){
+		
+			if ((libelle!=null)&&(libelle.isEmpty()))		
+				addFieldError("libelle", "Le libellé doit être renseigné");
+			
+		
+	}
+	
+	public int getIdSpecialite() {
+		return idSpecialite;
+	}
+
+
+	public void setIdSpecialite(int idSpecialite) {
+		this.idSpecialite = idSpecialite;
+	}
+
+
+
+	public String getLibelle() {
+		return libelle;
+	}
+
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
+	}
+
+
+	
 
 }

@@ -9,23 +9,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="aosp_etat_civil")
+
 public class EtatCivil implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="ref_etat_civil")
+
 	private int idEtatCivil;
-	
-	@Column(name="nom", length = 30, nullable = true)
+
 	private String nom;
-	
+
+
+
+
+	public EtatCivil() {
+		super();
+	}
+
+	public EtatCivil(String nom, String prenom) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+	}
+
 	public String getNom() {
 		return nom;
 	}

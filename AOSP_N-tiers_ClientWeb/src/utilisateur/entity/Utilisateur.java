@@ -20,9 +20,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
-@Entity
-@Table(name = "aosp_utilisateur")
-@Inheritance(strategy = InheritanceType.JOINED)
+
 public abstract class Utilisateur implements Serializable{
 
 	/**
@@ -30,27 +28,34 @@ public abstract class Utilisateur implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="ref_droit")
+	
 	private int idUtilisateur;
 	
-	@OneToOne ( cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name = "idEtatcivil", unique = true, nullable = true)
+	
 	EtatCivil etatCivil;
 	
-	@Column(name="mail", length = 30, nullable = true)
+	
 	private String mail;
 	
-	@Column(name = "motPasse", length = 30, nullable = true)	
+	
 	private String motPasse;
 	
-	@ManyToMany(cascade= { CascadeType.DETACH}, fetch = FetchType.EAGER)
-	@JoinTable(name="aosp_droits_utilisateur",
-	 joinColumns = @JoinColumn(name="idUtilisateur") ,
-	 inverseJoinColumns = @JoinColumn(name="idDroit") )
-	Collection<DroitsUtilisateur> listeDroits;
+	Collection<DroitUtilisateur> listeDroits;
 
+	public Utilisateur() {
+		super();
+	}
+
+	public Utilisateur(EtatCivil etatCivil, String mail, String motPasse, Collection<DroitUtilisateur> listeDroits) {
+		super();
+		this.etatCivil = etatCivil;
+		this.mail = mail;
+		this.motPasse = motPasse;
+		this.listeDroits = listeDroits;
+	}
+	
+	
+	
 	public int getIdUtilisateur() {
 		return idUtilisateur;
 	}
@@ -83,11 +88,11 @@ public abstract class Utilisateur implements Serializable{
 		this.motPasse = motPasse;
 	}
 
-	public Collection<DroitsUtilisateur> getListeDroits() {
+	public Collection<DroitUtilisateur> getListeDroits() {
 		return listeDroits;
 	}
 
-	public void setListeDroits(Collection<DroitsUtilisateur> listeDroits) {
+	public void setListeDroits(Collection<DroitUtilisateur> listeDroits) {
 		this.listeDroits = listeDroits;
 	}
 	

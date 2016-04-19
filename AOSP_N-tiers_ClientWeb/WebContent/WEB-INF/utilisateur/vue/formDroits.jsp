@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="s" uri="/struts-tags"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html >
 <html>
 <head>
@@ -10,18 +10,25 @@
 	href="<s:url namespace="/utilisateur/vue" action="cssCommun" />" />
 </head>
 <body>
-<jsp:include page="../menu/menuCRUDDroits.jsp" />
-<h1>CRUD droits</h1>
+	<jsp:include page="../menu/menuCRUDDroits.jsp" />
+	<h1>CRUD droits</h1>
 
-<s:form action="affichDroits" method="post">
+	<s:form action="affichDroits" method="post">
+
+		<s:textfield name="idDroit" label="Id droit">
+		</s:textfield>
+
+		<s:textfield name="libelle" label="Libellé du droit">
+		</s:textfield>
+
 		<s:url namespace="/utilisateur/vue" action="creationDroits"
 			var="creaDroits" />
 		<s:url namespace="/utilisateur/vue" action="modificationDroits"
 			var="modifDroits" />
 		<s:url namespace="/utilisateur/vue" action="suppressionDroits"
 			var="supDroits" />
-		<s:url namespace="/utilisateur/vue"
-			action="rechercherParIdDroits" var="recherDroits" />
+		<s:url namespace="/utilisateur/vue" action="rechercherParIdDroits"
+			var="recherDroits" />
 		<s:url namespace="/utilisateur/vue" action="remplirDroits"
 			var="remplirDroits" />
 
