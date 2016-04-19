@@ -32,6 +32,10 @@
 			<result>/WEB-INF/potager/css/style.css</result>
 		</action>
 		
+		<action name="css_materialize">
+			<result>/WEB-INF/potager/css/materialize/css/materialize.min.css</result>
+		</action>
+		
 
 	</package>
 

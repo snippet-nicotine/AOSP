@@ -1,182 +1,109 @@
-<%@page import="commun.config.Parametres"%>
-<%@page import="potager.entity.Potager"%>
-<%@page import="java.util.List"%>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="s"  uri="/struts-tags" %>
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
+<!DOCTYPE html>
+<html>
+  <head>
+  	<s:url namespace="/resources" action="css_materialize" var="materializeCss"/>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-	
-	<s:url namespace="/resources" action="css_potager_style"    var="css_style"/>
-	
-	<%@ include file="/WEB-INF/vuesPartielles/header.jsp"%>
-		
-	
-	
-	<div id="contenu" class="container-fluid">	
-			
-			<section id="titre" class="page-header">
-			  <h1>Administration des potagers</h1>
-			</section>			
-            		
-			<section id="actions">
-			
-				<div class="panel panel-default">
-				
-				  <div class="panel-heading">
-				  
-				  		<span>Créer un nouveau potager</span>
-				  		
-					  	<s:url namespace="/actions" action="/annuler_potager" var="annuler"/>
-						 <s:a href="%{annuler}" class="btn btn-danger btn-xs pull-right">
-						 		<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-						 		Annuler (<s:property value="nombreAnnulations" />)
-						 </s:a>			 	
-						 <a href="<%= request.getContextPath() %>/aosp/message" class="btn btn-default btn-xs pull-right">Demande d'arrosage</a>
-				  </div>
-				  
-				  <div class="panel-body">
-					 	<section id="ajouter">
-	
-						<s:form namespace="/actions" id="formulaire-ajouter" action="ajouter_potager" theme="bootstrap" cssClass="form-inline" >
-								
-								<s:textfield
-										label="Nom"
-										name="potager.nom"
-										tooltip="Nom du potager"
-								/>
-							
-							<div class="form-group">
-								<s:textfield
-										label="Longueur"
-										name="potager.longueur"
-										tooltip="Longueur du potager"
-								/>
-								<b>X</b>
-								<s:textfield
-										label="Largeur"
-										name="potager.largeur"
-										tooltip="Largeur du potager"
-								/>					
-							</div>
-							
-							<s:textfield
-									label="Code Postal"
-									name="potager.codePostal"
-									tooltip="Code postal (format: 13000, 65000,...)"
-							/>
-																	
-							<s:submit cssClass="btn btn-success" value="+ Ajouter"/>
-							
-						</s:form>			
-				
-					</section>
-				  </div>
-				</div>
-			 	
-			 	<div class="row pull-right">
-			 	</div>
-			 	
-			</section>
-		
-			<!-- Ajouter un potager -->
-						
-			
-			
-			<section id="lister">
-			
-				<table class="table table-hover table-striped table-bordered">
-				
-					<thead>
-						<tr>
-							<th>Nom</th>
-							<th>Dimension</th>
-							<th>Nombre de carrés</th>
-							<th>Code Postal</th>
-							<th>Propriétaire</th>
-							<th>Date de création</th>
-							<th>Visiteurs</th>
-							<th>Actions</th>
-						</tr>
-						
-					</thead>
-						
-					<tbody>
-										
-						<c:forEach items="${potagers}" var="potager">
-							<tr 
-								data-potager-id="${potager.idPotager}"
-								data-potager-nom="${potager.nom}"
-								data-potager-longueur="${potager.longueur}"
-								data-potager-largeur="${potager.largeur}"
-								data-potager-codePostal="${potager.codePostal}"
-							>				
-								
-								<td> 
-									<s:url namespace="/actions" action="/voir_potager" var="voirPotager"/>
-									<s:a href="%{voirPotager}">${potager.nom}</s:a>								
-								</td>
-								
-								<td>${potager.largeur} x ${potager.longueur}</td>
-								
-								<td>${fn:length(potager.carres)}</td>
-								
-								<td>${potager.codePostal}</td>
-								
-								<td> <a href="#" > ${potager.proprietaire.nom} </a> </td>
-								
-								<td> 																
-									<tags:localDate  pattern="dd/MM/yyyy" date="${potager.dateCreation}"/>														
-																						
-								</td>
-							
-								<td> 
-									<c:forEach items="${potager.visiteurs}" var="visiteur">
-										${visiteur.nom},
-									</c:forEach>
-								 </td>
-								
-								<td>
-																	
-									<s:a class="bouton-afficher-modifier" href="#">
-										<i class="glyphicon glyphicon-pencil"></i>									
-									</s:a>
-							
-									<s:url namespace="/actions" action="/supprimer_potager" var="supprimerPotager">
-										<s:param name="id">${potager.idPotager}</s:param>
-									</s:url>
-									
-									<s:a href="%{supprimerPotager}" class="">
-										<i  class="glyphicon glyphicon-remove"></i>										
-									</s:a>
-									
-								</td>
-							</tr>
-						</c:forEach>
-						
-					</tbody>
-							
-				</table>
-			
-			</section>
-		</div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  </head>
 
-	<section id="modifier">
-		<%@ include file="vuesPartielles/modal-modifier.jsp"%>	
-	</section>
-	
-	<section id="infos">
-		<s:actionerror theme="bootstrap"/>
-        <s:actionmessage theme="bootstrap"/>
-    </section>
-	
+  <body>
+  
+  <header>
+	  <%@include file="vuesPartielles/top-bar.jsp"%>
+	  <%@include file="vuesPartielles/side-bar.jsp"%>
+  </header>
+  
+  <main>
+	  <div class="container">
+	  	<div class="row">
+	  		<div class="col s12 ">
+	  			<h2 class="center-align flow-text">Bienvenue dans votre espace Nicolas</h2>
+	  		</div>
+	  		
+	  		
+	  <div class="row">
+        <div class="col s12 m4">
+          
+              <h3>Mes potagers</h3>
+              <ul class="collection">
+              	<li class="collection-item">Mon potager</li>
+              	<li class="collection-item">Un autre</li>
+              	<li class="collection-item">Le 3eme</li>
+              </ul>
+            </div>
+        
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Ajouter un potager</span>
+              <form action="">
+              	<div class="row">
+	              	<div class="input-field col s12">
+          				<label for="nom">Nom</label>
+	              		<input id="nom" name="nom" type="text" class="validate"/>
+	              	</div>
+              	</div>
+	              	<div class="row">
+		              	<div class="input-field col s6">
+	          				<label for="longueur">Longueur</label>
+		              		<input id="longueur" name="longueur" type="text" class="validate"/>
+		              	</div>
+		              	<div class="input-field col s6">
+	          				<label for="largeur">Largeur</label>
+		              		<input id="largeur" name="largeur" type="text" class="validate"/>
+		              	</div>	              	
+	              	</div>
+              	<div class="row">
+              		<div class="input-field col s12">
+	          				<label for="codePostal">Code Postal</label>
+		              		<input id="codePostal" name="codePostal" type="text" class="validate"/>
+		             </div>	
+              	</div>
+              </form>
+              
+            </div>
+            <div class="card-action">
+	  				<a class="waves-effect waves-light btn-flat">Annuler</a>
+	  				<a class="waves-effect waves-light btn">Ajouter</a>
+          	</div>
+        </div>
+        </div>
+        
+        <div class="col s12 m4">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Card Title</span>
+              <p>I am a very simple card. I am good at containing small bits of information.
+              I am convenient because I require little markup to use effectively.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+              <a href="#">This is a link</a>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      		<div class="col s6">This div is 6-columns wide</div>
+	  	</div>
+	  </div>
+  </main>
+  
+  <footer></footer>
 
-</body>
-	
-	<script type="text/javascript" src="<s:url namespace="/js" action="gestion_potager"/>"></script>
-
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+  	<script type="text/javascript" src="<s:url namespace="/js" action="gestion_potager"/>"></script>
+  </body>
 </html>
