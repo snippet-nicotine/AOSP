@@ -48,15 +48,15 @@ public class FacadeDaoGestionPotager implements DaoGestionPotager{
 	}
 
 	@Override
-	public List<Potager> listerPotager(Jardinier proprietaire) {
+	public List<Potager> listerPotager(Jardinier proprietaire) throws DaoPotagerQueryException {
 		return daoPotager.listerPotager(proprietaire);
 	}
 
 	@Override
-	public List<Potager> listerPotager(String codePostal) {
+	public List<Potager> listerPotager(String codePostal) throws DaoPotagerQueryException {
 		return daoPotager.listerPotager(codePostal);
 	}
-	
+
 	
 
 

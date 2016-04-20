@@ -2,16 +2,20 @@ package potager.entity;
 
 import java.io.Serializable;
 
-import com.google.gson.annotations.Expose;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 public class Carre implements Serializable{
 
 	private static final long serialVersionUID = 8695011214229733217L;
 
-	@Expose private int idCarre;
-	@Expose private int x;
-	@Expose private int y;
+	private int idCarre;
+	private int x;
+	private int y;
+
 	private Potager potager;
 	
 	public Carre(){
@@ -19,9 +23,9 @@ public class Carre implements Serializable{
 	}
 	
 	public Carre(Potager potager, int x, int y){
-		this.potager = potager;
 		this.x = x;
 		this.y = y;
+		this.potager = potager;
 	}
 
 	public int getIdCarre() {
@@ -46,14 +50,6 @@ public class Carre implements Serializable{
 
 	public void setY(int y) {
 		this.y = y;
-	}
-
-	public Potager getPotager() {
-		return potager;
-	}
-
-	public void setPotager(Potager potager) {
-		this.potager = potager;
 	}
 	
 	

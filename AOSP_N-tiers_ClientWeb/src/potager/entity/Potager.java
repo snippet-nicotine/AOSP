@@ -5,8 +5,21 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.annotations.Expose;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import commun.config.Parametres;
 import utilisateur.entity.Jardinier;
 
 
@@ -18,40 +31,46 @@ import utilisateur.entity.Jardinier;
  * Il a une dimension <i>(longueur x largeur)</i> et peut être géré par un jardinier.
  * Il est décomposé en plusieurs {@link potager.entity.Carre Carres} de potager. </p>
  */
-
 public class Potager implements Serializable{
 
 	private static final long serialVersionUID = -8065181790953611569L;
+
+	protected int idPotager;
+
+	protected Jardinier  proprietaire;
+
+	protected List<Jardinier> visiteurs;
 	
-	@Expose	protected int idPotager;
-	@Expose protected Jardinier  proprietaire;	
-	@Expose protected ArrayList<Jardinier> visiteurs;
+	protected LocalDate  dateCreation;	
 	
-	@Expose protected LocalDate  dateCreation;	
-	@Expose protected List<Carre> carres;
-	@Expose private String nom;
-	@Expose private int longueur;
-	@Expose private int largeur;
-	@Expose private String codePostal;
+	protected List<Carre> carres;
 	
-	@Expose private int nbCarresX;
-	@Expose private int nbCarresY;	
+	private String nom;
+	
+	private int longueur;
+	
+	private int largeur;
+	
+	private String codePostal;
+		
+	private int nbCarresX;
+	private int nbCarresY;	
 	
 	public Potager(){
 		this.carres       = new ArrayList<Carre>();
-		this.visiteurs    = new ArrayList<Jardinier>();		
+		this.visiteurs    = new ArrayList<Jardinier>();
+		this.dateCreation = LocalDate.now();
 	}
 	
 	public Potager(String nom, int longueur, int largeur, String codePostal, Jardinier proprietaire){
 		this();
-		
 		this.nom          = nom;
 		this.longueur     = longueur;
 		this.largeur      = largeur;
 		this.codePostal   = codePostal;
 		this.proprietaire = proprietaire;
-		this.dateCreation = LocalDate.now();
 		
+
 	}
 	
 	public int getIdPotager() {
@@ -134,13 +153,35 @@ public class Potager implements Serializable{
 		this.nbCarresY = nbCarresY;
 	}
 
-	public ArrayList<Jardinier> getVisiteurs() {
-		return visiteurs;
+	public List<Jardinier> getVisiteurs() {
+		return this.visiteurs;
 	}
 
-	public void setVisiteurs(ArrayList<Jardinier> visiteurs) {
+	public void setVisiteurs(List<Jardinier> visiteurs) {
 		this.visiteurs = visiteurs;
 	}
-
+	
+	public void addVisiteur(Jardinier visiteur){
+		if(!visiteurs.contains(visiteur) ){
+			visiteurs.add(visiteur);
+			//visiteur.addPotagerPartage(this);
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void clean(){
+		
+		proprietaire.clean();
+		setCarres( new ArrayList<Carre>( carres ) );		
+		setVisiteurs( new ArrayList<Jardinier>( visiteurs ) );
+		
+		for(Jardinier visiteur : visiteurs){
+			visiteur.clean();
+		}
+		
+	}
+	
 
 }

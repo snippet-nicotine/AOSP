@@ -42,8 +42,9 @@ public interface ServiceGestionPotager {
 	 * Renvoie tout les potagers d'un jardinier
 	 * @param proprietaire
 	 * @return
+	 * @throws DaoPotagerQueryException 
 	 */
-	public List<Potager> listerPotager(Jardinier proprietaire);
+	public List<Potager> listerPotager(Jardinier proprietaire) throws DaoPotagerQueryException;
 		
 	/**
 	 * Renvoie une liste de potager, en recherchant par une propri�t� du potager
@@ -55,5 +56,7 @@ public interface ServiceGestionPotager {
 	 * @return
 	 */
 	public List<Potager> listerPotager(String nomPropriete, String valeurPropriete, boolean isExact);
+
+	public List<Potager> listerPotager(String codePostal) throws DaoPotagerQueryException;
 	
 }

@@ -1,5 +1,6 @@
 package potager.service.controlleurs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -21,6 +22,7 @@ import potager.service.exception.DimensionPotagerException;
 import potager.service.exception.NomPotagerException;
 import potager.service.exception.ProprietairePotagerException;
 import potager.service.logic.PotagerManager;
+import utilisateur.entity.Jardinier;
 
 @Stateful
 @LocalBean
@@ -57,7 +59,7 @@ public class ControlleurPotager {
 			historique.ajouter( supprimer );
 			
 		} catch (DaoPotagerSuppressionException | DaoPotagerGetException e) {
-			throw e;
+			throw new DaoPotagerSuppressionException("Le potager avec l'id " + idPotager + "n'existe pas.");
 		}
 		
 	}
@@ -65,6 +67,12 @@ public class ControlleurPotager {
 	public List<Potager> listerPotager() throws DaoPotagerQueryException{
 		
 		return daoGestionPotager.listerPotager();
+		
+	}
+	
+	public List<Potager> listerPotager(Jardinier proprietaire) throws DaoPotagerQueryException{
+		
+		return daoGestionPotager.listerPotager(proprietaire);
 		
 	}
 
@@ -82,6 +90,10 @@ public class ControlleurPotager {
 
 	public Potager getPotager() {
 		return new Potager();
+	}
+
+	public ArrayList<Potager> listerPotager(String codePostal) throws DaoPotagerQueryException {
+		return (ArrayList<Potager>) daoGestionPotager.listerPotager(codePostal);
 	}
 	
 }

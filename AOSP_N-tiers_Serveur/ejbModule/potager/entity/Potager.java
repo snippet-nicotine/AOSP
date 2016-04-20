@@ -45,7 +45,7 @@ public class Potager implements Serializable{
 	@JoinColumn(name="idProprietaire", unique=true)
 	protected Jardinier  proprietaire;
 	
-	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
 	@JoinTable(name="aosp_potager_visiteur",
 		joinColumns        = @JoinColumn(name="id_potager"),
 		inverseJoinColumns = @JoinColumn(name="id_visiteur")	)
@@ -54,7 +54,7 @@ public class Potager implements Serializable{
 	@Column(nullable=false)
 	protected LocalDate  dateCreation;	
 	
-	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	protected List<Carre> carres;
 	
 	@Column(length=150, nullable=false)
@@ -190,8 +190,8 @@ public class Potager implements Serializable{
 	public void clean(){
 		
 		proprietaire.clean();
-		setCarres( new ArrayList<Carre>( carres ) );		
-		setVisiteurs( new ArrayList<Jardinier>( visiteurs ) );
+		setCarres( new ArrayList<Carre>( getCarres() ) );		
+		setVisiteurs( new ArrayList<Jardinier>( getVisiteurs() ) );
 		
 		for(Jardinier visiteur : visiteurs){
 			visiteur.clean();

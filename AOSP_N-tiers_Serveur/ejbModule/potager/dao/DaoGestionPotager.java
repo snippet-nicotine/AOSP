@@ -19,7 +19,7 @@ public interface DaoGestionPotager {
 	public void    supprimerPotager(int idPotager) throws DaoPotagerSuppressionException, DaoPotagerGetException;
 	
 	public List<Potager> listerPotager() throws DaoPotagerQueryException;
-	public List<Potager> listerPotager(Jardinier proprietaire);
-	public List<Potager> listerPotager(String codePostal);
+	public List<Potager> listerPotager(Jardinier proprietaire) throws DaoPotagerQueryException;
+	public List<Potager> listerPotager(String codePostal) throws DaoPotagerQueryException;
 	
 }

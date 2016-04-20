@@ -2,11 +2,14 @@ package potager.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Id;
 
+//TODO: Faire la javadoc
 public abstract class Terrain implements Serializable{
 
 	private static final long serialVersionUID = -4558213931653633895L;
-
+	
+	@Id
 	private int id;
 	private String nom;
 	private int longueur;

@@ -20,24 +20,30 @@ public class Potager implements Serializable{
 
 	private static final long serialVersionUID = -8065181790953611569L;
 
-	protected int idPotager;
 
-	protected Jardinier  proprietaire;	
+	protected int idPotager;
+	protected Jardinier  proprietaire;
 	protected List<Jardinier> visiteurs;
-	
+
 	protected LocalDate  dateCreation;	
-	protected List<Carre> carres;
-	private String nom;
-	private int longueur;
-	private int largeur;
-	private String codePostal;
 	
+	protected List<Carre> carres;
+	
+	private String nom;
+	
+	private int longueur;
+	
+	private int largeur;
+	
+	private String codePostal;
+		
 	private int nbCarresX;
 	private int nbCarresY;	
 	
 	public Potager(){
 		this.carres       = new ArrayList<Carre>();
 		this.visiteurs    = new ArrayList<Jardinier>();
+		this.dateCreation = LocalDate.now();
 	}
 	
 	public Potager(String nom, int longueur, int largeur, String codePostal, Jardinier proprietaire){
@@ -47,7 +53,7 @@ public class Potager implements Serializable{
 		this.largeur      = largeur;
 		this.codePostal   = codePostal;
 		this.proprietaire = proprietaire;
-		this.dateCreation = LocalDate.now();
+		
 
 	}
 	
@@ -145,5 +151,21 @@ public class Potager implements Serializable{
 			//visiteur.addPotagerPartage(this);
 		}
 	}
+	
+	/**
+	 * 
+	 */
+	public void clean(){
+		
+		proprietaire.clean();
+		setCarres( new ArrayList<Carre>( carres ) );		
+		setVisiteurs( new ArrayList<Jardinier>( visiteurs ) );
+		
+		for(Jardinier visiteur : visiteurs){
+			visiteur.clean();
+		}
+		
+	}
+	
 
 }

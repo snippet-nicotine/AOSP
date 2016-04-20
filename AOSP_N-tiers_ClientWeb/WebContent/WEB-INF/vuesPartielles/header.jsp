@@ -17,7 +17,7 @@
 
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	
-	<script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>	
+	<script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
 	<sb:head/>
 	<script type="text/javascript" src="<s:url namespace="/js" action="gestion_potager"/>" defer></script>
 	<script type="text/javascript" src="<s:url namespace="/js" action="formAjax"/>" defer></script>

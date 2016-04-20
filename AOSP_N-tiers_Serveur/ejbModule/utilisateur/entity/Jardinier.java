@@ -1,5 +1,6 @@
 package utilisateur.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,7 +22,7 @@ public class Jardinier extends AbstractJardinier {
 	private static final long serialVersionUID = 1L;
 
 	// Ajouté par nicolas
-	@OneToMany(mappedBy="proprietaire", cascade = {CascadeType.ALL} )
+	@OneToMany(mappedBy="proprietaire", fetch=FetchType.EAGER)
 	private List<Potager> potagers;
 	
 	// Ajouté par nicolas.
@@ -46,6 +47,22 @@ public class Jardinier extends AbstractJardinier {
 
 	public void clean() {
 
+		super.clean();
+		
+		if(potagers != null){
+			setPotagers( new ArrayList<Potager>(potagers) );			
+		}
+		else{
+			setPotagers( new ArrayList<Potager>() );
+		}
+		
+		if(potagerPartages != null){
+			setPotagerPartages( new ArrayList<Potager>(potagerPartages) );			
+		} 
+		else {
+			setPotagerPartages( new ArrayList<Potager>() );
+		}
+				
 	}
 	
 

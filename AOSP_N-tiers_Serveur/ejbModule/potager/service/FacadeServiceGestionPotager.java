@@ -1,5 +1,6 @@
 package potager.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -36,34 +37,48 @@ public class FacadeServiceGestionPotager implements ServiceGestionPotager{
 	@Override
 	public Potager getPotager(int idPotager) throws DaoPotagerGetException {	
 		
-		return controlleurPotager.getPotager(idPotager);
+		Potager potager = controlleurPotager.getPotager(idPotager);
+		potager.clean();
+		return potager;
 		
 	}
 
 	@Override
 	public Potager modifierPotager(Potager potager) throws DaoPotagerModificationException, NomPotagerException, CPPotagerException, ProprietairePotagerException, DimensionPotagerException {	
 		
-		return controlleurPotager.modifierPotager(potager);
+		potager = controlleurPotager.modifierPotager(potager);
+		potager.clean();
+		return potager;
 		
 	}
 
 	@Override
 	public List<Potager> listerPotager() throws DaoPotagerQueryException {	
 		
-		return controlleurPotager.listerPotager();
-		
+		ArrayList<Potager> potagers = (ArrayList<Potager>) controlleurPotager.listerPotager();
+		clean(potagers);
+		return potagers;
+				
 	}
 
 	@Override
-	public List<Potager> listerPotager(Jardinier proprietaire) {
-		// TODO Lister les potagers par propriétaire
-		return null;
+	public List<Potager> listerPotager(Jardinier proprietaire) throws DaoPotagerQueryException {
+		ArrayList<Potager> potagers = (ArrayList<Potager>) controlleurPotager.listerPotager(proprietaire);
+		clean(potagers);
+		return potagers;
 	}
 
 	@Override
 	public List<Potager> listerPotager(String nomPropriete, String valeurPropriete, boolean isExact) {
 		// TODO Lister les potagers par propriétaire et par la valeur d'une propriété
 		return null;
+	}
+	
+	@Override
+	public List<Potager> listerPotager(String codePostal) throws DaoPotagerQueryException {
+		ArrayList<Potager> potagers = (ArrayList<Potager>) controlleurPotager.listerPotager(codePostal);
+		clean(potagers);
+		return potagers;
 	}
 
 	@Override
@@ -78,10 +93,8 @@ public class FacadeServiceGestionPotager implements ServiceGestionPotager{
 			throws NomPotagerException, CPPotagerException, ProprietairePotagerException, 
 			       DimensionPotagerException, DaoPotagerAjoutException 
 	{
-		System.out.println( potager.getIdPotager() );
 		Potager newPotager =  controlleurPotager.ajouterPotager(potager);
-		System.out.println(newPotager.getIdPotager() );
-		
+		newPotager.clean();
 		return newPotager;
 	}
 
@@ -98,6 +111,17 @@ public class FacadeServiceGestionPotager implements ServiceGestionPotager{
 	@Override
 	public Potager getPotager() {
 		return controlleurPotager.getPotager();
+	}
+	
+	/**
+	 * Permet de renvoyer des entities dépourvuues de persistenceBag
+	 * @param potagers
+	 */
+	public void clean(List<Potager> potagers){
+		
+		for(Potager potager : potagers){
+			potager.clean();
+		}
 	}
 
 	

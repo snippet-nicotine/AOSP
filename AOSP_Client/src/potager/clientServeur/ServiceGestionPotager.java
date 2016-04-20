@@ -2,13 +2,13 @@ package potager.clientServeur;
 
 import java.util.List;
 
+import potager.dao.exception.DaoPotagerAjoutException;
+import potager.dao.exception.DaoPotagerGetException;
+import potager.dao.exception.DaoPotagerModificationException;
+import potager.dao.exception.DaoPotagerQueryException;
+import potager.dao.exception.DaoPotagerSuppressionException;
 import potager.entity.Potager;
 import potager.service.exception.CPPotagerException;
-import potager.service.exception.DaoPotagerAjoutException;
-import potager.service.exception.DaoPotagerGetException;
-import potager.service.exception.DaoPotagerModificationException;
-import potager.service.exception.DaoPotagerQueryException;
-import potager.service.exception.DaoPotagerSuppressionException;
 import potager.service.exception.DimensionPotagerException;
 import potager.service.exception.NomPotagerException;
 import potager.service.exception.ProprietairePotagerException;

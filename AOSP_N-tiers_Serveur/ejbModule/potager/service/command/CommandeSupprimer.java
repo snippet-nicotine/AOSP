@@ -32,10 +32,16 @@ public class CommandeSupprimer implements IUndoCommand{
 	@Override
 	public void execute(int idPotager) throws DaoPotagerSuppressionException, DaoPotagerGetException {
 		
-		System.out.println("je supprime " + idPotager);
 		this.idPotager = idPotager;
-		potager = daoGestionPotager.getPotager(idPotager);
-		daoGestionPotager.supprimerPotager(idPotager);
+		
+		try{
+			potager = daoGestionPotager.getPotager(idPotager);			
+			daoGestionPotager.supprimerPotager(idPotager);			
+		}
+		catch(DaoPotagerGetException e){
+			throw new DaoPotagerSuppressionException("Le potager avec l'id " + idPotager  + " n'existe pas");
+		}
+		
 	}
 
 	@Override

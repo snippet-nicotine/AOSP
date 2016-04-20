@@ -12,7 +12,23 @@
 			<AppenderRef ref="Console" />
 		</Root>
 		
-		<Logger></Logger>
+		
+		<logger name="com.opensymphony.xwork2">
+		    <level value="OFF" />
+		</logger>
+		
+		<logger name="freemarker.cache">
+		    <level value="OFF" />
+		</logger>
+		
+		<logger name="freemarker.beans">
+		    <level value="OFF" />
+		</logger>
+		
+		<logger name="org.apache.struts2">
+		    <level value="OFF" />
+		</logger>
 	</Loggers>
+	
 	
 </Configuration> 

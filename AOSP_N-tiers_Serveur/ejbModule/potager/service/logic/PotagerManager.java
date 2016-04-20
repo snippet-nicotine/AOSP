@@ -42,7 +42,7 @@ public class PotagerManager {
 		// Control de la validité de données
 		// RG 19.1 Nom, codePostal et le jardinier sont obligatoire
 		
-		if( potager.getNom().isEmpty() )                              throw new NomPotagerException("Le nom du potager doit être renseigné.");
+		if( potager.getNom() == null || potager.getNom().isEmpty() )  throw new NomPotagerException("Le nom du potager doit être renseigné.");
 		if( ! Validateur.checkCodePostal(potager.getCodePostal() ) )  throw new CPPotagerException("Le code postal n'est pas valide. (ex: 13100, 65200, 13000, ...)");
 		if( potager.getProprietaire() == null )                       throw new ProprietairePotagerException("Le potager a obligatoirement un propriétaire.");
 		

@@ -1,6 +1,7 @@
 package utilisateur.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -102,6 +103,18 @@ public abstract class Utilisateur implements Serializable{
 
 	public void setListeDroits(Collection<DroitsUtilisateur> listeDroits) {
 		this.listeDroits = listeDroits;
+	}
+	
+	//Ajouté par Nicolas
+	public void clean() {
+		
+		if(listeDroits != null){
+			listeDroits = new ArrayList<DroitsUtilisateur>(listeDroits);			
+		}
+		else{
+			listeDroits = new ArrayList<DroitsUtilisateur>();
+		}
+		
 	}
 	
 	
