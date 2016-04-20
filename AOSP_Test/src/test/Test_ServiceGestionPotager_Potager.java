@@ -25,7 +25,7 @@ import potager.service.exception.NomPotagerException;
 import potager.service.exception.ProprietairePotagerException;
 import utilisateur.entity.Jardinier;
 
-public class TestServicePotager {
+public class Test_ServiceGestionPotager_Potager {
 
 	private static ServiceGestionPotager service;
 	private static Jardinier proprietaire;

@@ -13,8 +13,10 @@ import potager.dao.exception.DaoPotagerGetException;
 import potager.dao.exception.DaoPotagerModificationException;
 import potager.dao.exception.DaoPotagerQueryException;
 import potager.dao.exception.DaoPotagerSuppressionException;
+import potager.entity.Carre;
 import potager.entity.Potager;
 import potager.service.command.Historique;
+import potager.service.controlleurs.ControlleurCarre;
 import potager.service.controlleurs.ControlleurJardinage;
 import potager.service.controlleurs.ControlleurPotager;
 import potager.service.exception.CPPotagerException;
@@ -33,6 +35,8 @@ public class FacadeServiceGestionPotager implements ServiceGestionPotager{
 	ControlleurPotager   controlleurPotager;
 	@EJB
 	Historique historique;
+	@EJB
+	ControlleurCarre controlleurCarre;
 
 	@Override
 	public Potager getPotager(int idPotager) throws DaoPotagerGetException {	
@@ -122,6 +126,11 @@ public class FacadeServiceGestionPotager implements ServiceGestionPotager{
 		for(Potager potager : potagers){
 			potager.clean();
 		}
+	}
+
+	@Override
+	public Carre creerCarre(Carre carre) throws DaoPotagerAjoutException {
+		return controlleurCarre.creerCarre(carre);
 	}
 
 	

@@ -11,50 +11,59 @@ import potager.dao.exception.DaoPotagerGetException;
 import potager.dao.exception.DaoPotagerModificationException;
 import potager.dao.exception.DaoPotagerQueryException;
 import potager.dao.exception.DaoPotagerSuppressionException;
+import potager.entity.Carre;
 import potager.entity.Potager;
 import utilisateur.entity.Jardinier;
 
 @Stateless
-@Remote(DaoGestionPotager.class)
-public class FacadeDaoGestionPotager implements DaoGestionPotager{
+@Remote(Dao.class)
+public class FacadeDaoGestionPotager implements Dao{
 	
 	@EJB
 	DaoPotager daoPotager;
+	
+	@EJB
+	DaoCarre daoCarre;
 
 	@Override
 	public Potager ajouterPotager(Potager potager) throws DaoPotagerAjoutException {
-		return daoPotager.ajouterPotager(potager);		
+		return daoPotager.create(potager);		
 	}
 	
 	@Override
 	public Potager getPotager(int idPotager) throws DaoPotagerGetException {
-		return daoPotager.getPotager(idPotager);
+		return daoPotager.read(idPotager);
 	}
 
 	@Override
 	public Potager modifierPotager(Potager potager) throws DaoPotagerModificationException {
-		return daoPotager.modifierPotager(potager);
+		return daoPotager.update(potager);
 	}
 
 	@Override
 	public void supprimerPotager(int idPotager) throws DaoPotagerSuppressionException, DaoPotagerGetException {
-		daoPotager.supprimerPotager(idPotager);
+		daoPotager.delete(idPotager);
 		
 	}
 
 	@Override
 	public List<Potager> listerPotager() throws DaoPotagerQueryException {
-		return daoPotager.listerPotager();
+		return daoPotager.lister();
 	}
 
 	@Override
 	public List<Potager> listerPotager(Jardinier proprietaire) throws DaoPotagerQueryException {
-		return daoPotager.listerPotager(proprietaire);
+		return daoPotager.lister(proprietaire);
 	}
 
 	@Override
 	public List<Potager> listerPotager(String codePostal) throws DaoPotagerQueryException {
-		return daoPotager.listerPotager(codePostal);
+		return daoPotager.lister(codePostal);
+	}
+
+	@Override
+	public Carre creerCarre(Carre carre) throws DaoPotagerAjoutException {
+		return daoCarre.create(carre);
 	}
 
 	

@@ -4,120 +4,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.persistence.EntityExistsException;
+import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TransactionRequiredException;
 
-import potager.dao.exception.DaoPotagerAjoutException;
 import potager.dao.exception.DaoPotagerGetException;
-import potager.dao.exception.DaoPotagerModificationException;
 import potager.dao.exception.DaoPotagerQueryException;
-import potager.dao.exception.DaoPotagerSuppressionException;
 import potager.entity.Potager;
 import utilisateur.entity.Jardinier;
 
-@Stateless
+@Singleton
 @LocalBean
-public class DaoPotager{
+public class DaoPotager extends AbastractDao<Potager>{
 	
 	@PersistenceContext(unitName="AOSP_Hibernate")
 	EntityManager em;
-
-	/**
-	 * 
-	 * @param potager
-	 * @return
-	 * @throws DaoPotagerAjoutException si le potager existe dejà, n'est pas valide, ou problème de transaction
-	 */
-	public Potager ajouterPotager(Potager potager) throws DaoPotagerAjoutException {
-		
-		try{
-			em.persist(potager);
-			em.flush();
-			
-			return potager; 
-		}
-		catch(EntityExistsException e){
-			e.printStackTrace();
-			throw new DaoPotagerAjoutException( "Le potager à ajouter existe dejà." );
-		}
-		catch(IllegalArgumentException e){
-			throw new DaoPotagerAjoutException( "L'instance à ajouter n'est pas un potager valide." );
-		}
-		catch(TransactionRequiredException e){
-			throw new DaoPotagerAjoutException( "Un problème de transction est survenue.Veuillez reesayer dans quellques minutes." );
-		}	
-		
-	}
-
-	/**
-	 * 
-	 * @param potager
-	 * @return
-	 * @throws DaoPotagerModificationException si le potager n'est pas valide, ou en cas de problème de transaction
-	 */
-	public Potager modifierPotager(Potager potager) throws DaoPotagerModificationException {
-		
-		try{
-			em.merge(potager);	
-			em.flush();	
-		}
-		catch(IllegalArgumentException  e){
-			throw new DaoPotagerModificationException( "Le potager à modifier n'est pas valide, ou a été supprimé." );
-		}
-		catch(TransactionRequiredException e){
-			throw new DaoPotagerModificationException( "Un problème de transction est survenue.Veuillez reesayer dans quellques minutes." );
-		}
-		
-		
-		return potager;
-		
-	}
-
-	/**
-	 * 
-	 * @param idPotager
-	 * @throws DaoPotagerSuppressionException
-	 * @throws DaoPotagerGetException 
-	 */
-	public void supprimerPotager(int idPotager) throws DaoPotagerSuppressionException{
-		
-		try{
-			em.remove( getPotager(idPotager) );
-			
-		}
-		catch(IllegalArgumentException  e){
-			throw new DaoPotagerSuppressionException( "Le potager à supprimer n'existe pas." );
-		}
-		catch(TransactionRequiredException e){
-			throw new DaoPotagerSuppressionException( "Un problème de transaction est survenue.Veuillez reesayer dans quellques minutes." );
-		}
-		catch(DaoPotagerGetException e){
-			throw new DaoPotagerSuppressionException( "Le potager est déjà supprimé" );
-		}
-		
-	}
 	
-	/**
-	 * 
-	 * @param potager
-	 * @throws DaoPotagerSuppressionException
-	 * @throws DaoPotagerGetException 
-	 */
-	public void supprimerPotager(Potager potager) throws DaoPotagerSuppressionException, DaoPotagerGetException{
+	
+	@Override
+	public Potager read(int idPotager) throws DaoPotagerGetException {
 		
 		try{
-			em.remove( potager );		
+			Potager potager = em.find(Potager.class, idPotager);
+			
+			if(potager == null) throw new DaoPotagerGetException("Impossible de trouver le potager demandé.");
+			
+			return potager;
 		}
 		catch(IllegalArgumentException  e){
-			throw new DaoPotagerSuppressionException( "Le potager à supprimer n'existe pas." );
+			throw new DaoPotagerGetException("Impossible de trouver le potager demandé.");
 		}
-		catch(TransactionRequiredException e){
-			throw new DaoPotagerSuppressionException( "Un problème de transaction est survenue.Veuillez reesayer dans quellques minutes." );
-		}		
-		
 	}
 
 	/**
@@ -125,7 +41,8 @@ public class DaoPotager{
 	 * @return
 	 * @throws DaoPotagerQueryException si la requête n'est pas valide
 	 */
-	public List<Potager> listerPotager() throws DaoPotagerQueryException {
+	@Override
+	public List<Potager> lister() throws DaoPotagerQueryException {
 
 		try{
 			ArrayList<Potager> potagers = (ArrayList<Potager>) em.createQuery("SELECT p FROM Potager p ORDER BY p.nom").getResultList();
@@ -138,7 +55,7 @@ public class DaoPotager{
 		}
 	}
 
-	public List<Potager> listerPotager(Jardinier proprietaire) throws DaoPotagerQueryException {
+	public List<Potager> lister(Jardinier proprietaire) throws DaoPotagerQueryException {
 		try{
 			
 			ArrayList<Potager> potagers = (ArrayList<Potager>) em.createQuery("SELECT p FROM Potager p WHERE p.proprietaire.idUtilisateur=:idProprio  ORDER BY p.nom ")
@@ -153,7 +70,7 @@ public class DaoPotager{
 		}
 	}
 
-	public List<Potager> listerPotager(String codePostal) throws DaoPotagerQueryException {
+	public List<Potager> lister(String codePostal) throws DaoPotagerQueryException {
 			
 		try{
 			
@@ -168,20 +85,5 @@ public class DaoPotager{
 			throw new DaoPotagerQueryException("La requête: " + "SELECT p FROM Potager p ORDER BY p.idPotager" + " n'est pas valide");
 		}
 	}
-	
-	public Potager getPotager(int idPotager) throws DaoPotagerGetException {
-		
-		try{
-			Potager potager = em.find(Potager.class, idPotager);
-			
-			if(potager == null) throw new DaoPotagerGetException("Impossible de trouver le potager demandé.");
-			
-			return potager;
-		}
-		catch(IllegalArgumentException  e){
-			throw new DaoPotagerGetException("Impossible de trouver le potager demandé.");
-		}
-	}
-		
 
 }

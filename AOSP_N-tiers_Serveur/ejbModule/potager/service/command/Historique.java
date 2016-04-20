@@ -9,6 +9,14 @@ import javax.ejb.Stateless;
 import potager.dao.exception.DaoPotagerAjoutException;
 import potager.dao.exception.DaoPotagerModificationException;
 
+/**
+ * 
+ * @author Nicolas Lambert
+ *
+ *	Classe qui s'occupe de gérer les commandes.
+ *  Annuler() annule la dernière commande exécutée.
+ *
+ */
 @Stateless
 @LocalBean
 public class Historique {
@@ -26,7 +34,7 @@ public class Historique {
 		System.out.println("commandes: " + commandes);
 		IUndoCommand derniereCommande = commandes.pop();
 		
-		if( derniereCommande != null){
+		if( commandes.size() != 0 && derniereCommande != null){
 			derniereCommande.undo();
 		}
 				

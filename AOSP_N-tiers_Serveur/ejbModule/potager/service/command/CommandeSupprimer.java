@@ -3,17 +3,22 @@ package potager.service.command;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import potager.dao.DaoGestionPotager;
+import potager.dao.Dao;
 import potager.dao.exception.DaoPotagerAjoutException;
 import potager.dao.exception.DaoPotagerGetException;
 import potager.dao.exception.DaoPotagerModificationException;
 import potager.dao.exception.DaoPotagerSuppressionException;
 import potager.entity.Potager;
 
-
+/**
+ * @author Nicolas Lambert
+ * 
+ * Permet de supprimer un potager
+ * Le potager est stocké dans la commande avant suppression, pour permettre l'undo 
+ */
 public class CommandeSupprimer implements IUndoCommand{
 	
-	DaoGestionPotager daoGestionPotager;
+	Dao daoGestionPotager;
 	private int idPotager;
 	private Potager potager;
 	
@@ -21,7 +26,7 @@ public class CommandeSupprimer implements IUndoCommand{
 		
 		try {
 			
-			daoGestionPotager = (DaoGestionPotager) new InitialContext().lookup("java:global/AOSP_N-tiers_Serveur/FacadeDaoGestionPotager!potager.dao.DaoGestionPotager");
+			daoGestionPotager = (Dao) new InitialContext().lookup("java:global/AOSP_N-tiers_Serveur/FacadeDaoGestionPotager!potager.dao.Dao");
 			
 		} catch (NamingException e) {
 			e.printStackTrace();
@@ -29,6 +34,9 @@ public class CommandeSupprimer implements IUndoCommand{
 		
 	}
 
+	/**
+	 * Methode appelée pour exécuter l'action (suppression)
+	 */
 	@Override
 	public void execute(int idPotager) throws DaoPotagerSuppressionException, DaoPotagerGetException {
 		
@@ -44,6 +52,9 @@ public class CommandeSupprimer implements IUndoCommand{
 		
 	}
 
+	/**
+	 * Méthode d'annulation
+	 */
 	@Override
 	public void undo() throws DaoPotagerAjoutException, DaoPotagerModificationException {
 		System.out.println("j'annule la suppression de " + idPotager);

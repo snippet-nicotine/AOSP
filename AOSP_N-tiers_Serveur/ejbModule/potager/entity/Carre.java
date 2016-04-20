@@ -7,9 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import commun.config.Parametres;
+import planning.entity.Planning;
 
 @Entity
 @Table(name=Parametres.bddTableCarre)
@@ -25,6 +27,9 @@ public class Carre implements Serializable{
 	
 	@ManyToOne
 	private Potager potager;
+	
+	@OneToOne
+	private Planning planning;
 	
 	public Carre(){
 		

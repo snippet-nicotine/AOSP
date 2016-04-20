@@ -41,11 +41,15 @@ public class Potager implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	protected int idPotager;
 	
+	//Todo: intégrer le planning pour le oneToOne
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="idProprietaire", unique=true)
 	protected Jardinier  proprietaire;
 	
-	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
+	// J'ai choisi EAGER pour faciliter l'accès aux listes
+	// J'ai concience que ce choix n'est pas optimal,
+	// mais il me semble que l'on perd l'intérêt du Lazy à partir du moment ou l'on refabrique les lists avant de renvoyer au client?
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="aosp_potager_visiteur",
 		joinColumns        = @JoinColumn(name="id_potager"),
 		inverseJoinColumns = @JoinColumn(name="id_visiteur")	)
@@ -54,6 +58,7 @@ public class Potager implements Serializable{
 	@Column(nullable=false)
 	protected LocalDate  dateCreation;	
 	
+	// J'utilise le cascadeType.ALL car c'est une association de type composition
 	@OneToMany(mappedBy="potager", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	protected List<Carre> carres;
 	

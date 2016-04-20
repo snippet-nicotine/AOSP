@@ -18,16 +18,26 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 <!-- 		</properties> -->
 <!-- 	</persistence-unit> -->
 	
+<!-- 	<persistence-unit name="AOSP_Hibernate"> -->
+<!-- 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
+<!-- 		<jta-data-source>java:jboss/datasources/OraclePerso</jta-data-source> -->
+<!--   		<properties> -->
+<!-- 			<property name="hibernate.dialect"          value="org.hibernate.dialect.Oracle10gDialect" /> -->
+<!-- 			<property name="hibernate.hbm2ddl.auto"     value="create-drop" /> -->
+<!-- 			<property name="hibernate.show_sql"         value="true" /> -->
+<!-- 			<property name="hibernate.format_sql"       value="false" /> -->
+<!-- 			<property name="hibernate.use_sql_comments" value="true" /> -->
+<!-- 			<property name="hibernate.default_schema"   value="STAG04" /> -->
+<!-- 		</properties> -->
+<!-- 	</persistence-unit> -->
+	
 	<persistence-unit name="AOSP_Hibernate">
-		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<jta-data-source>java:jboss/datasources/OraclePerso</jta-data-source>
-  		<properties>
-			<property name="hibernate.dialect"          value="org.hibernate.dialect.Oracle10gDialect" />
-			<property name="hibernate.hbm2ddl.auto"     value="create-drop" />
-			<property name="hibernate.show_sql"         value="true" />
-			<property name="hibernate.format_sql"       value="false" />
-			<property name="hibernate.use_sql_comments" value="true" />
-			<property name="hibernate.default_schema"   value="STAG04" />
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.show_sql" value="true" />
 		</properties>
 	</persistence-unit>
 	

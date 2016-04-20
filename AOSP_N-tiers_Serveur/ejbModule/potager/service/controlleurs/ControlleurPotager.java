@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 
-import potager.dao.DaoGestionPotager;
+import potager.dao.Dao;
 import potager.dao.exception.DaoPotagerAjoutException;
 import potager.dao.exception.DaoPotagerGetException;
 import potager.dao.exception.DaoPotagerModificationException;
@@ -29,7 +29,7 @@ import utilisateur.entity.Jardinier;
 public class ControlleurPotager {
 	
 	@EJB
-	DaoGestionPotager daoGestionPotager;
+	Dao daoGestionPotager;
 	@EJB
 	Historique historique;
 	@EJB

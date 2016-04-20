@@ -7,6 +7,7 @@ import potager.dao.exception.DaoPotagerGetException;
 import potager.dao.exception.DaoPotagerModificationException;
 import potager.dao.exception.DaoPotagerQueryException;
 import potager.dao.exception.DaoPotagerSuppressionException;
+import potager.entity.Carre;
 import potager.entity.Potager;
 import potager.service.exception.CPPotagerException;
 import potager.service.exception.DimensionPotagerException;
@@ -59,4 +60,10 @@ public interface ServiceGestionPotager {
 
 	public List<Potager> listerPotager(String codePostal) throws DaoPotagerQueryException;
 	
+	// --------------
+	// Carre
+	// --------------
+	
+	public Carre creerCarre(Carre carre) throws DaoPotagerAjoutException;
+
 }

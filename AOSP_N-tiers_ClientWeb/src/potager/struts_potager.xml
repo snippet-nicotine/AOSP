@@ -10,7 +10,11 @@
 
 	<package name="potager" namespace="/actions" extends="json-default">
 		
-<!-- 	Gestion des erreurs avec AJAX -->
+<!-- 	
+	Gestion des erreurs avec AJAX 
+	Tout les result "input" du package non définis dans l'action sont renvoyés en json.
+	Ils sont traités par WEB-INF/commun/js/formAjax.js
+-->
 		<global-results>
 			<result name="input" type="json">
 			  <param name="root">fieldErrors</param>
@@ -19,6 +23,11 @@
 			</result>
 	   </global-results>	
 	   
+<!-- 
+	Toutes le CRUD est géré par cette action.
+	Elle aurait put être mise à la racine du projet pour sa généricité,
+	mais pour ne pas poser de problème aux autre membres du groupe elle est active uniquement pour ce composant 
+-->
 		<action name="*_*" method="{1}" class="{2}.actions.Gestion_{2}">
 			<result name="error">/WEB-INF/{2}/gerer.jsp</result>
 			<result name="success">/WEB-INF/{2}/gerer.jsp</result>
