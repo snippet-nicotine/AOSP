@@ -11,9 +11,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import potager.entity.Potager;
+import utilisateur.util.Param;
 
+/**
+ * Entité qui implémente les jardiniers
+ * @author Guillaume
+ *
+ */
 @Entity
-@Table(name="aosp_jardinier")
+@Table(name=Param.TABLE_AOSP_JARDINIER)
 public class Jardinier extends AbstractJardinier {
 
 	
@@ -31,10 +37,21 @@ public class Jardinier extends AbstractJardinier {
 	@ManyToMany(mappedBy="visiteurs", fetch=FetchType.EAGER)
 	private List<Potager> potagerPartages;
 
+	/**
+	 * Contyructeur par défaut
+	 */
 	public Jardinier() {
 		super();
 	}
 	
+	/**
+	 * Constructeur qui initialise les propriétés du jardinier
+	 * @param etatCivil état civil du jardinier
+	 * @param mail mail du jardinier
+	 * @param motPasse mot de passe du jardinier
+	 * @param listeDroits liste des droits du jardinier
+	 * @param codePostal code postal du jardinier
+	 */
 	public Jardinier(EtatCivil etatCivil, String mail, String motPasse,
 			Collection<DroitUtilisateur> listeDroits, String codePostal){
 		setEtatCivil(etatCivil);

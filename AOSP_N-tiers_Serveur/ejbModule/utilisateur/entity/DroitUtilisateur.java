@@ -9,34 +9,48 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import utilisateur.util.Param;
 
+/**
+ * Entité qui implémente les droits utilisateurs
+ * @author Guillaume
+ *
+ */
 @Entity
-@Table(name = "aosp_droit")
+@Table(name = Param.TABLE_AOSP_DROIT)
 public class DroitUtilisateur implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
+	// id générée automatiquement
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idDroit;
-	
+	private int idDroit;			// id du droit
+
 	@Column(length = 30, nullable = true)
-	private String libelle;
-	
+	private String libelle;			// libellé du droit
+
+	/**
+	 * Constructeur par défaut
+	 */
 	public DroitUtilisateur() {
 		super();
 	}	
-	
 
+	/**
+	 * Contructeur qui initialise le libellé du droit mais pas l'id qui sera générée automatiquement
+	 * @param libelle
+	 */
 	public DroitUtilisateur(String libelle) {
 		super();
 		this.libelle = libelle;
 	}
 
-	
+	//******************** GETTERS et SETTERS
+
 	public int getIdDroit() {
 		return idDroit;
 	}
@@ -54,7 +68,7 @@ public class DroitUtilisateur implements Serializable{
 		this.libelle = libelle;
 	}
 
-
+	// toString
 	@Override
 	public String toString() {
 		return "DroitUtilisateur [idDroit=" + idDroit + ", libelle=" + libelle + "]";

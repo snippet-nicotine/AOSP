@@ -17,18 +17,18 @@ public class CRUDDroits extends MyActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private int idDroit;
 	private String libelle;
-	
+
 	private IServiceUtilisateur serviceUtilisateur;
 
-	
+
 	/**
 	 * Constructeur initialisant le service EJB
 	 */
 	public CRUDDroits() {
-		
+
 		InitialContext initialContext;
 		try {
 			initialContext 		= new InitialContext();			
@@ -39,7 +39,7 @@ public class CRUDDroits extends MyActionSupport{
 			System.err.println(e);
 		}	
 	}
-	
+
 	/**
 	 * Methode permettant de vider les champs de saisie
 	 */
@@ -47,16 +47,16 @@ public class CRUDDroits extends MyActionSupport{
 		idDroit=0;
 		libelle="";
 	}
-	
+
 	@Override
 	public String execute(){
 		return SUCCESS;
 	}
-	
+
 	public String affiche(){		
 		return SUCCESS;
 	}
-	
+
 	/**
 	 * Méthode de création d'un droit utilisateur
 	 * @return le return de l'action (SUCCESS)
@@ -68,7 +68,7 @@ public class CRUDDroits extends MyActionSupport{
 		videControles();
 		return SUCCESS;
 	}
-	
+
 	/**
 	 * Méthode de modification d'un droit utilisateur
 	 * @return le return de l'action (SUCCESS)
@@ -81,7 +81,7 @@ public class CRUDDroits extends MyActionSupport{
 		videControles();
 		return SUCCESS;
 	}
-	
+
 	/**
 	 * Méthode de suppression d'un droit utilisateur
 	 * @return  le return de l'action (SUCCESS)
@@ -98,29 +98,29 @@ public class CRUDDroits extends MyActionSupport{
 		libelle = droitUtilisateur.getLibelle();
 		return SUCCESS;
 	}
-	
+
 	public String remplir(){
 		idDroit=0;
 		libelle = "Libellé par défaut";
 		return "remplirOK";
 
-		
+
 	}
-	
+
 	@Override
 	public void validate(){
-		
-			if ((libelle!=null)&&(libelle.isEmpty()))		
-				addFieldError("libelle", "Le libellé doit être renseigné");		
+
+		if ((libelle!=null)&&(libelle.isEmpty()))		
+			addFieldError("libelle", "Le libellé doit être renseigné");		
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	//*************************** Getters et Setters
-	
+
 	public int getIdDroit() {
 		return idDroit;
 	}

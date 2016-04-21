@@ -8,16 +8,16 @@ public class DroitUtilisateur implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private int idDroit;
-	
+
 	private String libelle;
 
 	public DroitUtilisateur() {
 		super();
 	}
-	
-	
+
+
 
 	public DroitUtilisateur(String libelle) {
 		super();

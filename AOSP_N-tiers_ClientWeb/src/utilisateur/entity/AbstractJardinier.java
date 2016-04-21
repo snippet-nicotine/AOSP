@@ -6,11 +6,9 @@ public abstract class AbstractJardinier extends Utilisateur {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
+
+
 	private String codePostal;
-	
-	
 	
 
 	public String getCodePostal() {

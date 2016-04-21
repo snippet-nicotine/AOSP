@@ -12,15 +12,15 @@ public class Jardinier extends AbstractJardinier {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
+
 	private List<Potager> potagers;
-	
-	
+
+
 	private List<Potager> potagerPartages;
-	
-	
-	
-	
+
+
+
+
 	public Jardinier() {
 		super();
 	}
@@ -34,14 +34,14 @@ public class Jardinier extends AbstractJardinier {
 		setListeDroits(listeDroits);
 		setCodePostal(codePostal);
 	}
-	
-	
+
+
 	public String getNom(){
 		return "test";
 	}
-	
+
 	public void setNom(){
-		
+
 	}
 
 	public List<Potager> getPotagers() {
@@ -63,7 +63,7 @@ public class Jardinier extends AbstractJardinier {
 	public void clean() {
 		// TODO Auto-generated method stub		
 	}
-	
+
 	@Override
 	public String toString() {
 		return super.toString()+" Jardinier [potagers=" + potagers + ", potagerPartages=" + potagerPartages + "]";

@@ -18,9 +18,19 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import utilisateur.util.Param;
 
+
+/**
+ * Entité implémentant la classe abstraite Utilisateur
+ * @author Guillaume
+ *
+ */
 @Entity
-@Table(name = "aosp_utilisateur")
+@Table(name = Param.TABLE_AOSP_UTILISATEUR)
+
+// on utilise la strategy JOINED pour pouvoir avoir des contraintes de non nullité et la possibilité de d'avoir tous les mapping
+// on aura une table par classe (même abstraite)
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Utilisateur implements Serializable{
 
@@ -29,33 +39,50 @@ public abstract class Utilisateur implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	// id générée automatiquement. cela permet d'avoir toujours une clé unique automatiquement
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="ref_utilisateur")
-	private int idUtilisateur;
+	private int idUtilisateur;	//id de l'utilisateur
 	
+	// relation 1-1. cascadeType.ALL pour que toutes les opérations sur l'utilisateur(creer, modifier, supprimer)
+	// soit répercutées sur l'EtatCivil
+	// fetch = EAGER pour que EtatCivil soit chargé en même temps que Utilisateur
 	@OneToOne ( cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name = "idEtatcivil", unique = true, nullable = true)
-	private EtatCivil etatCivil;
+	@JoinColumn(name = "idEtatcivil", unique = true, nullable = false)
+	private EtatCivil etatCivil;		// état civil de l'utilisateur
 	
-	@Column(name="mail", length = 30, nullable = true)
-	private String mail;
+	@Column(name="mail", length = 30, nullable = false)
+	private String mail;				// mail de l'utilisateur
 	
-	@Column(name = "motPasse", length = 30, nullable = true)	
-	private String motPasse;
+	@Column(name = "motPasse", length = 30, nullable = false)	
+	private String motPasse;			// mot de passe de l'utilisateur
 
-	@ManyToMany(cascade= { CascadeType.DETACH}, fetch = FetchType.EAGER)
+	// relation n-n : cascadeType DETACH pour que la les droits puisse être créés, modifiés ou supprimés indépendament
+	// de l'utilisateur
+	// fetch = EAGER pour que listeDroits soit chargé en même temps que Utilisateur (on a toujours besoin de connaître
+	// la liste de droits)
+	@ManyToMany(cascade= CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinTable(name="aosp_droits_utilisateur",
 			joinColumns = @JoinColumn(name="idUtilisateur") ,
 			 inverseJoinColumns = @JoinColumn(name="idDroit") )
-	private Collection<DroitUtilisateur> listeDroits;
+	private Collection<DroitUtilisateur> listeDroits;		// liste des droits de l'utilisateur
 	
 		
-	
+	/**
+	 * constructeur par défaut
+	 */
 	public Utilisateur() {
 		super();
 	}
 
+	/**
+	 * constructeur initialisant les propriétés de l'utilisateur (sauf idUtilisateur qui sera généré automatiquement)
+	 * @param etatCivil état civil de l'utilisateur
+	 * @param mail mail de l'utilisateur
+	 * @param motPasse mot de passe de l'utilisateur
+	 * @param listeDroits liste des droits de l'utilisateur
+	 */
 	public Utilisateur(EtatCivil etatCivil, String mail, String motPasse, Collection<DroitUtilisateur> listeDroits) {
 		super();
 		this.etatCivil = etatCivil;
@@ -77,6 +104,9 @@ public abstract class Utilisateur implements Serializable{
 	
 	// -----------------------------
 
+	
+	//*************************** GETTERS et SETTERS
+	
 	public int getIdUtilisateur() {
 		return idUtilisateur;
 	}

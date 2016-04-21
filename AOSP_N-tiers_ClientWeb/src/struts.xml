@@ -6,14 +6,12 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="true" />
 
- <include file="utilisateurApp.xml" />
-  	<include file="utilisateur.xml" />
-	
+	<include file="utilisateurApp.xml" />
+	<include file="utilisateur.xml" />
+
 
 	<package name="default" extends="struts-default">
 		<default-action-ref name="accueil" />
-		
-		
 	</package>
 
 </struts>

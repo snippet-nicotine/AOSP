@@ -15,16 +15,16 @@ public class Administrateur extends Utilisateur {
 	/**
 	 * 
 	 */
-	
+
 	public Administrateur() {
 		super();		
 	}
-	
+
 	public Administrateur(EtatCivil etatCivil, String mail, String motPasse, Collection<DroitUtilisateur> droits){
 		super(etatCivil, mail, motPasse, droits);
-		
+
 	}
-	
+
 	@Override
 	public String toString() {
 		return super.toString();

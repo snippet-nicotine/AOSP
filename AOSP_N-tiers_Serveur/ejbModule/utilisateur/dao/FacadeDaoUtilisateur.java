@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 
 
 import utilisateur.dao.gerer.DaoGererUtilisateur;
+import utilisateur.dao.jeuEssai.DaoJeuEssai;
 import utilisateur.dao.lister.DaoListerUtilisateur;
 import utilisateur.entity.DroitUtilisateur;
 import utilisateur.entity.Specialite;
@@ -26,6 +27,9 @@ public class FacadeDaoUtilisateur implements IFacadeDaoUtilisateur{
 	
 	@EJB
 	private DaoListerUtilisateur daoLister;
+	
+	@EJB
+	private DaoJeuEssai daoJeuEssai;
 
 	@Override
 	public void ajouterUtilisateur(Utilisateur utilisateur) {
@@ -117,6 +121,9 @@ public class FacadeDaoUtilisateur implements IFacadeDaoUtilisateur{
 		return daoLister.listerUtilisateurParId();
 	}
 
-	
+	@Override
+	public void creerJeuEssai(){
+		daoJeuEssai.creerJeuEssai();
+	}
 
 }

@@ -6,7 +6,7 @@
 
 	<package name="application" namespace="" extends="struts-default">
 
-		<!-- action au démarage -->
+		<!-- action au démarrage -->
 		<action name="accueil">
 			<result>/WEB-INF/utilisateur/vue/accueil.jsp</result>
 		</action>

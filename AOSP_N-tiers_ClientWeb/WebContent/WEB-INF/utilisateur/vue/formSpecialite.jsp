@@ -21,9 +21,9 @@
 		<s:textfield name="libelle" label="Libellé de la spécialité">
 		</s:textfield>
 
-		
-		
-		
+
+
+
 		<s:url namespace="/utilisateur/vue" action="creationSpecialite"
 			var="creaSpecialite" />
 		<s:url namespace="/utilisateur/vue" action="modificationSpecialite"

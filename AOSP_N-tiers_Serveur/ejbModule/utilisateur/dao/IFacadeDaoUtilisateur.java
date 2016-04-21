@@ -33,6 +33,8 @@ public interface IFacadeDaoUtilisateur {
 	
 	public List<Utilisateur> listerUtilisateurParId();
 	
+	public void creerJeuEssai();
+	
 	
 
 }

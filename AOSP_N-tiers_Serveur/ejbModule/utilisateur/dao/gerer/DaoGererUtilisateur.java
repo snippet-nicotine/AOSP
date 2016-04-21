@@ -1,5 +1,7 @@
 package utilisateur.dao.gerer;
 
+
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -36,7 +38,7 @@ public class DaoGererUtilisateur {
 	}
 
 	public void supprimerUtilisateur(Utilisateur utilisateur){
-		em.remove(em.contains(utilisateur)? utilisateur : em.merge(utilisateur));
+		em.remove(em.contains(utilisateur)? utilisateur : em.merge(utilisateur));		
 	}
 
 	public Utilisateur rechercherParIdUtilisateur(int idUtilisateur) throws NonTrouveDAOException{
@@ -84,8 +86,8 @@ public class DaoGererUtilisateur {
 		em.merge(droitUtilisateur);
 	}
 
-	public void supprimerDroitUtilisateur(DroitUtilisateur droitUtilisateur){
-		em.remove(em.contains(droitUtilisateur)? droitUtilisateur : em.merge(droitUtilisateur));
+	public void supprimerDroitUtilisateur(DroitUtilisateur droitUtilisateur){		
+		em.remove(em.contains(droitUtilisateur)? droitUtilisateur : em.merge(droitUtilisateur));		
 	}
 	
 	public DroitUtilisateur rechercherParIdDroit(int idDroit){
@@ -98,28 +100,6 @@ public class DaoGererUtilisateur {
 	
 	
 
-	//	public void supprimerAuteur(Specialite specialite){
-	//		List<Utilisateur> listeUtilisateur = daoLister.listerParTitre();
-	//		for(Utilisateur utilisateur : listeUtilisateur) if(utilisateur.getAuteur()!=null && utilisateur.getAuteur().getIdAuteur()==auteur.getIdAuteur())
-	//			utilisateur.set(null);
-	//		em.remove(em.contains(specialite)? specialite : em.merge(specialite));
-	//		em.flush();
-	//		
-	//		
-	//	}
-	//	
-	//	public void addTheme(Theme theme){
-	//		em.persist(theme);
-	//		em.flush();
-	//	}
-	//	
-	//	public void modifierTheme(Theme theme){
-	//		em.merge(theme);
-	//		em.flush();
-	//	}
-	//	
-	//	public void deleteTheme(Theme theme){
-	//		em.remove(em.contains(theme)? theme : em.merge(theme));
-	//	}
+	
 
 }

@@ -42,7 +42,7 @@ public class EtatCivil implements Serializable{
 		this.prenom = prenom;
 	}
 
-	
+
 
 
 	public void setIdEtatCivil(int idEtatCivil) {
@@ -52,11 +52,11 @@ public class EtatCivil implements Serializable{
 	public int getIdEtatCivil() {
 		return idEtatCivil;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "EtatCivil [idEtatCivil=" + idEtatCivil + ", nom=" + nom + ", prenom=" + prenom + "]";
 	}
 
-	
+
 }

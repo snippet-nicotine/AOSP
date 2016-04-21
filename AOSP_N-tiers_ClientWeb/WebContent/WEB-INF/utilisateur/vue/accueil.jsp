@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="s" uri="/struts-tags"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html >
 <html>
 <head>
@@ -11,6 +11,6 @@
 <title>Accueil</title>
 </head>
 <body>
-<h1>Bienvenue dans l'application de gestion des utilisateurs</h1>
+	<h1>Bienvenue dans l'application de gestion des utilisateurs</h1>
 </body>
 </html>

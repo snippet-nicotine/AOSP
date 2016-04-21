@@ -36,6 +36,12 @@ public class ServiceListerUtilisateur {
 		return daoLister.getListeDroit();
 	}
 
+	/**
+	 * Méthode permettant de remplir une collection de Droit utilisateur avec un tableau de String contenant les id (en String)
+	 *  des droits
+	 * @param tab tableau contenant les id (en String) des droits à créer
+	 * @return la Collection de droits obtenue à partir du tableau tab
+	 */
 	public Collection<DroitUtilisateur> tabToListe(String[] tab){
 		Collection<DroitUtilisateur> liste = new ArrayList<DroitUtilisateur> ();
 		DroitUtilisateur droitUtilisateur = null;
@@ -46,6 +52,29 @@ public class ServiceListerUtilisateur {
 			liste.add(droitUtilisateur);
 		}
 		return liste;
+	}
+	
+	/**
+	 * Méthode permettant de remplir un tableau de String avec les id contenus dans une List de droits
+	 * @param liste liste de droit utilisateur
+	 * @return le tableau de String contenant les id de la liste de droits
+	 */
+	public String[] listeToTab(Collection<DroitUtilisateur> liste){
+		String[] tab = null;
+		int i=0;
+		
+		// on est obligé d'utiliser un compteur (i) puisqu'une Collection ne possede pas de méthode get(i)
+		if(liste!=null){
+			tab= new String[liste.size()];
+			for(DroitUtilisateur droit : liste){
+			// Méthode rapide pour transformer un int en String
+			tab[i]=""+droit.getIdDroit();
+			i++;
+			}
+			
+					
+		}
+		return tab;
 	}
 
 }

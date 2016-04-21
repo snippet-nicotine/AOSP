@@ -9,19 +9,19 @@ public abstract class Utilisateur implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
+
+
 	private int idUtilisateur;
-	
-	
+
+
 	EtatCivil etatCivil;
-	
-	
+
+
 	private String mail;
-	
-	
+
+
 	private String motPasse;
-	
+
 	Collection<DroitUtilisateur> listeDroits;
 
 	public Utilisateur() {
@@ -35,9 +35,9 @@ public abstract class Utilisateur implements Serializable{
 		this.motPasse = motPasse;
 		this.listeDroits = listeDroits;
 	}
-	
-	
-	
+
+
+
 	public int getIdUtilisateur() {
 		return idUtilisateur;
 	}
@@ -77,7 +77,7 @@ public abstract class Utilisateur implements Serializable{
 	public void setListeDroits(Collection<DroitUtilisateur> listeDroits) {
 		this.listeDroits = listeDroits;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Utilisateur [idUtilisateur=" + idUtilisateur + ", etatCivil=" + etatCivil + ", mail=" + mail

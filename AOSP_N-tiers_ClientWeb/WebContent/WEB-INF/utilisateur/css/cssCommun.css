@@ -1,5 +1,4 @@
-@CHARSET "ISO-8859-1";
-
+@CHARSET "UTF-8";
 
 body {
 	background: #eeeeee;
@@ -7,19 +6,9 @@ body {
 
 
 
-input[type=radio] {
-	background-color: transparent;
-	border: none;
-	width: 20px;
-}
-
-
-
 input, textarea, select, option {
 	background-color: #80ff80;
 }
-
-
 
 input, textarea, select {
 	padding: 3px;
@@ -37,7 +26,7 @@ ul#menu {
 
 ul#menu>li { /* li directement sous ul d'id menu */
 	float: left; /*pour IE*/
-	margin-left:3px;	
+	margin-left: 3px;
 }
 
 ul#menu  li  a {
@@ -45,7 +34,6 @@ ul#menu  li  a {
 	float: left;
 	width: 150px;
 	line-height: 40px; /* hauteur */
-	/* background: purple url("/exo4bBiblioWeb/images/fondBleu.png") repeat-x; */
 	background: #adadad;
 	font-weight: bold;
 	color: #000000;
@@ -57,11 +45,4 @@ ul#menu li a:hover {
 	background: #044B74;
 	font-weight: bold;
 	color: #87C4E8; /* bleu fonce */
-}
-
-#listeUtilisateur{
-	width: 200px;
-}
-.divUtil{
-	float:left;
 }

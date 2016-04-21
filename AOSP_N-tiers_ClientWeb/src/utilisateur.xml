@@ -28,7 +28,7 @@
 
 			<!-- les actions qui ne doivent pas être validées -->
 			<interceptor-ref name="defaultStack">
-				<param name="validation.excludeMethods">suppression, remplir, rechercherParId</param>
+				<param name="validation.excludeMethods">suppression, remplir, rechercherParId, jeuEssai</param>
 			</interceptor-ref>
 
 		</action>

@@ -1,5 +1,11 @@
 package utilisateur.clientServeur;
 
+
+/**
+ * Classe implementant une exception perso.
+ * @author Guillaume
+ *
+ */
 public class NonTrouveServiceException extends Exception{
 
 	/**
