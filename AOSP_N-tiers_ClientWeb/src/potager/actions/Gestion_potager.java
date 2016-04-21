@@ -1,12 +1,14 @@
 package potager.actions;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 
 import commun.actions.GestionAction;
 import commun.config.Parametres;
@@ -22,8 +24,9 @@ import potager.service.exception.DimensionPotagerException;
 import potager.service.exception.NomPotagerException;
 import potager.service.exception.ProprietairePotagerException;
 import utilisateur.entity.Jardinier;
+import utilisateur.entity.Utilisateur;
 
-public class Gestion_potager extends GestionAction implements ServletRequestAware{
+public class Gestion_potager extends GestionAction implements ServletRequestAware, SessionAware{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -34,6 +37,9 @@ public class Gestion_potager extends GestionAction implements ServletRequestAwar
 	private Potager potager;
 	private ArrayList<Jardinier> utilisateurs;
 	private HttpServletRequest httpRequest;
+	
+	private Utilisateur user = new Utilisateur();
+    private Map<String, Object> sessionAttributes = null;
 	
 	protected ServiceGestionPotager serviceGestionPotager;
 
@@ -279,6 +285,12 @@ public class Gestion_potager extends GestionAction implements ServletRequestAwar
 		}
 		
 		return VISUALISER;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

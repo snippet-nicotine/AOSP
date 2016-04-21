@@ -13,12 +13,33 @@
 	<include file="commun/struts_commun.xml"></include>
 	<include file="potager/struts_potager.xml"></include>
 	
-	<package name="default" namespace="/aosp" extends="struts-default">
-	
+	<package name="default" namespace="" extends="struts-default">
+	    
+	    <interceptors>
+            <interceptor name="authentication"
+                class="commun.interceptors.AuthentificationInterceptor"></interceptor>
+            <interceptor-stack name="authStack">
+                <interceptor-ref name="authentification"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+ 
+        <default-interceptor-ref name="authStack"></default-interceptor-ref>
+	    
 		<default-action-ref name="todo" />
 		
+		<global-results>
+    		<result name="login" type="redirect">/login.action</result>
+		</global-results>
+		
+		
+		<action name="login">
+		    <result>/WEB-INF/commun/html/connexion.jsp</result>
+		    
+	    </action>
+		
 		<action name="todo">
-			<result>/potager/test.jsp</result>
+			<result>/WEB-INF/potager/test.jsp</result>
 		</action>
 
 	</package>
